@@ -40,22 +40,21 @@ function save_gene(gene_information, gene_array){
 	gene.name = temp_json.logic_name;
 	gene.description = temp_json.description;
 	gene_array.push(gene);
+	console.log(gene_array);
 }
 
+gene_array = [];
 
-async function write_gene_data(list_gene_file){
+function write_gene_data(list_gene_file){
 	let gene_IDS = get_list_gene(list_gene_file);
-	let gene_array = [];
-	let promise = new Promise((resolve, reject) => {
-		if(gene_array.lenght == gene_IDS.length){
-			console.log('ok');
-			resolve(gene_array);
-		}
-	});
+	//gene_array = [];
 	for(let gene of gene_IDS){
 		ensembl_get('lookup/id/' + gene).then((ret) => {save_gene(ret.body, gene_array)})
 	}
 	console.log(gene_array);
+	while(gene_array.length != gene_IDS.length){
+		console.log(gene_array.length);
+	}
 	return gene_array;
 }
 
@@ -69,4 +68,4 @@ async function write_gene_data(list_gene_file){
 
 
 //get_list_gene('mart_export_human.txt');
-write_gene_data('mart_export_human.txt').then(console.log);
+console.log(write_gene_data('mart_export_human.txt'));
