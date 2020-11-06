@@ -16,21 +16,49 @@ function get_list_gene(file_name){
 		console.error(err);
 	}
 	if(file_data){
-		console.log('read correctly');
 		file_data = file_data.split('\n');
 		file_data.shift();
-		console.log(file_data);
+		file_data.pop();
 	}
 	return file_data;
 }
 
-
-
-
 async function ensembl_get(content){
-	console.log('In async');
 	return await got(ENSEMBL_API + content + FORMAT_JSON);
 }
+
+function save_gene(gene_information, gene_array){
+	let temp_json = JSON.parse(gene_information);
+	let gene = {};
+	gene.id = temp_json.id;
+	gene.version = temp_json.version;
+	gene.start = temp_json.start;
+	gene.end = temp_json.end;
+	gene.biotype = temp_json.biotype;
+	gene.chromosome = temp_json.seq_region_name;
+	gene.strand = temp_json.strand;
+	gene.name = temp_json.logic_name;
+	gene.description = temp_json.description;
+	gene_array.push(gene);
+}
+
+
+async function write_gene_data(list_gene_file){
+	let gene_IDS = get_list_gene(list_gene_file);
+	let gene_array = [];
+	let promise = new Promise((resolve, reject) => {
+		if(gene_array.lenght == gene_IDS.length){
+			console.log('ok');
+			resolve(gene_array);
+		}
+	});
+	for(let gene of gene_IDS){
+		ensembl_get('lookup/id/' + gene).then((ret) => {save_gene(ret.body, gene_array)})
+	}
+	console.log(gene_array);
+	return gene_array;
+}
+
 
 
 /***************************TESTS**********************************/
@@ -41,3 +69,4 @@ async function ensembl_get(content){
 
 
 //get_list_gene('mart_export_human.txt');
+write_gene_data('mart_export_human.txt').then(console.log);
