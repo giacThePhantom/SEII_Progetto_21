@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/giacThePhantom/SEII_Progetto_21/issues"
   },
-  "homepage": "https://github.com/giacThePhantom/SEII_Progetto_21#readme"
+  "homepage": "https://github.com/giacThePhantom/SEII_Progetto_21#readme",
+  "dependencies": {
+    "got": "^11.8.0"
+  }
 }
