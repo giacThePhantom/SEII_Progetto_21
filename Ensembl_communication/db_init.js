@@ -84,18 +84,19 @@ function close_file(file_name){
  * @param {array} array to which the processed gene information is pushed
  */
 function save_gene(gene_information, gene_array) {
-  let temp_json = JSON.parse(gene_information);
-  let gene = {};
-  gene.id = temp_json.id;
-  gene.version = temp_json.version;
-  gene.start = temp_json.start;
-  gene.end = temp_json.end;
-  gene.biotype = temp_json.biotype;
-  gene.chromosome = temp_json.seq_region_name;
-  gene.strand = temp_json.strand;
-  gene.name = temp_json.logic_name;
-  gene.description = temp_json.description;
-  gene_array.push(gene);
+  	let temp_json = JSON.parse(gene_information);
+  	let gene = {};
+  	gene.id = temp_json.id;
+  	gene.version = temp_json.version;
+  	gene.start = temp_json.start;
+  	gene.end = temp_json.end;
+  	gene.biotype = temp_json.biotype;
+  	gene.chromosome = temp_json.seq_region_name;
+  	gene.strand = temp_json.strand;
+  	gene.name = temp_json.logic_name;
+  	gene.description = temp_json.description;
+	gene_array.push(gene);
+	console.log(gene);
 }
 
 /*
@@ -129,6 +130,7 @@ function get_all_lists(){
 		ret.push(temp.name);
 		temp = directory.readSync();
 	}
+	directory.close();
 	return ret;
 }
 
