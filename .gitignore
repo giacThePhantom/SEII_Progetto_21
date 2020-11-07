@@ -107,6 +107,4 @@ dist
 *.swp
 *.swo
 
-#Temporary JSONs
-Ensembl_communication/Jsons/*.json
 
