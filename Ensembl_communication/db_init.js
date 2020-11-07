@@ -1,13 +1,17 @@
-onst got = require('got');
-const fs = require('fs');
+const got = require('got');	// HTTP requests
+const fs = require('fs');	// File system
 
-const ENSEMBL_API = 'http://rest.ensembl.org/'
-const FORMAT_JSON = '?content-type=application/json'
-const GENE_LIST_LOCATION = './Gene_List/'
+const ENSEMBL_API = 'http://rest.ensembl.org/' 		// Site where we retrieve information
+const FORMAT_JSON = '?content-type=application/json'	// Format API request in json
+const GENE_LIST_LOCATION = './Gene_List/'		// Dir where biomart downloads are stored
+const JSON_LOCATION = './Jsons/'			// ? Temporary store elaborated info, will be replaced by db		
 
 
-
-
+/*
+ * Retrieves from a biomart download the gene list.
+ * @param {string} the file to be read.
+ * @return {array} the strings of gene ids read.
+ */
 function get_list_gene(file_name) {
   let file_data;
   try {
@@ -23,10 +27,63 @@ function get_list_gene(file_name) {
   return file_data;
 }
 
+
+/*
+ * Async function to request API Information
+ * @param {string} content of the request
+ * @return {???} the request
+ */
 async function ensembl_get(content) {
   return await got(ENSEMBL_API + content + FORMAT_JSON);
 }
 
+/*
+ * Creates the json file to store data TEMPORARY!!!
+ * @param {string} name of file where ids are stored
+ * @return {string} name of new file
+ */
+function create_file(file_name){
+	console.log(file_name.slice)
+	let correct_name = file_name.split('.')[0];
+	correct_name = correct_name.split('_')[2] + '.json';
+	fs.writeFile(JSON_LOCATION + correct_name, '[\n', (err) => {
+		if (err) throw err;
+		});
+	return correct_name;
+}
+
+/*
+ * Writes the processed gene information to the json file TEMPORARY!!!
+ * @param {string} name of json file
+ * @param {JSON} gene json object
+ * @param {number} index of gene to be inserted
+ */
+function write_gene_to_file(file_name, gene, index) {
+	if(index != 0){
+		fs.appendFile(JSON_LOCATION + file_name, ',\n', (err) =>{
+			if (err) throw err;
+		});
+	}
+	fs.appendFile(JSON_LOCATION + file_name, JSON.stringify(gene, null, 2) , (err) =>{
+		if (err) throw err;
+	});
+}
+
+/* 
+ * Closes the json file giving the correct syntax
+ * @param {string} json file name.
+ */
+function close_file(file_name){
+	fs.appendFile(JSON_LOCATION + file_name, '\n]', (err) =>{
+		if (err) throw err;
+	});
+}
+
+/*
+ * Processes and saves in an array the information retrieved from ensembl
+ * @param {JSON} gene information from ensembl.
+ * @param {array} array to which the processed gene information is pushed
+ */
 function save_gene(gene_information, gene_array) {
   let temp_json = JSON.parse(gene_information);
   let gene = {};
@@ -42,25 +99,40 @@ function save_gene(gene_information, gene_array) {
   gene_array.push(gene);
 }
 
-
+/*
+ * Takes the file of gene ids, gets their information and saves them (now in JSON, in the end in DB)
+ * @param {string} the name of the file containing the list of ids
+ */
 async function write_gene_data(list_gene_file) {
-
-	var gene_array=[];
-  let gene_IDS = get_list_gene(list_gene_file);
-  //gene_array = [];
+	let file_to_save = create_file(list_gene_file);
+	let gene_array=[];
+  	let gene_IDS = get_list_gene(list_gene_file);
+  	//gene_array = [];
 	return new Promise(async function(resolve, reject){
 			//do something
-
-	for (let gene of gene_IDS) {
-		await ensembl_get('lookup/id/' + gene).then((ret) => {
-			save_gene(ret.body, gene_array)
-		});
+		for (let gene of gene_IDS) {
+			await ensembl_get('lookup/id/' + gene).then((ret) => {
+				save_gene(ret.body, gene_array);
+				let last = gene_array.length - 1;
+				write_gene_to_file(file_to_save, gene_array[last], last);
+			});
+		}
+		resolve(gene_array); //resolve with value
+	});
+}
+/*
+ * Gets all the lists of genes ids downloaded from biomart
+ * @return {array} all the file names where the gene ids are stored
+ */
+function get_all_lists(){
+	let directory = fs.opendirSync(GENE_LIST_LOCATION);
+	let ret = []
+	let temp = directory.readSync();
+	while(temp != null){
+		console.log(temp.name);
+		ret.push(temp.name);
+		temp = directory.readSync();
 	}
-	resolve(gene_array); //resolve with value
-});
-  /*while(gene_array.length != gene_IDS.length){
-	//	console.log(gene_array.length);
-}*/
 }
 
 
@@ -73,8 +145,9 @@ async function write_gene_data(list_gene_file) {
 
 
 //get_list_gene('mart_export_human.txt');
-async function start(){
-	let arr=await write_gene_data('mart_export_human.txt');
-	console.log(arr);
-}
-start();
+//async function start(){
+//	let arr=await write_gene_data('mart_export_human.txt');
+//	console.log(arr);
+//}
+//start();
+get_all_lists();

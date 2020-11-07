@@ -1,0 +1,56 @@
+[
+{
+  "id": "ENSG00000000003",
+  "version": 15,
+  "start": 100627108,
+  "end": 100639991,
+  "biotype": "protein_coding",
+  "chromosome": "X",
+  "strand": -1,
+  "name": "ensembl_havana_gene_homo_sapiens",
+  "description": "tetraspanin 6 [Source:HGNC Symbol;Acc:HGNC:11858]"
+},
+{
+  "id": "ENSG00000000005",
+  "version": 6,
+  "start": 100584936,
+  "end": 100599885,
+  "biotype": "protein_coding",
+  "chromosome": "X",
+  "strand": 1,
+  "name": "ensembl_havana_gene_homo_sapiens",
+  "description": "tenomodulin [Source:HGNC Symbol;Acc:HGNC:17757]"
+},
+{
+  "id": "ENSG00000000419",
+  "version": 13,
+  "start": 50934867,
+  "end": 50958555,
+  "biotype": "protein_coding",
+  "chromosome": "20",
+  "strand": -1,
+  "name": "ensembl_havana_gene_homo_sapiens",
+  "description": "dolichyl-phosphate mannosyltransferase subunit 1, catalytic [Source:HGNC Symbol;Acc:HGNC:3005]"
+},
+{
+  "id": "ENSG00000000457",
+  "version": 14,
+  "start": 169849631,
+  "end": 169894267,
+  "biotype": "protein_coding",
+  "chromosome": "1",
+  "strand": -1,
+  "name": "ensembl_havana_gene_homo_sapiens",
+  "description": "SCY1 like pseudokinase 3 [Source:HGNC Symbol;Acc:HGNC:19285]"
+},
+{
+  "id": "ENSG00000000460",
+  "version": 17,
+  "start": 169662007,
+  "end": 169854080,
+  "biotype": "protein_coding",
+  "chromosome": "1",
+  "strand": 1,
+  "name": "ensembl_havana_gene_homo_sapiens",
+  "description": "chromosome 1 open reading frame 112 [Source:HGNC Symbol;Acc:HGNC:25565]"
+}
