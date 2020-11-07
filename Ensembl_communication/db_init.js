@@ -13,18 +13,18 @@ const JSON_LOCATION = './Jsons/'			// ? Temporary store elaborated info, will be
  * @return {array} the strings of gene ids read.
  */
 function get_list_gene(file_name) {
-  let file_data;
-  try {
-    file_data = fs.readFileSync(GENE_LIST_LOCATION + file_name, 'utf-8');
-  } catch (err) {
-    console.error(err);
-  }
-  if (file_data) {
-    file_data = file_data.split('\n');
-    file_data.shift();
-    file_data.pop();
-  }
-  return file_data;
+	let file_data;
+	try {
+		file_data = fs.readFileSync(GENE_LIST_LOCATION + file_name, 'utf-8');
+ 	} catch (err) {
+    		console.error(err);
+  	}
+  	if (file_data) {
+  	 	file_data = file_data.split('\n'); // Every ID has its line
+    		file_data.shift();		   // Delete first element (not a gene ID)
+    		file_data.pop();    		   // Delete last empty element
+  	}
+	return file_data;
 }
 
 
@@ -34,7 +34,7 @@ function get_list_gene(file_name) {
  * @return {???} the request
  */
 async function ensembl_get(content) {
-  return await got(ENSEMBL_API + content + FORMAT_JSON);
+  	return await got(ENSEMBL_API + content + FORMAT_JSON);
 }
 
 /*
@@ -43,9 +43,8 @@ async function ensembl_get(content) {
  * @return {string} name of new file
  */
 function create_file(file_name){
-	console.log(file_name.slice)
-	let correct_name = file_name.split('.')[0];
-	correct_name = correct_name.split('_')[2] + '.json';
+	let correct_name = file_name.split('.')[0]; 			// Delete txt extension
+	correct_name = correct_name.split('_')[2] + '.json';		// Delete mart_export and add new extension
 	fs.writeFile(JSON_LOCATION + correct_name, '[\n', (err) => {
 		if (err) throw err;
 		});
@@ -59,8 +58,8 @@ function create_file(file_name){
  * @param {number} index of gene to be inserted
  */
 function write_gene_to_file(file_name, gene, index) {
-	if(index != 0){
-		fs.appendFile(JSON_LOCATION + file_name, ',\n', (err) =>{
+	if(index != 0){		//if it's not the first gene add ',' for JSON array
+		fs.appendFile(JSON_LOCATION + file_name, ',\n', (err) =>{	
 			if (err) throw err;
 		});
 	}
@@ -104,17 +103,15 @@ function save_gene(gene_information, gene_array) {
  * @param {string} the name of the file containing the list of ids
  */
 async function write_gene_data(list_gene_file) {
-	let file_to_save = create_file(list_gene_file);
-	let gene_array=[];
+	let file_to_save = create_file(list_gene_file);		//TEMPORARY!!!
+	let gene_array = [];
   	let gene_IDS = get_list_gene(list_gene_file);
-  	//gene_array = [];
 	return new Promise(async function(resolve, reject){
-			//do something
 		for (let gene of gene_IDS) {
 			await ensembl_get('lookup/id/' + gene).then((ret) => {
 				save_gene(ret.body, gene_array);
-				let last = gene_array.length - 1;
-				write_gene_to_file(file_to_save, gene_array[last], last);
+				let last = gene_array.length - 1;				//TEMPORARY!!!
+				write_gene_to_file(file_to_save, gene_array[last], last); 	//TEMPORARY!!!
 			});
 		}
 		resolve(gene_array); //resolve with value
@@ -129,25 +126,23 @@ function get_all_lists(){
 	let ret = []
 	let temp = directory.readSync();
 	while(temp != null){
-		console.log(temp.name);
 		ret.push(temp.name);
 		temp = directory.readSync();
+	}
+	return ret;
+}
+
+/*
+ * Start the program to save data from ensembl
+ */
+async function start(){
+	let files = get_all_lists();
+	for(let file of files){
+		console.log('Reading from: ' + file)
+		let arr=await write_gene_data(file);
+		console.log(arr);
 	}
 }
 
 
-
-/***************************TESTS**********************************/
-
-//ensembl_get('archive/id/ENSG00000210049').then((ret) => {console.log(ret.body)});
-
-
-
-
-//get_list_gene('mart_export_human.txt');
-//async function start(){
-//	let arr=await write_gene_data('mart_export_human.txt');
-//	console.log(arr);
-//}
-//start();
-get_all_lists();
+start();
