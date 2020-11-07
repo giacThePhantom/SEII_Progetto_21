@@ -1,4 +1,4 @@
-const got = require('got');
+onst got = require('got');
 const fs = require('fs');
 
 const ENSEMBL_API = 'http://rest.ensembl.org/'
