@@ -6,6 +6,17 @@ const FORMAT_JSON = '?content-type=application/json'	// Format API request in js
 const GENE_LIST_LOCATION = './Gene_List/'		// Dir where biomart downloads are stored
 const JSON_LOCATION = './Jsons/'			// ? Temporary store elaborated info, will be replaced by db		
 
+/*
+ * Processes the name of mart export file and returns the species it has info of.
+ * @param {string} name of mart export file.
+ * @return {string} the species of the mart export file
+ */
+function get_species_from_mart_export(file_name){
+	let correct_name = file_name.split('.')[0]; 			// Delete txt extension
+	correct_name = correct_name.split('_')[2];			// Delete mart_export
+	return correct_name;
+}
+
 
 /*
  * Retrieves from a biomart download the gene list.
@@ -43,8 +54,8 @@ async function ensembl_get(content) {
  * @return {string} name of new file
  */
 function create_file(file_name){
-	let correct_name = file_name.split('.')[0]; 			// Delete txt extension
-	correct_name = correct_name.split('_')[2] + '.json';		// Delete mart_export and add new extension
+	let correct_name = get_species_from_mart_export(file_name); 
+	correct_name += '.json';					// Add json extension
 	fs.writeFile(JSON_LOCATION + correct_name, '[\n', (err) => {
 		if (err) throw err;
 		});
@@ -118,6 +129,15 @@ async function write_gene_data(list_gene_file) {
 		resolve(gene_array); //resolve with value
 	});
 }
+
+
+async function write_homology_info(list_gene_file) {
+	console.log('TO DO');
+}
+
+
+
+
 /*
  * Gets all the lists of genes ids downloaded from biomart
  * @return {array} all the file names where the gene ids are stored
@@ -134,15 +154,80 @@ function get_all_lists(){
 	return ret;
 }
 
+
+
+/*
+ * Prints all genes IDs
+ */
+function print_genes(){
+	console.log('Getting all IDs:');
+	let files = get_all_lists();
+	for(let file of files){
+		let species = get_species_from_mart_export(file);
+		console.log('IDs of species ' + species + ":");
+		let ids = get_list_gene(file);
+		for(let i = 0; i < ids.length; i++){
+			process.stdout.write('\t' + ids[i]);
+			if(i % 4 == 0 && i != 0){
+				process.stdout.write('\n')
+			}
+		}
+		console.log('');
+	}
+}
+
+
+/*
+ * Saves all the gene info (now in JSONs, at the end in DB)
+ */
+async function build_gene_data(){
+	let files = get_all_lists();
+	for(let file of files){
+		console.log('Reading from: ' + file);
+		let arr = await write_gene_data(file);
+		console.log(arr);
+	}
+}
+
+/*
+ * Saves all gene homology info (now in JSONs, at the end in DB)
+ */
+async function build_homology(){
+	let files = get_all_lists();
+	for(let file of files){
+		console.log('Reading from: ' + file);
+		let arr = await write_homology_info(file);
+		console.log(arr);
+	}
+
+}
+
+
+
 /*
  * Start the program to save data from ensembl
  */
 async function start(){
-	let files = get_all_lists();
-	for(let file of files){
-		console.log('Reading from: ' + file)
-		let arr=await write_gene_data(file);
-		console.log(arr);
+	let my_args = process.argv.slice(2);
+	if(my_args.length == 0){
+		console.error('Missing arguments!');
+	}
+	else{
+		for(let arg of my_args){
+			switch(arg){
+				case 'print_genes':
+					print_genes();
+				break;
+				case 'build_genes_info':	
+					build_gene_data();
+				break;
+				case 'build_homology':
+					build_homology();
+				break;
+				default:
+					console.error('Cannot recognise option: ' + arg)		
+			}
+		}
 	}
 }
 
