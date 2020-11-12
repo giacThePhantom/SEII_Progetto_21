@@ -89,12 +89,13 @@ module.exports = {
 	 */
 	get_homology_info: (homology_information) => {
 		let temp_json = JSON.parse(homology_information);
+		console.log(temp_json);
 		let homologies = [];
 		for(let temp of temp_json.data[0].homologies){
 			let homology = {};
 			homology.id = temp_json.data[0].id;
-			homology.target_id = temp.target.id;
-			homology.target_species = temp.target.species;
+			homology.target_id = temp.id;
+			homology.target_species = temp.species;
 			homologies.push(homology);
 		}
 		console.log(homologies);

@@ -84,7 +84,7 @@ module.exports = {
 				for(let specie of species){
 					specie = read.get_species_from_mart_export(specie); 
 					if(specie != specie_name){
-						await read.ensembl_get('homology/id/' + gene + '?' + 'target_species=' + specie).then((ret) => {
+						await read.ensembl_get('homology/id/' + gene + '?' + 'target_species=' + specie + ';format=condensed').then((ret) => {
 							let homologies = read.get_homology_info(ret.body);
 							for(let homology of homologies){
 								write_json_to_file(file_to_save, homology, homology_array.length); 	//TEMPORARY!!!
