@@ -62,4 +62,24 @@ module.exports = {
 		directory.close();
 		return ret;
 	},
+	/*
+	 * Processes gene data received from ensembl.
+	 * @param {JSON} gene information from ensembl.
+	 * @return {JSON} processed gene information.
+	 */
+	get_gene_info: (gene_information) => {
+		let temp_json = JSON.parse(gene_information);
+		let gene = {};
+		gene.id = temp_json.id;
+		gene.version = temp_json.version;
+		gene.start = temp_json.start;
+		gene.end = temp_json.end;
+		gene.biotype = temp_json.biotype;
+		gene.chromosome = temp_json.seq_region_name;
+		gene.strand = temp_json.strand;
+		gene.name = temp_json.logic_name;
+		gene.description = temp_json.description;
+		console.log(gene);
+		return gene;
+	}
 };

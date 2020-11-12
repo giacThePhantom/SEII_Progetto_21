@@ -1,17 +1,13 @@
 //const got = require('got');	// HTTP requests
 const fs = require('fs');	// File system
 const read = require('./read_data.js');
+const write = require('./write_data.js');
 
 const ENSEMBL_API = 'http://rest.ensembl.org/' 		// Site where we retrieve information
 const FORMAT_JSON = '?content-type=application/json'	// Format API request in json
 const GENE_LIST_LOCATION = './Gene_List/'		// Dir where biomart downloads are stored
 const JSON_LOCATION = './Jsons/'			// ? Temporary store elaborated info, will be replaced by db
 
-/*
- * Processes the name of mart export file and returns the species it has info of.
- * @param {string} name of mart export file.
- * @return {string} the species of the mart export file
- */
 
 /*
  * Creates the json file to store data TEMPORARY!!!
@@ -55,40 +51,19 @@ function close_file(file_name){
 }
 
 /*
- * Processes and saves in an array the information retrieved from ensembl
- * @param {JSON} gene information from ensembl.
- * @param {array} array to which the processed gene information is pushed
- */
-function save_gene(gene_information, gene_array) {
-	let temp_json = JSON.parse(gene_information);
-	let gene = {};
-	gene.id = temp_json.id;
-	gene.version = temp_json.version;
-	gene.start = temp_json.start;
-	gene.end = temp_json.end;
-	gene.biotype = temp_json.biotype;
-	gene.chromosome = temp_json.seq_region_name;
-	gene.strand = temp_json.strand;
-	gene.name = temp_json.logic_name;
-	gene.description = temp_json.description;
-	gene_array.push(gene);
-	console.log(gene);
-}
-
-/*
  * Takes the file of gene ids, gets their information and saves them (now in JSON, in the end in DB)
  * @param {string} the name of the file containing the list of ids
  */
 async function write_gene_data(list_gene_file) {
-	let file_to_save = read.create_file(list_gene_file);		//TEMPORARY!!!
+	let file_to_save = create_file(list_gene_file);		//TEMPORARY!!!
 	let gene_array = [];
 	let gene_IDS = read.get_list_gene(list_gene_file);
 	return new Promise(async function(resolve, reject){
 		for (let gene of gene_IDS) {
 			await read.ensembl_get('lookup/id/' + gene).then((ret) => {
-				save_gene(ret.body, gene_array);
-				let last = gene_array.length - 1;				//TEMPORARY!!!
-				write_gene_to_file(file_to_save, gene_array[last], last); 	//TEMPORARY!!!
+				let gene = read.get_gene_info(ret.body);
+				write_gene_to_file(file_to_save, gene, gene_array.length); 	//TEMPORARY!!!
+				gene_array.push(gene);
 			}
 			);
 		}
@@ -135,7 +110,7 @@ async function build_gene_data(){
 	let files = read.get_all_lists();
 	for(let file of files){
 		console.log('Reading from: ' + file);
-		let arr = await write_gene_data(file);
+		let arr = await write.write_gene_data(file);
 		console.log(arr);
 	}
 }
