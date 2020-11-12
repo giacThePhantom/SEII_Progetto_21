@@ -79,10 +79,12 @@ module.exports = {
 		let homology_array = [];
 		let gene_IDS = read.get_list_gene(file_name);
 		return new Promise(async function(resolve, reject){
+			let species = read.get_all_lists();
+			for(let i = 0; i < species.length; i++){
+				species[i] = read.get_species_from_mart_export(species[i]); 
+			}
 			for (let gene of gene_IDS) {
-				let species = read.get_all_lists();
 				for(let specie of species){
-					specie = read.get_species_from_mart_export(specie); 
 					if(specie != specie_name){
 						await read.ensembl_get('homology/id/' + gene + '?' + 'target_species=' + specie + ';format=condensed').then((ret) => {
 							let homologies = read.get_homology_info(ret.body);
