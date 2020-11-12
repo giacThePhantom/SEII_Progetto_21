@@ -67,6 +67,10 @@ module.exports = {
 		});
 	},
 	
+	/*
+	 * Takes the file of gene ids, gets their homologues and saves them (now in JSON, in the end in DB)
+	 * @param {string} the name of the file containing the list of ids
+	 */
 	write_homology_data: async (file_name) => {
 		console.log('in write homology data');
 		let specie_name = read.get_species_from_mart_export(file_name);

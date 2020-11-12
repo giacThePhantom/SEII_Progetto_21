@@ -82,7 +82,11 @@ module.exports = {
 		console.log(gene);
 		return gene;
 	},
-	
+	/*
+	 * Processes homology data received from ensembl.
+	 * @param {JSON} homology information from ensembl.
+	 * @return {JSON} processed homology information.
+	 */
 	get_homology_info: (homology_information) => {
 		let temp_json = JSON.parse(homology_information);
 		let homologies = [];
