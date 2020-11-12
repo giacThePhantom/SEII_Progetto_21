@@ -3,7 +3,7 @@ const got = require('got');	// HTTP requests
 
 const GENE_LIST_LOCATION = './Gene_List/'		// Dir where biomart downloads are stored
 const ENSEMBL_API = 'http://rest.ensembl.org/' 		// Site where we retrieve information
-const FORMAT_JSON = '?content-type=application/json'	// Format API request in json
+const FORMAT_JSON = ';content-type=application/json'	// Format API request in json
 
 
 module.exports = {
@@ -81,5 +81,19 @@ module.exports = {
 		gene.description = temp_json.description;
 		console.log(gene);
 		return gene;
+	},
+	
+	get_homology_info: (homology_information) => {
+		let temp_json = JSON.parse(homology_information);
+		let homologies = [];
+		for(let temp of temp_json.data[0].homologies){
+			let homology = {};
+			homology.id = temp_json.data[0].id;
+			homology.target_id = temp.target.id;
+			homology.target_species = temp.target.species;
+			homologies.push(homology);
+		}
+		console.log(homologies);
+		return homologies;
 	}
 };
