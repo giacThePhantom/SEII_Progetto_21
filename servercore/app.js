@@ -27,11 +27,11 @@ app.listen(port, function(){
 
 function get_list_gene(file_name) {
   const listgenes = require(GENE_LIST_LOCATION+file_name); 
-  console.log(listgenes); 
+ //console.log(listgenes); 
   return listgenes;   
 }
 
-app.get('/api/singlegene/:species', function (req, res) {
+app.get('/api/:species', function (req, res) {
     var species = req.params.species;
     var genes = get_list_gene(species+".json");
     if(genes) {
@@ -42,11 +42,14 @@ app.get('/api/singlegene/:species', function (req, res) {
   
   });
 
-  app.get('/api/species/:species', function (req, res) {
+  app.get('/api/:species/:identifier', function (req, res) {
     var species = req.params.species;
-    var genes = get_list_gene(species+".json");
-    if(genes) {
-      res.status(200).send(genes);
+    var identifier = req.params.identifier;
+    //var genes = get_list_gene(species+".json"); //restituisco un file json??
+    var genes = '{"id": 23, "result": win}';
+    var parsed = JSON.parse(genes);
+    if(parsed) {
+      res.status(200).send(parsed.id);
     } else {
       res.status(404);
     }
