@@ -1,6 +1,6 @@
 const read = require('./read_data.js');
 const write = require('./write_data.js');
-
+const conn = require('./db_conn.js');
 
 /*
  * Prints all genes IDs
@@ -48,6 +48,22 @@ async function build_homology(){
 
 }
 
+/* 
+ * Creates the collection for database genes
+ */
+
+async function build_db(){
+	let mongo_client = conn.connect();
+	conn.init_db(mongo_client);
+	conn.close(mongo_client);
+}
+
+async function drop_db(){
+	let mongo_client = conn.connect();
+	conn.del_db(mongo_client);
+	conn.close(mongo_client);
+}
+
 
 
 /*
@@ -69,6 +85,12 @@ async function start(){
 					break;
 				case 'build_homology':
 					build_homology();
+					break;
+				case 'build_db':
+					build_db();
+					break;
+				case 'drop_db':
+					drop_db();
 					break;
 				default:
 					console.error('Cannot recognise option: ' + arg);

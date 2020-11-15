@@ -1,7 +1,7 @@
 const read = require('./read_data.js');
 const fs = require('fs');	// File system
-
-const JSON_LOCATION = './Jsons/'			// ? Temporary store elaborated info, will be replaced by db
+const conn = require('./db_conn.js');
+const JSON_LOCATION = './Jsons/';			// ? Temporary store elaborated info, will be replaced by db
 
 /*
  * Creates the json file to store data TEMPORARY!!!
@@ -35,7 +35,7 @@ function write_json_to_file(file_name, gene, index){
 
 /*
  * Closes the json file giving the correct syntax
- * @param {string} json file name.
+ * @param {string} json file.
  */
 function close_file(file_name){
 	fs.appendFile(JSON_LOCATION + file_name, '\n]', (err) =>{
@@ -49,15 +49,14 @@ module.exports = {
 	 * @param {string} the name of the file containing the list of ids
 	 */
 	write_gene_data: async (list_gene_file) => {
-		let file_to_save = read.get_species_from_mart_export(list_gene_file);
-		file_to_save = create_file(file_to_save);		//TEMPORARY!!!
 		let gene_array = [];
 		let gene_IDS = read.get_list_gene(list_gene_file);
+		let genes_db = conn.connect().db('genes');
 		return new Promise(async function(resolve, reject){
 			for (let gene of gene_IDS) {
 				await read.ensembl_get('lookup/id/' + gene + '?').then((ret) => {
 					let gene = read.get_gene_info(ret.body);
-					write_json_to_file(file_to_save, gene, gene_array.length); 	//TEMPORARY!!!
+					conn.insert_gene(genes_db, gene);
 					gene_array.push(gene);
 				}
 				);
@@ -71,12 +70,10 @@ module.exports = {
 	 * @param {string} the name of the file containing the list of ids
 	 */
 	write_homology_data: async (file_name) => {
-		console.log('in write homology data');
 		let specie_name = read.get_species_from_mart_export(file_name);
-		let file_to_save = specie_name + '_homologies';
-		file_to_save = create_file(file_to_save);
 		let homology_array = [];
 		let gene_IDS = read.get_list_gene(file_name);
+		let homology_db = conn.connect().db('genes');
 		return new Promise(async function(resolve, reject){
 			let species = read.get_all_lists();
 			for(let i = 0; i < species.length; i++){
@@ -88,7 +85,7 @@ module.exports = {
 						await read.ensembl_get('homology/id/' + gene + '?' + 'target_species=' + specie + ';format=condensed').then((ret) => {
 							let homologies = read.get_homology_info(ret.body);
 							for(let homology of homologies){
-								write_json_to_file(file_to_save, homology, homology_array.length); 	//TEMPORARY!!!
+								conn.insert_homology(homology_db, homology);
 								homology_array.push(homology);
 							}
 						});

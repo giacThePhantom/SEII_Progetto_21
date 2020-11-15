@@ -1,6 +1,6 @@
 const fs = require('fs');	// File system
 const got = require('got');	// HTTP requests
-
+const conn = require('./db_conn.js');
 const GENE_LIST_LOCATION = './Gene_List/'		// Dir where biomart downloads are stored
 const ENSEMBL_API = 'http://rest.ensembl.org/' 		// Site where we retrieve information
 const FORMAT_JSON = ';content-type=application/json'	// Format API request in json
@@ -35,6 +35,7 @@ module.exports = {
 			file_data.shift();		   // Delete first element (not a gene ID)
 			file_data.pop();    		   // Delete last empty element
 		}
+
 		return file_data;
 	},
 
@@ -77,7 +78,7 @@ module.exports = {
 		gene.biotype = temp_json.biotype;
 		gene.chromosome = temp_json.seq_region_name;
 		gene.strand = temp_json.strand;
-		gene.name = temp_json.logic_name;
+		gene.name = temp_json.species;
 		gene.description = temp_json.description;
 		console.log(gene);
 		return gene;
