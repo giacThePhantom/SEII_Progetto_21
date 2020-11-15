@@ -43,7 +43,6 @@ function close_file(file_name){
 	});
 }
 
-
 module.exports = {
 	/*
 	 * Takes the file of gene ids, gets their information and saves them (now in JSON, in the end in DB)
