@@ -25,6 +25,39 @@ function log(err, res, msg){
 	console.log(msg);
 }
 
+/* See if gene is present in genes_info.
+ * @param {String} Ensembl stable ID.
+ * @return {Boolean} True if present, false otherwise.
+ */
+async function gene_alredy_saved(db_genes, gene_info){
+	let data = await db_genes.collection('genes_info').findOne({'id': gene_info.id});
+	let res;
+	if(data){
+		res = true;
+	}
+	else{
+		res = false;
+	}
+	return res;
+}
+
+/* See if homology is present in genes_homology.
+ * @param {String} Ensembl stable ID of gene.
+ * @param {String} Ensembl stable ID of homologue.
+ * @return {Boolean} True if present, false otherwise.
+ */
+async function homology_alredy_saved(db_genes, homology_info){
+	let data = await db_genes.collection('genes_homology').findOne({ $and: [{'id': homology_info.id}, {'target_id': homology_info.target_id}]});
+	let res;
+	if(data){
+		res = true;
+	}
+	else{
+		res = false;
+	}
+	return res;
+}
+
 module.exports = {
 	/* Creates a MongoClient
 	 * @return {MongoClient} client to return
@@ -50,7 +83,7 @@ module.exports = {
 	 * @param {MongoClient} Client to close.
 	 */
 	close: async (client) => {
-		//await client.close();
+	//	await client.close();
 	},
 	
 	/* Deletes genes db.
@@ -68,7 +101,10 @@ module.exports = {
 	 * @param{Object} Data to be stored.
 	 */
 	insert_gene: async (db_genes, gene_info) => {
-		db_genes.collection('genes_info').insertOne(gene_info, (err, res) => log(err, res, '1 info inserted'));
+		let to_be_saved = !(await gene_alredy_saved(db_genes, gene_info));
+		if(to_be_saved){
+			await db_genes.collection('genes_info').insertOne(gene_info, (err, res) => log(err, res, '1 info inserted'));
+		}
 		
 	},
 	
@@ -77,9 +113,11 @@ module.exports = {
 	 * @param{Object} Data to be stored.
 	 */
 	insert_homology: async (db_genes, gene_homology) => {
-		db_genes.collection('genes_homology').insertOne(gene_homology, (err, res) => log(err, res, '1 homology inserted'));
+		let to_be_saved = !(await homology_alredy_saved(db_genes, gene_homology));
+		if(to_be_saved){
+			await db_genes.collection('genes_homology').insertOne(gene_homology, (err, res) => log(err, res, '1 homology inserted'));
+		}
 	}
-
 
 }
 
