@@ -1,7 +1,6 @@
 /*const fs = require('fs');	// File system
 const got = require('got');	// HTTP requests
 const conn = require('./db_conn.js');
-const read = require('./read_data.js'); //
 const write = require('.write_data.js');
 var bodyParser = require('body-parser');
 
@@ -14,8 +13,7 @@ app.use(bodyParser.json());
 var expess = require('express');
 var app = expess();
 */
-var link='https://rest.ensembl.org/archive/id/ENSG00000157767?content-type=application/json';
-
+const read = require('./read_data.js'); //
 var util = require('util');
 
 //Gene_List on db
@@ -30,12 +28,40 @@ console.log("PROVA: "+ prova.id+"\n");
 */
 
 //Funzia
+module.export = {
+  update_all_genes:()=>{
+    for(new_gene of new_genes){
+      console.log("Cercando id "+new_gene.id);
+      if(new_gene.version > db_on_pc[new_gene.id].version){
+        console.log("C'e' da aggiornare\n");
+      }
+      else{
+        console.log("Non c'e' da aggiornare\n");
+      }
+    }
+  }
+}
+//Test
+///*
 for(new_gene of new_genes){
-  console.log("Cercando id "+new_gene.id);
   if(new_gene.version > db_on_pc[new_gene.id].version){
+    db_on_pc[new_gene.id]=new_gene;
+    /*
+    gene.version = temp_json.version;
+		gene.start = temp_json.start;
+		gene.end = temp_json.end;
+		gene.biotype = temp_json.biotype;
+		gene.chromosome = temp_json.seq_region_name;
+		gene.strand = temp_json.strand;
+		gene.name = temp_json.species;
+		gene.description = temp_json.description;
+		console.log(gene);*/
+
     console.log("C'e' da aggiornare\n");
   }
   else{
     console.log("Non c'e' da aggiornare\n");
   }
 }
+
+//*/
