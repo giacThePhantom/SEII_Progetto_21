@@ -21,6 +21,7 @@ async function run(client){
  * @param {String} Message to print.
  */
 function log(err, res, msg){
+	console.log(msg);
 	if(err) throw err;
 	console.log(msg);
 }
@@ -62,10 +63,10 @@ module.exports = {
 	/* Creates a MongoClient
 	 * @return {MongoClient} client to return
 	 */
-	connect: () => {
+	connect: async () => {
 		let uri_final = uri + '?useUnifiedTopology=true';
 		const client = new MongoClient(uri_final);
-		run(client).catch(console.dir);
+		await run(client).catch(console.dir);
 		return client;
 	},
 	/* Creates genes db.
@@ -74,8 +75,8 @@ module.exports = {
 	 */
 	init_db: async (client) => {
 		let db_genes = client.db('genes');
-		db_genes.createCollection('genes_info', (err, res) => log(err, res, 'created genes_info'));
-		db_genes.createCollection('genes_homology', (err, res) => log(err, res, 'created genes_homology'));
+		await db_genes.createCollection('genes_info', (err, res) => log(err, res, 'created genes_info'));
+		await db_genes.createCollection('genes_homology', (err, res) => log(err, res, 'created genes_homology'));
 		return db_genes;
 	},
 
@@ -83,7 +84,7 @@ module.exports = {
 	 * @param {MongoClient} Client to close.
 	 */
 	close: async (client) => {
-	//	await client.close();
+		await client.close((err, res) => {log(err, res, 'Closing db connection')});
 	},
 	
 	/* Deletes genes db.
@@ -91,8 +92,11 @@ module.exports = {
 	 */
 	del_db: async (client) => {
 		let db_genes = client.db('genes');
-		db_genes.collection('genes_info').drop((err, delOK) => log(err, delOK, 'deleted genes_info'));
-		db_genes.collection('genes_homology').drop((err, delOK) => log(err, delOK, 'delete genes_homology'));
+		return new Promise(async function(resolve, reject){
+			await db_genes.collection('genes_info').drop((err, delOK) => log(err, delOK, 'deleted genes_info'));
+			await db_genes.collection('genes_homology').drop((err, delOK) => log(err, delOK, 'deleted genes_homology'));
+			resolve('true');
+		});
 	},
 		
 

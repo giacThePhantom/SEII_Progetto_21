@@ -53,14 +53,14 @@ async function build_homology(){
  */
 
 async function build_db(){
-	let mongo_client = conn.connect();
-	conn.init_db(mongo_client);
-	conn.close(mongo_client);
+	let mongo_client = await conn.connect();
+	await conn.init_db(mongo_client);
+	await conn.close(mongo_client);
 }
 
 async function drop_db(){
-	let mongo_client = conn.connect();
-	conn.del_db(mongo_client);
+	let mongo_client = await conn.connect();
+	console.log(await conn.del_db(mongo_client));
 	conn.close(mongo_client);
 }
 
@@ -81,16 +81,16 @@ async function start(){
 					print_genes();
 					break;
 				case 'build_genes_info':
-					build_gene_data();
+					await build_gene_data();
 					break;
 				case 'build_homology':
-					build_homology();
+					await build_homology();
 					break;
 				case 'build_db':
-					build_db();
+					await build_db();
 					break;
 				case 'drop_db':
-					drop_db();
+					await drop_db();
 					break;
 				default:
 					console.error('Cannot recognise option: ' + arg);
