@@ -18,6 +18,8 @@
   "homepage": "https://github.com/giacThePhantom/SEII_Progetto_21#readme",
   "dependencies": {
     "got": "^11.8.0",
-    "mongodb": "^3.6.3"
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.15",
+    "shuffle-array": "^1.0.1"
   }
 }

@@ -54,7 +54,9 @@ async function build_homology(){
 
 async function build_db(){
 	let mongo_client = await conn.connect();
+	console.log('Connected');
 	await conn.init_db(mongo_client);
+	console.log('Finished creating schemas, ending');
 	await conn.close(mongo_client);
 }
 

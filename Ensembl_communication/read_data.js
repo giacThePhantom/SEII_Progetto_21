@@ -1,10 +1,10 @@
 const fs = require('fs');	// File system
 const got = require('got');	// HTTP requests
 const conn = require('./db_conn.js');
+const shuffle = require('shuffle-array');
 const GENE_LIST_LOCATION = './Gene_List/'		// Dir where biomart downloads are stored
 const ENSEMBL_API = 'http://rest.ensembl.org/' 		// Site where we retrieve information
 const FORMAT_JSON = ';content-type=application/json'	// Format API request in json
-
 
 module.exports = {
 	/*
@@ -35,7 +35,7 @@ module.exports = {
 			file_data.shift();		   // Delete first element (not a gene ID)
 			file_data.pop();    		   // Delete last empty element
 		}
-
+		shuffle(file_data);
 		return file_data;
 	},
 
