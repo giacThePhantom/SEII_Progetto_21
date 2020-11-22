@@ -12,3 +12,6 @@ img{
 	width: 100%;
 	height: auto;
 }
+#maincontent,td{
+	text-align: center;
+}
