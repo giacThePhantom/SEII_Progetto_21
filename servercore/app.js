@@ -31,7 +31,7 @@ function get_list_gene(file_name) {
   return listgenes;   
 }
 
-app.get('/api/:species/:identifier', function (req, res) {
+app.get('/api/v1/species/:species/:identifier', function (req, res) {
   var species = req.params.species;
   var identifier = req.params.identifier;
   var genes = get_list_gene(species+".json");
@@ -45,7 +45,7 @@ app.get('/api/:species/:identifier', function (req, res) {
 
 });
 
-app.get('/api/:species', function (req, res) {
+app.get('/api/v1/species/:species', function (req, res) {
     var species = req.params.species;
     var genes = get_list_gene(species+".json");
     if(genes) {
@@ -56,5 +56,9 @@ app.get('/api/:species', function (req, res) {
   
   });
 
+app.get('/api/v1/species', function(req, res) {
+  var species = '{["chicken", "human", "mouse", "rat", "zebrafish"]}';
+  res.status(200).send(species);
+});
   
 
