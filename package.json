@@ -1,0 +1,25 @@
+{
+  "name": "seii_progetto_21",
+  "version": "1.0.0",
+  "description": "Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021\r * Giacomo Fantoni\r * Ettore Favari\r * Filippo Gastaldello\r * Nicola Giuseppe Marchioro\r * Elisa Pettinà",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giacThePhantom/SEII_Progetto_21.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/giacThePhantom/SEII_Progetto_21/issues"
+  },
+  "homepage": "https://github.com/giacThePhantom/SEII_Progetto_21#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {}
+}

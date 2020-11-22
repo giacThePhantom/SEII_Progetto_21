@@ -1,4 +1,4 @@
-//prova commit
+
 var express    = require('express');
 var bodyParser = require('body-parser');
 
@@ -31,6 +31,20 @@ function get_list_gene(file_name) {
   return listgenes;   
 }
 
+app.get('/api/:species/:identifier', function (req, res) {
+  var species = req.params.species;
+  var identifier = req.params.identifier;
+  var genes = get_list_gene(species+".json");
+
+  genes.forEach(element => { //controllo la lista dei geni e restituisco info di un singolo gene
+    if (element.id == identifier){
+      res.status(200).send(element);
+    }
+  });
+  res.status(404);
+
+});
+
 app.get('/api/:species', function (req, res) {
     var species = req.params.species;
     var genes = get_list_gene(species+".json");
@@ -42,17 +56,5 @@ app.get('/api/:species', function (req, res) {
   
   });
 
-  app.get('/api/:species/:identifier', function (req, res) {
-    var species = req.params.species;
-    var identifier = req.params.identifier;
-    //var genes = get_list_gene(species+".json"); //restituisco un file json??
-    var genes = '{"id": 23, "result": win}';
-    var parsed = JSON.parse(genes);
-    if(parsed) {
-      res.status(200).send(parsed.id);
-    } else {
-      res.status(404);
-    }
   
-  });
 
