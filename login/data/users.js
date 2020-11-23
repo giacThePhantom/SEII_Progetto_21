@@ -20,6 +20,23 @@ router.get('', (req, res) => {
     res.status(200).json(users);
 });
 
+router.post('/auth', (req, res) => {
+    let users = db.users.all()
+    .filter( (entry) => {
+						console.log(req.body.password);
+            return entry.email == req.body.email && entry.password== req.body.password; //checks for credentials in the database
+    }).map( (entry) => {
+        return { //format output returning only some infos
+            self: '/api/v1/users/' + entry.id,
+            email: entry.email,
+						username: entry.username,
+						admin: entry.admin
+        }
+    });
+    res.status(200).json(users);
+});
+
+//get user info by id
 router.get('/:id', (req, res) => {
     let users = db.users.all()
     .filter( (entry) => {
@@ -34,9 +51,13 @@ router.get('/:id', (req, res) => {
     });
     res.status(200).json(users);
 });
+//insert a new user in the database (default admin:false)
 router.post('', (req, res) => {
     let user = {
-        email: req.body.email
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
+        admin: false,
     };
 
     if (!user.email || typeof user.email != 'string' || !checkIfEmailInString(user.email)) {
@@ -45,19 +66,12 @@ router.post('', (req, res) => {
     }
 
     let userId = db.users.insert(user);
-
-    /**
-     * Link to the newly created resource is returned in the Location header
-     * https://www.restapitutorial.com/lessons/httpmethods.html
-     */
     res.location("/api/v1/users/" + userId).status(201).send();
 });
 
 
 
-// https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
-function checkIfEmailInString(text) {
-    // eslint-disable-next-line
+function checkIfEmailInString(text) {//checks wether the string is in a valid email format
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(text);
 }

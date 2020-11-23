@@ -44,3 +44,33 @@ console.log(getWidth());
 }
 window.onresize=sizeHandler;
 sizeHandler();
+
+
+
+function authenticate(){
+	let email=document.getElementById("email_field").value;
+	let psw=document.getElementById("psw_field").value;
+	 fetch('../api/v1/users/auth',{
+		 method:'post',
+		 headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+		body:JSON.stringify({email:email,password:psw})
+	})
+	 .then((resp) => resp.json()) // Transform the data into json
+  	.then(function(data) { // Here you get the data to modify as you please
+        //console.log(data.length);
+				if(data.length>0){
+	        loggedUser = data[0];
+	        loggedUser.id = loggedUser.self.substring(loggedUser.self.lastIndexOf('/') + 1);
+	        console.log( loggedUser.self);
+				}
+				else{
+					console.log("user not found");
+				}
+        return;
+    })
+    .catch( error => console.error(error) ); // If there is any error you will catch them here
+
+}
