@@ -6,6 +6,25 @@ const GENE_LIST_LOCATION = './Gene_List/'		// Dir where biomart downloads are st
 const ENSEMBL_API = 'http://rest.ensembl.org/' 		// Site where we retrieve information
 const FORMAT_JSON = ';content-type=application/json'	// Format API request in json
 
+
+function get_gene_tree_rec(response){
+	console.log('In gene tree rec');
+	let data = {scientific_name: '', children: []};
+	if(response.children){
+		//data.children = [];
+		for(let child of response.children){
+			console.log('child');
+			console.log(child);
+			data.children.push({scientific_name: child.taxonomy.scientific_name, children: get_gene_tree_rec(child.children)});
+			console.log(child.children);
+			//get_gene_tree_rec(child.children, data.children[data.children.length - 1]);
+		}
+	return data.children;
+	}
+	return [];
+}
+
+
 module.exports = {
 	/*
 	 * Processes the name of mart export file and returns the species it has info of.
@@ -45,10 +64,16 @@ module.exports = {
 	 * @return {???} the request
 	 */
 	ensembl_get: async (content) => {
-		return await got(ENSEMBL_API + content + FORMAT_JSON);
+		console.log(ENSEMBL_API + content + FORMAT_JSON);
+		return await got(ENSEMBL_API + content + FORMAT_JSON).catch((err) => {
+			if(err.response.statusCode == 404){
+				console.log('Could not find ' + ENSEMBL_API + content + FORMAT_JSON);
+			}
+			else throw err;
+		});
 	},
 
-	get_gene_sequence: async (response) => {
+	get_gene_sequence: (response) => {
 		let json_seq = JSON.parse(response);
 		return json_seq.seq;
 	},
@@ -101,5 +126,19 @@ module.exports = {
 			homologies.push(homology);
 		}
 		return homologies;
+	},
+
+	get_gene_tree: (response) => {
+		let response_json = JSON.parse(response);
+		console.log(response_json);
+		let data = {};
+		data.id = response_json.id;
+		response_json = response_json.tree;
+		data.children = [];
+		data.root_species = response_json.taxonomy.scientific_name;
+		return get_gene_tree_rec(response_json);
+		//return data;
 	}
+
+
 };

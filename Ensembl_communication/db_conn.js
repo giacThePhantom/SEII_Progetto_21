@@ -44,6 +44,7 @@ module.exports = {
 			await to_be_inserted.save((err) => {log(err, 'Inserted correctly', 'Inserted gene info');});
 			console.log('Inserted');
 		}
+		return to_be_saved;
 		
 	}
 
