@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const { Schema } = mongoose;
 
-const gene_schema = new Schema({
+const gene = new Schema({
 	id: String,
 	version: Number,
 	start: Number,
@@ -14,7 +14,8 @@ const gene_schema = new Schema({
 	description: String,
 	sequence: String,
 	homologies: [{
-		target_id: String
+		target_id: String,
+		target_species: String
 	}],
 	gene_tree: String
 });
@@ -23,7 +24,7 @@ const gene_schema = new Schema({
 const gene_tree = new Schema({
 	id: String,
 	children: [{
-		scientific_name: String.
+		scientific_name: String,
 		children: [{}]
 	}]
 });
@@ -33,8 +34,7 @@ const gene_tree = new Schema({
 
 
 module.exports = {
-	mongoose.model('gene_info', gene_schema),
-
-	mongoose.model('gene_tree', gene_homology),
+	genes_model: mongoose.model('gene_info', gene),
+	gene_trees: mongoose.model('gene_tree', gene_tree)
 }
 

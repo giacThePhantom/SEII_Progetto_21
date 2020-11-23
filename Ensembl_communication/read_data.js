@@ -48,6 +48,10 @@ module.exports = {
 		return await got(ENSEMBL_API + content + FORMAT_JSON);
 	},
 
+	get_gene_sequence: async (response) => {
+		let json_seq = JSON.parse(response);
+		return json_seq.seq;
+	},
 	/*
 	 * Gets all the lists of genes ids downloaded from biomart
 	 * @return {array} all the file names where the gene ids are stored
@@ -80,7 +84,6 @@ module.exports = {
 		gene.strand = temp_json.strand;
 		gene.name = temp_json.species;
 		gene.description = temp_json.description;
-		console.log(gene);
 		return gene;
 	},
 	/*
@@ -88,18 +91,15 @@ module.exports = {
 	 * @param {JSON} homology information from ensembl.
 	 * @return {JSON} processed homology information.
 	 */
-	get_homology_info: (homology_information) => {
+	get_homologies: (homology_information) => {
 		let temp_json = JSON.parse(homology_information);
-		console.log(temp_json);
 		let homologies = [];
 		for(let temp of temp_json.data[0].homologies){
 			let homology = {};
-			homology.id = temp_json.data[0].id;
 			homology.target_id = temp.id;
 			homology.target_species = temp.species;
 			homologies.push(homology);
 		}
-		console.log(homologies);
 		return homologies;
 	}
 };
