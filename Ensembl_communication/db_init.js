@@ -32,12 +32,13 @@ async function build_gene_data(connection){
 /*
  * Start the program to save data from ensembl
  */
-async function start(connection){
-	console.log('starting');
-	connection = run(); //TEMPORARY
-	console.log('created connection');
-	build_gene_data();
+module.exports = {
+	
+	start: async (connection) => {
+		console.log('starting');
+		connection = run(); //TEMPORARY
+		console.log('created connection');
+		build_gene_data();
+	}
 }
 
-let connection = {}
-start(connection);

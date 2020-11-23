@@ -1,3 +1,8 @@
+const mongoose = require('mongoose');
+const db_init = require('../Ensembl_communication/db_init');
+
+const uri = 'mongodb://127.0.0.1:27017/genes';
+
 
 var express    = require('express');
 var bodyParser = require('body-parser');
@@ -9,6 +14,11 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use('/', express.static('public'));
+
+
+//Start the database
+const connection = mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+
 
 // starting the server
 var port = process.env.PORT || 3000;
@@ -62,5 +72,6 @@ app.get('/api/v1/species', function(req, res) {
 });
 
 
+db_init.start(connection);
   
 

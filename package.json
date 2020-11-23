@@ -21,7 +21,7 @@
     "express": "^4.17.1",
     "request": "^2.88.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
     "got": "^11.8.0",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.15",
