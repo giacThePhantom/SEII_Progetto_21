@@ -2,9 +2,26 @@ const read = require('./read_data.js');
 const write = require('./write_data.js');
 const conn = require('./db_conn.js');
 
+const mongoose = require('mongoose'); //temporary
+
+const uri = 'mongodb://127.0.0.1:27017/genes';
 /*
  * Prints all genes IDs
  */
+
+// TEMPORARYYYYYYYYYYYYYYY
+async function run(){
+    	// Connect the client to the server
+    	//await client.connect();
+    	// Establish and verify connection
+    	//await client.db("admin").command({ ping: 1 });
+    	let client = await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+	console.log("Connected successfully to server");
+	return client;
+  	
+}
+
+
 function print_genes(){
 	console.log('Getting all IDs:');
 	let files = read.get_all_lists();
@@ -52,17 +69,16 @@ async function build_homology(){
  * Creates the collection for database genes
  */
 
-async function build_db(){
-	let mongo_client = await conn.connect();
+
+async function build_db(connection){
 	console.log('Connected');
-	await conn.init_db(mongo_client);
+	await conn.init_db();
 	console.log('Finished creating schemas, ending');
-	await conn.close(mongo_client);
 }
 
 async function drop_db(){
-	let mongo_client = await conn.connect();
-	console.log(await conn.del_db(mongo_client));
+	let mongo_client = run();
+	await conn.del_db(mongo_client);
 	conn.close(mongo_client);
 }
 
@@ -71,7 +87,10 @@ async function drop_db(){
 /*
  * Start the program to save data from ensembl
  */
-async function start(){
+async function start(connection){
+	connection = run(); //TEMPORARY
+	build_bd(connection);
+
 	let my_args = process.argv.slice(2);
 	if(my_args.length == 0){
 		console.error('Missing arguments!');

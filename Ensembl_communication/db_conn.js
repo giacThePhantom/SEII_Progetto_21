@@ -110,7 +110,7 @@ module.exports = {
 	 */
 	close: async (client) => {
 		console.log('Closing the connection');
-		mongoose.connection.close();
+		//mongoose.connection.close();
 		//await client.close((err, res) => {log(err, res, 'Closing db connection')});
 	},
 	
