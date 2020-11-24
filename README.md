@@ -49,18 +49,12 @@ Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021
 | | | | definizione delle risorse e degli endpoint relativi alle specie e implementazione metodi REST | Filippo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
 | | | | Metodo REST per vedere quali specie sono disponibili | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
 | | | | Design UI | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | Io come utente posso accedere alle informazioni su un determinato gene di mio interesse. Per approfondire la sua funzione.| task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | Io come utente posso chiedere informazioni ai moderatori, per avere un confronto con persone competenti.| task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | Io come utente posso accedere alle informazioni su un determinato gene di mio interesse. Per approfondire la sua funzione.| Metodo REST per prendere geni da db/file in locale | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | definizione delle risorse e degli endpoints relativi ai geni ed  implementazione metodi REST | Filippo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Metodo REST selezionare info del singolo gene | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | Io come utente posso chiedere informazioni ai moderatori, per avere un confronto con persone competenti.| definizione della risorsa Q&A e dei
+metodi REST | Filippo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Design form domanda | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
 | | | Io come utente posso comparare due singoli geni, per capire come differenze di sequenza portano a differenze funzionali.| task | volunteer | estimate | days | | | | |
 | | | | task | volunteer | estimate | days | | | | |
 | | | | task | volunteer | estimate | days | | | | |
