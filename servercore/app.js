@@ -71,7 +71,7 @@ app.get('/api/v1/species', function(req, res) {
   res.status(200).send(species);
 });
 
-
+console.log('Starting db init');
 db_init.start(connection);
   
 
