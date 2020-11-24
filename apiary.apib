@@ -1,305 +1,193 @@
-FORMAT: 1A
-HOST: https://polls.apiblueprint.org/
+openapi: 3.0.0
+info :
+  version : 1.0.0
+  title : SEII_Progetto_21
+  description : API del progetto per il corso di Ingegnieria del software 2 dell'Università degli studi di Trento
+  
+servers : 
+  - url : http://localhost
+  
+paths :
+  /species :
+    get :
+      description : Returns the list of all species
+      parameters :
+        - name : id
+          in : query
+          description : Specify the ID of the species to return
+          schema :
+            type : integer
+      responses :
+        '200' :
+          description : succesfully returned a list of species
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  species :
+                    type : array
+                    items :
+                      type : object
+                      properties :
+                        scientific name : 
+                          type : string
+                        common name :
+                          type : string
+                        genome :
+                          type : array
+                          items :
+                            type : string
+        '400' :
+          description : Invalid request
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :   
+                  message :
+                    type : string
+    post:
+      description: Lets a user post a new species
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scientific name:
+                  type: string
+                common name :
+                  type : string
+                genome :
+                  type : array
+                  items :
+                    type : string
 
-# SEII_Progetto_21
+      responses:
+        '200':
+          description: Successfully posted a species
 
-API del progetto per il corso di Ingegnieria del software 2 dell'Università degli studi di Trento
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string                
+      
+  /genes :
+    get :
+      description : Returns the list of all genes
+      parameters :
+        - name : id
+          in : query
+          description : Specify the ID of the gene to return
+          schema :
+            type : integer
+      responses : 
+        '200' :
+          description : succesfully returned a list of genes
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  genes :
+                    type : array
+                    items : 
+                      type : object
+                      properties :
+                        id :
+                          type : string
+                        biotype :
+                          type : string
+                        chromosome :
+                          type : integer
+                        strand :
+                          type : integer
+                        sequence :
+                          type : string
+                        description: 
+                          type : string
+                        start :
+                          type : integer
+                        end :
+                          type : integer
+                        version :
+                          type : string
+                        homologies :
+                          type : array
+                          items :
+                            type : string
+                        gene_tree_id : 
+                          type : string
+        '400' :
+          description : Invalid request
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :   
+                  message :
+                    type : string
+  /qanda :
+    get:
+      description : Returns the list of all Q&As
+      parameters :
+        - name : id
+          in : query
+          description : Specify the ID of the Q&A to return
+          schema :
+            type : integer
+      responses :
+        '200' :
+          description : Succesfully returned a list of Q&As
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  qanda :
+                    type : array
+                    items :
+                      type : object
+                      properties:
+                        id:
+                          type : string
+                        questionAuthor :
+                          type : string
+                        answerAuthor :
+                          type : string
+                        questionText :
+                          type : string
+                        answerText :
+                          type : string
+    post:
+      description: Lets a user post a new Q&A
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
 
-## Species collection [/species]
+      responses:
+        '200':
+          description: Successfully posted a Q&A
 
-### List all species [GET]
-
-Allows to retrieve all the species in the collection.
-
-+ Response 200 (application/json)
-
-        {
-            species :
-                        [
-                            {
-                                scientific name : “species name”,
-                                common name : “species common name”,
-                                genome : 
-                                        [
-                                        “gene id”,
-                                        “gene id”,
-                                        “gene id”
-                                        ]
-                            
-                            }
-                        ]
-        }
-
-## Get a single species [/species/{id}]
-
-
-+ Parameters
-    + id (number) - ID of the species i want to retrieve
-    
-### View species details [GET]
-
-Allows to retrieve a single species identified by its id.
-
-+ Response 200 (application/json)
-    
-        {
-            "species":
-                        {
-                            scientific name : “species name”,
-                            common name : “species common name”,
-                            genome :
-                                    [
-                                        “gene id”,
-                                        “gene id”,
-                                        “gene id”
-                                    ]
-                        }
-        }
-
-## Genes collection [/genes]
-
-### List all genes [GET]
-
-Allows to retrieve all genes in the collection.
-
-+ Response 200 (application/json)
-
-        {
-            "genes" :
-                        [
-                            {
-                                id : “unique integer id(ensembl id)”,
-                                biotype : “ ”,
-                                chromosome : “ ”,
-                                strand : “ ”,
-                                sequence : “ ”,
-                                description : “gene description”
-                                start : “ ”,
-                                end : “ ”,
-                                version : “ ”,
-                                homologies :
-                                            [
-                                                “gene id”,
-                                                “gene id”,
-                                                “gene id”
-                                            ],
-                                gene_tree_id : “gene tree id”
-                            }
-                        ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
-
-## Get a single gene [/genes/{id}]
-
-+ Parameters
-    + id (number) - ID of the species I want to retrieve. 
-
-###Get gene details [GET]
-
-Allows to retrieve a single gene identified by its id.
-
-+ Response 200 (application/json)
-
-        {
-            "genes" :
-                        {
-                            id : “unique integer id(ensembl id)”,
-                            biotype : “ ”,
-                            chromosome : “ ”,
-                            strand : “ ”,
-                            sequence : “ ”,
-                            description : “gene description”,
-                            start : “ ”,
-                            end : “ ”,
-                            version : “ ”,
-                            homologies :
-                                        [
-                                            “gene id”,
-                                            “gene id”,
-                                            “gene id”
-                                        ],
-                            gene_tree_id : “gene tree id”
-                        }
-        }
-
-## GeneTree collection [/geneTrees]
-
-### List all geneTrees [GET]
-
-Allows to retrieve all gene trees in the collection.
-
-+ Response 200 (application/json)
-
-        {
-            "geneTrees" : 
-                            [
-                                {
-                                    id : “ ”,
-                                    root_species : “ “,
-                                    children :
-                                                [
-                                                    {
-                                                        scientific_name : “ ”,
-                                                        children : [ … ]
-                                                    },
-                                                    {
-                                                        scientific_name: “ ”,
-                                                        child : [ … ]
-                                                    },
-                                                    {
-                                                        scientific_name: “ ”,
-                                                        child : [ … ]
-                                                    }
-                                                ]
-                                }
-                            ]
-        }
-
-## Get a single geneTree [/geneTrees/{id}]
-
-+ Parameters
-    + id (number) - ID of the geneTree i want to retrieve.
-### Get geneTrees details [GET]
-
-Allows to retrieve a single geneTree identified by its id.
-
-+ Response 200 (application/json)
-
-        {
-            id : “ ”,
-            root_species : “ “,
-            child :
-                    [
-                        {
-                            scientific_name : “ ”,
-                            child : [ … ]
-                        },
-                        {
-                            scientific_name: “ ”,
-                            child : [ … ]
-                        },
-                        {
-                            scientific_name: “ ”,
-                            child : [ … ]
-                        }
-                    ]
-        }
-
-
-## Users collection [/users]
-
-###List all users [GET]
-
-Allows to get all the registered users.
-+ Response 200 (application/json)
-
-        {
-            "users" : 
-                        [
-                            {
-                                id : “userid”,
-                                email : “ … ”,
-                                username : “ … ”,
-                                password: “...”,
-                                admin : bool,
-                                uploadedGenes :
-                                                [
-                                                    {
-                                                        usergeneid : “ “,
-                                                        approved: bool
-                                                    },
-                                                ]
-                            }
-
-                        ]
-        }
-        
-## Get a single user [/users/{id}]
-
-+ Parameters
-    + id (number) - ID of the user I want to retrieve.
-    
-### Get details on a user [GET]
-
-Allows to retrieve a single user identified by its id.
-
-+ Response 200 (application/json)
-
-        {
-            id : “userid”,
-            email : “ … ”,
-            username : “ … ”,
-            password: “...”,
-            admin : bool,
-            uploadedGenes :
-                            [
-                                {
-                                    usergeneid : “ “,
-                                    approved: bool
-                                },
-                            ]
-        }
-
-## Q&As collectoin [/qanda]
-
-###List all qanda [GET]
-
-+ Response 200 (application/json)
-
-        {
-            "qanda" :
-                    [
-                        {
-                            id : “ … “,
-                            questionAuthor : “userid”,
-                            answerAuthor : “ ”,
-                            questionText : “ … “,
-                            answersText : “ … “
-                        }
-                    ]
-        }
-
-## Get a single Q&A [/qanda/{id}]
-
-+ Parameters
-    + id (number) - ID of the Q&A I want to retrieve.
-    
-### Get Q&A details [GET]
-
-+ Response 200 (applicaiton/json)
-
-        {
-            id : “ … “,
-            questionAuthor : “userid”,
-            answerAuthor : “ ”,
-            questionText : “ … “,
-            answersText : “ … “
-        }
->>>>>>> 63b050f0f95fc620cadf29f2a0aca0af89d7e49e
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
