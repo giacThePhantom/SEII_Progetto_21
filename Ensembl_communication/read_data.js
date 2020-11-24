@@ -2,7 +2,7 @@ const fs = require('fs');	// File system
 const got = require('got');	// HTTP requests
 const conn = require('./db_conn.js');
 const shuffle = require('shuffle-array');
-const GENE_LIST_LOCATION = '/home/giacomo/Documents/Universita/IngSoft2/Progetto/Ensembl_communication/Gene_List/'		// Dir where biomart downloads are stored
+const GENE_LIST_LOCATION = '../Ensembl_communication/Gene_List/'		// Dir where biomart downloads are stored
 const ENSEMBL_API = 'http://rest.ensembl.org/' 		// Site where we retrieve information
 const FORMAT_JSON = ';content-type=application/json'	// Format API request in json
 
