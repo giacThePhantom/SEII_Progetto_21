@@ -33,24 +33,22 @@ Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021
 | |Sign up | Io come utente posso entrare nel sito e visualizzare informazioni affidabili.| Modellazione dati dei geni | Giacomo | 1 | 1 |1 |1 | 1| 1| 1 |0 |0 |0 |0 |0 |0 |0 |0 0|0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |
 | | | | Modellazione dati gene tree | Giacomo | 1 | 1 |1 |1 |1 |1 |1 |1 |1 |1 |1 |1|1 |1 |1 |1 |1 |1 |1 |1 |1 | 1 |1 |1 |0 |0 |
 | | | | Design API | Elisa | 1 |1 |1 |1 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |
-| | | | Ottenere e leggere id ensembl  | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Ottenere informazioni dei geni | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Ottenere informazioni delle omologie | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Ottenere informazioni sugli alberi | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Scrivere dati nel database | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Deploy | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | Io come utente posso entrare nel sito e visualizzare informazioni aggiornate.| task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | Io come utente posso comparare due interi genomi per determinare quando e come due specie si sono differenziate. Con un UI intuitiva.| task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Ottenere e leggere id ensembl  | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Ottenere informazioni dei geni | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Ottenere informazioni delle omologie | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Ottenere informazioni sugli alberi | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Scrivere dati nel database | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Deploy | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | Io come utente posso entrare nel sito e visualizzare informazioni aggiornate.| Aggiornare tutte le liste di geni | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Aggiornare una lista di geni | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Aggiornare un sigolo gene | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Comunicazione con database | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | Io come utente posso comparare due interi genomi per determinare quando e come due specie si sono differenziate. Con un UI intuitiva.| Pagina principale | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Comunicazione con database | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Metodo REST rendere lista di geni di una specie da db/file in locale | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | definizione delle risorse e degli endpoint relativi alle specie e implementazione metodi REST | Filippo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Metodo REST per vedere quali specie sono disponibili | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| | | | Design UI | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
 | | | Io come utente posso accedere alle informazioni su un determinato gene di mio interesse. Per approfondire la sua funzione.| task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
 | | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
 | | | | task | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
