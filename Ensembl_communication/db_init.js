@@ -36,7 +36,7 @@ module.exports = {
 	
 	start: async (connection) => {
 		console.log('starting');
-		connection = run(); //TEMPORARY
+		//connection = run(); //TEMPORARY
 		console.log('created connection');
 		build_gene_data();
 	}

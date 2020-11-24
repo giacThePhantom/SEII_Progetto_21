@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
 
-const uri = 'mongodb://127.0.0.1:27017/genes';
+const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?retryWrites=true&w=majority';
 
 
 var express    = require('express');
@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-var GENE_LIST_LOCATION= 'C:\\Users\\Elisa\\Desktop\\progettoSE\\SEII_Progetto_21\\servercore\\Jsons\\';
+var GENE_LIST_LOCATION= './servercore/Jsons/';
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
