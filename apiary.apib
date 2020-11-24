@@ -10,13 +10,8 @@ servers :
 paths :
   /species :
     get :
-      description : Returns the list of all/one species
-      parameters :
-        - name : id
-          in : query
-          description : Specify the ID of the species to return
-          schema :
-            type : integer
+      description : Returns the list of all species
+     
       responses :
         '200' :
           description : succesfully returned a list of species
@@ -78,16 +73,66 @@ paths :
                 properties:   
                   message:
                     type: string                
-      
-  /genes :
+  
+  /species/{id} :
     get :
-      description : Returns the list of all/one genes
+      description : Returns a species identified by its ID
       parameters :
         - name : id
           in : query
-          description : Specify the ID of the gene to return
+          description : Specify the ID of the species to return
           schema :
             type : integer
+      responses :
+        '200' :
+          description : succesfully returned a species object
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  species :
+                    type : array
+                    items :
+                      type : object
+                      properties :
+                        scientific name : 
+                          type : string
+                        common name :
+                          type : string
+                        genome :
+                          type : array
+                          items :
+                            type : string
+        '400' :
+          description : Invalid request
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :   
+                  message :
+                    type : string
+    
+      responses:
+        '200':
+          description: Successfully posted a species
+
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string                
+   
+      
+  /genes :
+    get :
+      description : Returns the list of all genes
+      
       responses : 
         '200' :
           description : succesfully returned a list of genes
@@ -134,15 +179,109 @@ paths :
                 properties :   
                   message :
                     type : string
-  /users :
+    post:
+      description: Lets a user upload a gene
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type : object
+              properties :
+                biotype :
+                  type : string
+                chromosome :
+                  type : integer
+                strand :
+                  type : integer
+                sequence :
+                  type : string
+                description: 
+                  type : string
+                start :
+                  type : integer
+                end :
+                  type : integer
+                version :
+                  type : string
+                homologies :
+                  type : array
+                  items :
+                    type : string
+                gene_tree_id : 
+                  type : string
+      responses:
+        '200':
+          description: Successfully posted a gene
+
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string                  
+  /genes/{id} :
     get :
-      description : Returns the list of all/one users
+      description : Returns one genes identified by its ID
       parameters :
         - name : id
           in : query
-          description : Specify the ID of the user to return
+          description : Specify the ID of the gene to return
           schema :
             type : integer
+      responses : 
+        '200' :
+          description : succesfully returned a gene object
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  genes :
+                    type : array
+                    items : 
+                      type : object
+                      properties :
+                        id :
+                          type : string
+                        biotype :
+                          type : string
+                        chromosome :
+                          type : integer
+                        strand :
+                          type : integer
+                        sequence :
+                          type : string
+                        description: 
+                          type : string
+                        start :
+                          type : integer
+                        end :
+                          type : integer
+                        version :
+                          type : string
+                        homologies :
+                          type : array
+                          items :
+                            type : string
+                        gene_tree_id : 
+                          type : string
+        '400' :
+          description : Invalid request
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :   
+                  message :
+                    type : string
+                    
+  /users :
+    get :
+      description : Returns the list of all/one users
       responses :
         '200' :
           description : succesfully returned a list of users
@@ -200,8 +339,7 @@ paths :
                 username :
                   type : string
                 password :
-                  type : stringdded
-                
+                  type : string
       responses:
         '200':
           description: Successfully posted a species
@@ -215,16 +353,60 @@ paths :
                 properties:   
                   message:
                     type: string                
-    
-  /qanda :
-    get:
-      description : Returns the list of all Q&As
+  /users/{id} :
+    get :
+      description : Returns one user identified by its ID
       parameters :
         - name : id
           in : query
-          description : Specify the ID of the Q&A to return
+          description : Specify the ID of the user to return
           schema :
             type : integer
+      responses :
+        '200' :
+          description : succesfully returned a users object
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  users :
+                    type : array
+                    items :
+                      type : object
+                      properties :
+                        id : 
+                          type : string
+                        email :
+                          type : string
+                        username :
+                          type : string
+                        password :
+                          type : string
+                        admin :
+                          type : boolean
+                        uploadedgenes :
+                          type : array
+                          items :
+                            type : object
+                            properties :
+                                usergeneid :
+                                  type : string
+                                approved :
+                                  type : boolean
+        '400' :
+          description : Invalid request
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :   
+                  message :
+                    type : string
+  /qanda :
+    get:
+      description : Returns the list of all Q&As
+      
       responses :
         '200' :
           description : Succesfully returned a list of Q&As
@@ -272,4 +454,36 @@ paths :
                 type: object
                 properties:   
                   message:
-                    type: string
+                    type: string                
+  /qanda/{id} :
+    get:
+      description : Returns the list of a Q&A identified by its ID
+      parameters :
+        - name : id
+          in : query
+          description : Specify the ID of the Q&A to return
+          schema :
+            type : integer
+      responses :
+        '200' :
+          description : Succesfully returned a Q&A object
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  qanda :
+                    type : array
+                    items :
+                      type : object
+                      properties:
+                        id:
+                          type : string
+                        questionAuthor :
+                          type : string
+                        answerAuthor :
+                          type : string
+                        questionText :
+                          type : string
+                        answerText :
+                          type : string
