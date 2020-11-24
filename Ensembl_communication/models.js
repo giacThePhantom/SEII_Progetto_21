@@ -10,7 +10,6 @@ const gene = new Schema({
 	biotype: String,
 	chromosome: String,
 	strand: Number, 
-	name: String,
 	description: String,
 	sequence: String,
 	homologies: [{

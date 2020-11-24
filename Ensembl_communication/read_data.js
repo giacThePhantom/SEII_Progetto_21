@@ -107,7 +107,6 @@ module.exports = {
 		gene.biotype = temp_json.biotype;
 		gene.chromosome = temp_json.seq_region_name;
 		gene.strand = temp_json.strand;
-		gene.name = temp_json.species;
 		gene.description = temp_json.description;
 		return gene;
 	},
