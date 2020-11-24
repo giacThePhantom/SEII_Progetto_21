@@ -1,15 +1,11 @@
-function loaduserlist(){
-	const userlist=document.getElementById("userlist");
+function loaduserlist(){//function used in the test phase, it retrieves from the server the entire userlist
+	//const userlist=document.getElementById("userlist");
 
 	fetch("../api/v1/users")
 	.then((resp)=>resp.json())
 	.then(function(data){
 		console.log(data);
-		//userlist.innerHTML='';
 		data.forEach((item, i) => {
-			//	var li=document.createElement("li");
-			//	li.innerHTML=`<a href=../profile.html?username=${item.username}>${item.username}</a>`;
-			//	userlist.appendChild(li);
 				console.log(item);
 		});
 
@@ -17,7 +13,7 @@ function loaduserlist(){
 }
 loaduserlist();
 
-function getWidth() {
+function getWidth() { //function used to get the window size
   if (self.innerWidth) {
     return self.innerWidth;
   }
@@ -30,23 +26,23 @@ function getWidth() {
     return document.body.clientWidth;
   }
 }
-function sizeHandler(){
-console.log(getWidth());
+function sizeHandler(){ //handle the resize of the window, to get a better layout
+//console.log(getWidth());
 	let topmenu=document.getElementById("topmenu");
 	if(getWidth()>1160)
 	{
 		topmenu.style.height="100px";
-		console.log("size100");
+		//console.log("size100");
 	}else{
 		topmenu.style.height="150px";
-		console.log("size150");
+		//console.log("size150");
 	}
 }
 window.onresize=sizeHandler;
 sizeHandler();
 
 
-
+//function that try to authenticate, if there's no match in the database it returns a user not found error
 function authenticate(){
 	let email=document.getElementById("email_field").value;
 	let psw=document.getElementById("psw_field").value;
@@ -54,15 +50,15 @@ function authenticate(){
 		 method:'post',
 		 headers: {
       'Content-Type': 'application/json'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
 		body:JSON.stringify({email:email,password:psw})
 	})
 	 .then((resp) => resp.json()) // Transform the data into json
-  	.then(function(data) { // Here you get the data to modify as you please
+  	.then(function(data) {
         //console.log(data.length);
-				if(data.length>0){
+				if(data.length>0){//if length=0 there is no match for the given email and password
 	        loggedUser = data[0];
+					 //id at where you can find the resource if you go to /api/v1/users/:id
 	        loggedUser.id = loggedUser.self.substring(loggedUser.self.lastIndexOf('/') + 1);
 	        console.log( loggedUser.self);
 				}

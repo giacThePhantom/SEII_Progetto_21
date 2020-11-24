@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('./db.js');
 
-
+//API used during the test phase, return the entire collection of users
 router.get('', (req, res) => {
     let users = db.users.all()
     .filter( (entry) => {
@@ -19,7 +19,7 @@ router.get('', (req, res) => {
     });
     res.status(200).json(users);
 });
-
+//API used to authenticate from the login page
 router.post('/auth', (req, res) => {
     let users = db.users.all()
     .filter( (entry) => {

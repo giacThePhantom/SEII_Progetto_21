@@ -1,3 +1,5 @@
+//simple database like collection of data
+
 const storage = {
     users: []
 };
