@@ -403,6 +403,34 @@ paths :
                 properties :   
                   message :
                     type : string
+  /users/auth :
+    post:
+      description: Lets a user authenticate to access more features
+      parameters :
+        - name : email
+          in : query
+          description : Specify the email of the user who wants to log in
+          schema :
+            type : string
+        - name : password
+          in : query
+          description : Specify the password of the user who wants to log in
+          schema :
+            type : string
+                
+      responses:
+        '200':
+          description: User authenticated correctly
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  token:
+                    type: string  
+
+        '400':
+          description: User not found or wrong password       
   /qanda :
     get:
       description : Returns the list of all Q&As
