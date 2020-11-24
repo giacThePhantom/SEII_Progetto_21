@@ -30,21 +30,75 @@ Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021
 | | Sprint Backlog (Sprint Planning) |  |  |  |  | Sprint |  |  |  |  |
 |-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | | Name | User story | | Volunteer | Estimate | Day1 | Day2 | Day3 | Day4 | Day5 |
-| | | Io come utente posso entrare nel sito e visualizzare informazioni affidabili.| Design API | | | | | | | |
-| | | Io come utente posso entrare nel sito e visualizzare informazioni aggiornate.| Implementazione metodo REST | | | | | | | |
-| | | Io come utente posso comparare due interi genomi per determinare quando e come due specie si sono differenziate. Con un UI intuitiva.| Progettazione e implementazione DB (collezione studente) | | | | | | | |
-| | | Io come utente posso accedere alle informazioni su un determinato gene di mio interesse. Per approfondire la sua funzione.| Sviluppo UI | | | | | | | |
-| | | Io come utente posso chiedere informazioni ai moderatori, per avere un confronto con persone competenti.| Documentazione | | | | | | | |
-| | | Io come utente posso comparare due singoli geni, per capire come differenze di sequenza portano a differenze funzionali.| Testing | | | | | | | |
-| | |Io come utente posso registrarmi nel sito per avere un'esperienza personalizzata. | Deploy | | | | | | | |
-| | |Io come utente loggato posso vedere la storia delle mie ricerche. | | | | | | | | |
-| | | | | | | | | | | |
-| | | | | | | | | | | |
-| | | | | | | | | | | |
-| | | | | | | | | | | |
-| | | | | | | | | | | |
+| | | Io come utente posso entrare nel sito e visualizzare informazioni affidabili.| task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+
+
+| | | Io come utente posso entrare nel sito e visualizzare informazioni aggiornate.| task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+
+
+| | | Io come utente posso comparare due interi genomi per determinare quando e come due specie si sono differenziate. Con un UI intuitiva.| task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+
+
+| | | Io come utente posso accedere alle informazioni su un determinato gene di mio interesse. Per approfondire la sua funzione.| task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+
+
+| | | Io come utente posso chiedere informazioni ai moderatori, per avere un confronto con persone competenti.| task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+
+
+| | | Io come utente posso comparare due singoli geni, per capire come differenze di sequenza portano a differenze funzionali.| task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+
+
+| | |Io come utente posso registrarmi nel sito per avere un'esperienza personalizzata. | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+
+
+| | |Io come utente loggato posso vedere la storia delle mie ricerche. | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+| | | | task | volunteer | estimate | days | | | | |
+
+
 | | Total | | | | | | | | | |
 | | Ideal | | | | | | | | | |
+
+
+
 | Sprint #2 | ... | ... | ... | ... | ... |  |  |  |  |  |
 | | | | | | | | | | | |
 | | | | | | | | | | | |
