@@ -28,6 +28,5 @@
     "mongoose": "^5.10.15",
     "shuffle-array": "^1.0.1"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
