@@ -30,9 +30,9 @@ Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021
 | | Sprint Backlog (Sprint Planning) |  |  |  |  | Sprint |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 |-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | | Name | User story | | Volunteer | Estimate | Day1 | Day2 | Day3 | Day4 | Day5 | Day6 | Day7 | Day8 | Day9 | Day10 | Day11 | Day12 | Day13 | Day14 | Day15 | Day16 | Day17 | Day18 | Day19 | Day20 | Day21 | Day22 | Day23 | Day24 | Day25 |
-| |Sign up | Io come utente posso entrare nel sito e visualizzare informazioni affidabili.| Modellazione dati dei geni | Giacomo | 1 | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Modellazione dati gene tree | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Design API | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
+| |Sign up | Io come utente posso entrare nel sito e visualizzare informazioni affidabili.| Modellazione dati dei geni | Giacomo | 1 | 1 |1 |1 | 1| 1| 1 |0 |0 |0 |0 |0 |0 |0 |0 0|0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |
+| | | | Modellazione dati gene tree | Giacomo | 1 | 1 |1 |1 |1 |1 |1 |1 |1 |1 |1 |1|1 |1 |1 |1 |1 |1 |1 |1 |1 | 1 |1 |1 |0 |0 |
+| | | | Design API | Elisa | 1 |1 |1 |1 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |
 | | | | Ottenere e leggere id ensembl  | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
 | | | | Ottenere informazioni dei geni | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
 | | | | Ottenere informazioni delle omologie | volunteer | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
