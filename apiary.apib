@@ -10,7 +10,7 @@ servers :
 paths :
   /species :
     get :
-      description : Returns the list of all species
+      description : Returns the list of all/one species
       parameters :
         - name : id
           in : query
@@ -81,7 +81,7 @@ paths :
       
   /genes :
     get :
-      description : Returns the list of all genes
+      description : Returns the list of all/one genes
       parameters :
         - name : id
           in : query
@@ -134,6 +134,88 @@ paths :
                 properties :   
                   message :
                     type : string
+  /users :
+    get :
+      description : Returns the list of all/one users
+      parameters :
+        - name : id
+          in : query
+          description : Specify the ID of the user to return
+          schema :
+            type : integer
+      responses :
+        '200' :
+          description : succesfully returned a list of users
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  users :
+                    type : array
+                    items :
+                      type : object
+                      properties :
+                        id : 
+                          type : string
+                        email :
+                          type : string
+                        username :
+                          type : string
+                        password :
+                          type : string
+                        admin :
+                          type : boolean
+                        uploadedgenes :
+                          type : array
+                          items :
+                            type : object
+                            properties :
+                                usergeneid :
+                                  type : string
+                                approved :
+                                  type : boolean
+        '400' :
+          description : Invalid request
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :   
+                  message :
+                    type : string
+    post:
+      description: Lets a user sign up
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type : object
+              properties :
+                id : 
+                  type : string
+                email :
+                  type : string
+                username :
+                  type : string
+                password :
+                  type : stringdded
+                
+      responses:
+        '200':
+          description: Successfully posted a species
+
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string                
+    
   /qanda :
     get:
       description : Returns the list of all Q&As
