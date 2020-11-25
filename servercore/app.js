@@ -103,4 +103,4 @@ app.get('/api/v1/gene/sequence/:id', (req, res) => {
 
 
 console.log('Starting db init');
-//db_init.start();
+db_init.start();
