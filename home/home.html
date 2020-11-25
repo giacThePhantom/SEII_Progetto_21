@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="home_style.css">
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js "></script>
+
+    <script type="text/javascript">
+         $("document").ready(function() {
+             $('#topmenu').load('menu.html');
+         });
+  function getWidth() {
+    if (self.innerWidth) {
+      return self.innerWidth;
+    }
+
+    if (document.documentElement && document.documentElement.clientWidth) {
+      return document.documentElement.clientWidth;
+    }
+
+    if (document.body) {
+      return document.body.clientWidth;
+    }
+  }
+  function sizeHandler(){
+  console.log(getWidth());
+      let topmenu=document.getElementById("topmenu");
+      if(getWidth()>1160)
+      {
+          topmenu.style.height="100px";
+          console.log("size100");
+      }else{
+          topmenu.style.height="150px";
+          console.log("size150");
+      }
+  }
+  window.onresize=sizeHandler;
+  sizeHandler();
+     </script>
+  </head>
+
+
+  <body onload="dropdown()">
+    <div id="topmenu"  style="max-height:150px;height:150px;"></div>
+    <center>
+      <table>
+        <tr>
+          <th>
+            <div id="dropdownmenu" ></div>
+          </th>
+          <th>
+          </th>
+          <th>
+          <div id="dropdownmenu"></div>
+          </th>
+        </tr>
+        <tr>
+          <th>
+          </th>
+          <th>
+            <button class= "button" onclick="dropdown()">
+              Analisi
+            </button>
+          </th>
+          <th>
+          </th>
+        </tr>
+      </table>
+    </center>
+    <script src="home_actions.js" charset="utf-8"></script>
+  </body>
+</html>
