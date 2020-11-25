@@ -23,6 +23,7 @@ async function build_species_data(){
 	let files = read.get_all_lists();
 	for(let file of files){
 		let arr = await write.write_species_data(file);
+		console.log('Wrote data for ' + file);
 	}
 }
 
