@@ -1,3 +1,4 @@
+const { get_gene_sequence } = require('../Ensembl_communication/read_data.js');
 const read = require('../Ensembl_communication/read_data.js')
 
 
@@ -47,3 +48,25 @@ test('get_gene_info with non gene info', () =>{
 	expect(read.get_gene_info('{"Parent":"ENSG00000210077","biotype":"Mt_tRNA","source":"ensembl","strand":1,"species":"homo_sapiens","display_name":"MT-TV-201","seq_region_name":"MT","is_canonical":1,"end":1670,"logic_name":"mt_genbank_import_homo_sapiens","object_type":"Transcript","db_type":"core","id":"ENST00000387342","start":1602,"assembly_name":"GRCh38","version":1}')).toBe({});
 });
 
+test('get_gene_sequece with correct gene object as parameter', () =>{
+	expect(read.get_gene_sequence('{ "desc": "chromosome:GRCh38:5:31743988:31744451:-1","id": "ENSG00000248378","version": 1,"molecule": "dna","query": "ENSG00000248378","seq": "TTGGAAGTGAATTAAGACCCTCTCTTGGATACCAGCTGTGAAAGAACGGACTTTTTTTACCTAGTAAGGATGTGACAGACCTGCTCCTGACCCTTCTTTGTTAGTGGCCAGTAAATATACGCAAGGCAAAGTCCCACCCTAGTTTTGAAAAAAGCCAAACTAACAACTCTGCCCAATTTCAAGGAACCGATATAATTTTCAGTACATGAGTGTGATTTAGAAATGGAAACAACATCAGAGCAGGGTTAAATCAACAACCAAGCCATAGACCTTAAAAGGACCAGACTTCATGGTTCAATGATGCCAAGAAAAAGATTCCACCTATAAACTCTTTAGAAAGTAACCACCTCAGAAAGTTCCAGACAAACCAGTTCTGCTTTGCAGATCAGCCCTGTATAAAGCTCTTACCACATTAGTAAGAAGTTACTTGTGCTTTGGTTACAAACAGGCACAATTAAAGGGAA" }')).toBe('TTGGAAGTGAATTAAGACCCTCTCTTGGATACCAGCTGTGAAAGAACGGACTTTTTTTACCTAGTAAGGATGTGACAGACCTGCTCCTGACCCTTCTTTGTTAGTGGCCAGTAAATATACGCAAGGCAAAGTCCCACCCTAGTTTTGAAAAAAGCCAAACTAACAACTCTGCCCAATTTCAAGGAACCGATATAATTTTCAGTACATGAGTGTGATTTAGAAATGGAAACAACATCAGAGCAGGGTTAAATCAACAACCAAGCCATAGACCTTAAAAGGACCAGACTTCATGGTTCAATGATGCCAAGAAAAAGATTCCACCTATAAACTCTTTAGAAAGTAACCACCTCAGAAAGTTCCAGACAAACCAGTTCTGCTTTGCAGATCAGCCCTGTATAAAGCTCTTACCACATTAGTAAGAAGTTACTTGTGCTTTGGTTACAAACAGGCACAATTAAAGGGAA');
+});
+
+test('get_gene_sequece with uncorrect gene object as parameter', () =>{
+	expect(read.get_gene_sequence('{"species":"homo_sapiens","id":"ENSG00000141068","protein_id":"ENSP00000381958","type":"other_paralog","taxonomy_level":"Bilateria","method_link_type":"ENSEMBL_PARALOGUES"}')).toBe(undefined);
+});
+
+test('get_gene_sequece with empty input', () =>{
+	expect(read.get_gene_sequence('')).toBe(undefined);
+});
+
+test('get_homologies with correct homology object as input', () => {
+	expect(read.get_homologies('{"species":"homo_sapiens","id":"ENSG00000141068","protein_id":"ENSP00000381958","type":"other_paralog","taxonomy_level":"Bilateria","method_link_type":"ENSEMBL_PARALOGUES"}')).toStrictEqual({
+		target_id : "ENSG00000141068",
+		target_species : "homo_sapiens"
+	});
+});
+
+test('get_homologies with uncorrect homology object as input', () => {
+	expect(read.get_homologies('{"species":"homo_sapiens","protein_id":"ENSP00000381958","type":"other_paralog","taxonomy_level":"Bilateria","method_link_type":"ENSEMBL_PARALOGUES"}')).toStrictEqual(undefined);
+});
