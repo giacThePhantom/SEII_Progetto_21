@@ -26,7 +26,6 @@ Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021
 
 ## Sprint #1 Backlog
 
-<<<<<<< HEAD
 | | Sprint Backlog (Sprint Planning) |  |  |  |  | Sprint |  |  |  |  |
 |-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | | Name | User story | | Volunteer | Estimate | Day1 | Day2 | Day3 | Day4 | Day5 |
@@ -46,65 +45,6 @@ Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021
 | | Total | | | | | | | | | |
 | | Ideal | | | | | | | | | |
 | Sprint #2 | ... | ... | ... | ... | ... |  |  |  |  |  |
-=======
-| | Sprint Backlog (Sprint Planning) |  |  |  |  | Sprint |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-|-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| | Name | User story | | Volunteer | Estimate | Day1 | Day2 | Day3 | Day4 | Day5 | Day6 | Day7 | Day8 | Day9 | Day10 | Day11 | Day12 | Day13 | Day14 | Day15 | Day16 | Day17 | Day18 | Day19 | Day20 | Day21 | Day22 | Day23 | Day24 | Day25 |
-| |Sign up | Io come utente posso entrare nel sito e visualizzare informazioni affidabili.| Modellazione dati dei geni | Giacomo | 1 | 1 |1 |1 | 1| 1| 1 |0 |0 |0 |0 |0 |0 |0 |0 0|0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |
-| | | | Modellazione dati gene tree | Giacomo | 1 | 1 |1 |1 |1 |1 |1 |1 |1 |1 |1 |1|1 |1 |1 |1 |1 |1 |1 |1 |1 | 1 |1 |1 |0 |0 |
-| | | | Design API | Elisa | 1 |1 |1 |1 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |0 |
-| | | | Ottenere e leggere id ensembl  | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Ottenere informazioni dei geni | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Ottenere informazioni delle omologie | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Ottenere informazioni sugli alberi | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Scrivere dati nel database | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Deploy | Giacomo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | Io come utente posso entrare nel sito e visualizzare informazioni aggiornate.| Aggiornare tutte le liste di geni | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Aggiornare una lista di geni | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Aggiornare un sigolo gene | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Comunicazione con database | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | Io come utente posso comparare due interi genomi per determinare quando e come due specie si sono differenziate. Con un UI intuitiva.| Pagina principale | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Comunicazione con database | Ettore | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Metodo REST rendere lista di geni di una specie da db/file in locale | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | definizione delle risorse e degli endpoint relativi alle specie e implementazione metodi REST | Filippo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Metodo REST per vedere quali specie sono disponibili | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Design UI | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | Io come utente posso accedere alle informazioni su un determinato gene di mio interesse. Per approfondire la sua funzione.| Metodo REST per prendere geni da db/file in locale | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | definizione delle risorse e degli endpoints relativi ai geni ed  implementazione metodi REST | Filippo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Metodo REST selezionare info del singolo gene | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | Io come utente posso chiedere informazioni ai moderatori, per avere un confronto con persone competenti.| definizione della risorsa Q&A e dei
-metodi REST | Filippo | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | | Design form domanda | Elisa | estimate | days | | | | | days | | | | | days | | | | | days | | | | | days | | | | |
-| | | Io come utente posso comparare due singoli geni, per capire come differenze di sequenza portano a differenze funzionali.| task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | |Io come utente posso registrarmi nel sito per avere un'esperienza personalizzata. | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | |Io come utente loggato posso vedere la storia delle mie ricerche. | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | | | task | volunteer | estimate | days | | | | |
-| | Total | | | | | | | | | |
-| | Ideal | | | | | | | | | |
-
-
-
-## Sprint #2 Backlog
-
-| | Sprint Backlog (Sprint Planning) |  |  |  |  | Sprint |  |  |  |  |
-|-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| Sprint #2 | ... | ... | ... | ... | ... |  |  |  |  |  |
-| | Name | User story | | Volunteer | Estimate | Day1 | Day2 | Day3 | Day4 | Day5 |
->>>>>>> main
 | | | | | | | | | | | |
 | | | | | | | | | | | |
 | | Total | | | | | | | | | |
