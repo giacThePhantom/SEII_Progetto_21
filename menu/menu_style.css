@@ -1,0 +1,118 @@
+body{
+  background-color: white;
+  margin: 0px;
+  padding: 0px;
+}
+body *{
+
+//  border: 1px solid black;
+}
+
+.topmenu {
+  margin: 0;
+  padding: 0px;
+  padding-top: 5px;
+  padding-bottom:  5px;
+  width: 100%;
+  list-style-type: none;
+  background-color: #227bba;
+  text-align: center;
+  /*PER AVERLO FISSO IN CIMA  */
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
+.topmenu ul{
+  width: 100%
+}
+.topmenu li {
+  display: inline;
+}
+
+.topmenu li a {
+  width: 25%;
+  display: inline-block;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: helvetica;
+  font-size: 30px;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.topmenu li a:hover {
+color: #1A24C7;}
+
+
+.topmenu div{
+  display: inline;
+}
+.topmenu .profile_img{
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.topmenu #profile{
+  float: right;
+}
+
+
+
+
+
+.topmenu .dropbtn {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: helvetica;
+  font-size: 30px;
+  padding: 14px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  background:transparent;
+  border: none;
+}
+
+.topmenu .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.topmenu .dropdown-content {
+  display: none;
+    width: 100%;
+  text-decoration: none;
+  position: absolute;
+  border: 1px solid #0a62a1;
+  border-radius: 2%;
+}
+
+.topmenu .dropdown-content a {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-family: helvetica;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.topmenu .dropdown:hover .dropdown-content {
+  display: block;
+  background-color: #0a62a1aa;
+}
+
+.topmenu .dropdown:hover .dropbtn {
+  color: #1A24C7;
+}
+
+.topmenu .dropdown-item{
+  width: 100%;
+  margin-top: 10px;
+}
+.topmenu td{
+  padding : 0px;
+}
