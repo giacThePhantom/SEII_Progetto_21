@@ -49,7 +49,9 @@ app.get('/api/v1/species/:species/:identifier', function (req, res) {
   var species = req.params.species;
   var identifier = req.params.identifier;
   var genes = get_list_gene(species+".json");
-  res.status(200).send(conn.get_gene_info_for_species(species, identifier));
+	conn.get_gene_info_for_species(species, identifier).then((ret) => {
+		res.status(200).send(ret);
+	});
   /*genes.forEach(element => { //controllo la lista dei geni e restituisco info di un singolo gene
     if (element.id == identifier){
       res.status(200).send(element);
