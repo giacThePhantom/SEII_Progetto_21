@@ -2,7 +2,11 @@ const read = require('./read_data.js');
 const fs = require('fs');	// File system
 const conn = require('./db_conn.js');
 
-
+/* 
+ * Excludes from the list of species the one selected.
+ * @param {String} the species to be excluded.
+ * @return {Array} All the other species.
+ */
 function get_other_species(species){
 	species = read.get_species_from_mart_export(species);
 	let ret = read.get_all_lists();
@@ -15,7 +19,11 @@ function get_other_species(species){
 
 }
 
-
+/* Processes the gene data from the id.
+ * @param {String} gene ensembl id.
+ * @param {Array} the list of other species.
+ * @return {Object} the object gene to be inserted in the database
+ */
 async function process_gene_data(gene_id, species_list){
 	let response = await read.ensembl_get('lookup/id/' + gene_id + '?');
 	let to_be_inserted = read.get_gene_info(response.body);
@@ -36,17 +44,15 @@ async function process_gene_data(gene_id, species_list){
 		console.log(to_be_inserted.gene_tree);
 		console.log(to_be_inserted.gene_tree.children[1].children);
 	}*/
-	console.log('-----------------Gene to be inserted-------------------');
-	console.log(to_be_inserted);
-	console.log('-----------------Gene terminated-------------------');
 	return to_be_inserted;
 }
 
 
 module.exports = {
 	/*
-	 * Takes the file of gene ids, gets their information and saves them (now in JSON, in the end in DB)
+	 * Takes the file of gene ids, gets their information and saves them in the database 
 	 * @param {string} the name of the file containing the list of ids
+	 * @return {Array} the array of the genes saved
 	 */
 	write_gene_data: async (list_gene_file) => {
 		let gene_array = [];
@@ -54,12 +60,26 @@ module.exports = {
 		let species_array = get_other_species(list_gene_file);
 		return new Promise(async function(resolve, reject){
 			for (let gene of gene_IDS) {
-				console.log('Reading gene ' + gene);
 				let to_be_inserted = await process_gene_data(gene, species_array);
 				await conn.insert_gene(to_be_inserted);
 				gene_array.push(to_be_inserted);
 			}
 			resolve(gene_array); //resolve with value
 		});
+	},
+	/*
+	 * Takes the file of gene ids for a species and save the species information in the database
+	 * @param {string} the name of the file containing the list of ids
+	 */
+	write_species_data: async (list_gene_file) => {
+		let gene_IDS = read.get_list_gene(list_gene_file);
+		let name = read.get_species_from_mart_export(list_gene_file);
+		return new Promise(async (resolve, reject) => {
+			let to_be_inserted = {}
+			to_be_inserted.name = name;
+			to_be_inserted.genes = gene_IDS
+			await conn.insert_species(to_be_inserted);
+		
+		});
 	}
-};
+}

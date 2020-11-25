@@ -28,13 +28,11 @@
   "id": "ENSRNOG00000000008",
   "target_id": "ENSGALG00000032584",
   "target_species": "gallus_gallus"
-},
-,
-{
+},{
   "id": "ENSRNOG00000000008",
   "target_id": "ENSDARG00000074442",
   "target_species": "danio_rerio"
-}{
+},{
   "id": "ENSRNOG00000000008",
   "target_id": "ENSDARG00000111246",
   "target_species": "danio_rerio"
@@ -113,13 +111,11 @@
   "id": "ENSRNOG00000000017",
   "target_id": "ENSG00000105889",
   "target_species": "homo_sapiens"
-}{
+},{
   "id": "ENSRNOG00000000017",
   "target_id": "ENSG00000164647",
   "target_species": "homo_sapiens"
-},
-,
-{
+},{
   "id": "ENSRNOG00000000024",
   "target_id": "ENSGALG00000011798",
   "target_species": "gallus_gallus"
@@ -318,13 +314,11 @@
   "id": "ENSRNOG00000000047",
   "target_id": "ENSDARG00000026070",
   "target_species": "danio_rerio"
-}{
+},{
   "id": "ENSRNOG00000000047",
   "target_id": "ENSDARG00000019098",
   "target_species": "danio_rerio"
-},
-,
-{
+},{
   "id": "ENSRNOG00000000047",
   "target_id": "ENSMUSG00000027215",
   "target_species": "mus_musculus"
@@ -333,13 +327,11 @@
   "id": "ENSRNOG00000000047",
   "target_id": "ENSG00000085117",
   "target_species": "homo_sapiens"
-},
-,
-{
+},{
   "id": "ENSRNOG00000000048",
   "target_id": "ENSGALG00000050226",
   "target_species": "gallus_gallus"
-}{
+},{
   "id": "ENSRNOG00000000048",
   "target_id": "ENSGALG00000015352",
   "target_species": "gallus_gallus"
@@ -383,13 +375,11 @@
   "id": "ENSRNOG00000000054",
   "target_id": "ENSG00000127220",
   "target_species": "homo_sapiens"
-},
-,
-{
+},{
   "id": "ENSRNOG00000000055",
   "target_id": "ENSGALG00000054978",
   "target_species": "gallus_gallus"
-}{
+},{
   "id": "ENSRNOG00000000055",
   "target_id": "ENSGALG00000010507",
   "target_species": "gallus_gallus"
@@ -403,4 +393,4 @@
   "id": "ENSRNOG00000000055",
   "target_id": "ENSG00000181036",
   "target_species": "homo_sapiens"
-}
+}]
