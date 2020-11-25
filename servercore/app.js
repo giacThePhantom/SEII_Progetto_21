@@ -27,6 +27,14 @@ app.listen(port, function(){
 });
 
 
+const users = require('../login/data/users.js');
+
+
+
+app.use('/api/v1/users', users);
+
+app.use(express.static('../login/static'));
+
 
 
 app.get('/api/v1/species/:species/:identifier', function (req, res) {
@@ -63,13 +71,23 @@ app.get('/api/v1/species', function(req, res) {
 	})
 });
 
-const users = require('../login/data/users.js');
 
+app.get('/api/v1/gene/:id', (req, res) => {
+	const filters = req.query;
+	console.log(filters);
+	let id = req.params.id;
+	conn.get_gene_info(id, filters).then( (ret) =>{
+		if(ret.error){
+			res.status(404).json(ret);
+		}
+		else{
+			res.status(200).send(ret);
+		}
+	});
+});
 
-
-app.use('/api/v1/users', users);
 
 console.log('Starting db init');
-db_init.start();
+//db_init.start();
   
 

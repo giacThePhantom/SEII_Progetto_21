@@ -42,10 +42,23 @@ module.exports = {
 	get_all_species: async () => {
 		let species_found = await models.species_model.find({}, {name: true, _id : false});
 		return species_found;
+	},
+
+	get_gene_info: async (id, filters) => {
+		let gene_found;
+		if(filters.format == 'condensed'){
+			gene_found = await models.genes_model.findOne({'id' : id}, {_id : false, sequence : false});
+		}
+		else{
+			gene_found = await models.genes_model.findOne({'id' : id}, {_id : false});
+		}
+		let res;
+		if(!gene_found){
+			res = {error : "Cannot find gene " + id};
+		}
+		else{
+			res = gene_found;
+		}
+		return res;
 	}
-	
-
-
-
-
 }
