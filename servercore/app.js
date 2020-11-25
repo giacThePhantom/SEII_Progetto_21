@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
-
+const conn = require('./db_conn')
 const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?retryWrites=true&w=majority';
 
 
@@ -49,13 +49,13 @@ app.get('/api/v1/species/:species/:identifier', function (req, res) {
   var species = req.params.species;
   var identifier = req.params.identifier;
   var genes = get_list_gene(species+".json");
-
-  genes.forEach(element => { //controllo la lista dei geni e restituisco info di un singolo gene
+  res.status(200).send(conn.get_gene_info_for_species(species, identifier);
+  /*genes.forEach(element => { //controllo la lista dei geni e restituisco info di un singolo gene
     if (element.id == identifier){
       res.status(200).send(element);
     }
   });
-  res.status(404).json({error: 'gene not found'});
+  res.status(404).json({error: 'gene not found'});*/
 
 });
 
