@@ -43,7 +43,7 @@ module.exports = {
 	 * @return {array} the strings of gene ids read.
 	 */
 	get_list_gene: (file_name) => {
-		let file_data;
+		let file_data = [];
 		try {
 			file_data = fs.readFileSync(GENE_LIST_LOCATION + file_name, 'utf-8');
 		} catch (err) {
