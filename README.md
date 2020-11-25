@@ -47,7 +47,7 @@ Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021
  | | | Comunicazione con database | Ettore | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 0 | 0 |
  | | | Metodo REST rendere lista di geni di una specie da db/file in locale | Elisa | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 1 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
  | | | definizione delle risorse e degli endpoint relativi alle specie e implementazione metodi REST | Filippo | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 2 | 2 | 2 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
- | | | Metodo REST per vedere quali specie sono disponibili | Elisa | 1 | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 |
+ | | | Metodo REST per vedere quali specie sono disponibili | Elisa | 1 | 1| 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 2 | 1 | 1 | 2 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 |
  | | | Design UI | Elisa | 5 | 5 | 2 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
  | Accedere a singolo gene | Io come utente posso accedere alle informazioni su un determinato gene di mio interesse. Per approfondire la sua funzione. | Metodo REST per prendere geni da db/file in locale | Elisa | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 2 | 2 | 3 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | 0 | 0 |
  | | | definizione delle risorse e degli endpoints relativi ai geni e implementazione metodi REST | Filippo | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 |
