@@ -2,12 +2,17 @@ const mongoose = require('mongoose')
 
 const { Schema } = mongoose;
 
+/*
+ * Schema of species
+ */
 const species = new Schema({
 	name: String, 
 	genes: [String]
 })
 
-
+/*
+ * Schema of genes
+ */
 const gene = new Schema({
 	id: String,
 	version: Number,
@@ -25,7 +30,9 @@ const gene = new Schema({
 	gene_tree: String
 });
 
-
+/*
+ * Schema of gene tree
+ */
 const gene_tree = new Schema({
 	id: String,
 	root_species: String,
