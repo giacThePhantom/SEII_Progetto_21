@@ -8,8 +8,8 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 
 var app = express();
+var GENE_LIST_LOCATION= './Ensembl_communication/Jsons';
 
-	var GENE_LIST_LOCATION= './Ensembl_communication/Jsons';
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
