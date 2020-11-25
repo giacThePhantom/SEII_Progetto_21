@@ -53,6 +53,16 @@ describe('login.test', () => {
 								admin:true}])
 					} )
 		});
+
+    it("get user by id",()=>{
+      expect.assertions(1);
+        return fetch(url+"/-1")
+                  .then(r => r.json())
+                  .then( data => {
+                    expect(data).toEqual([])
+                    })
+    });
+
 		it("authenticate user", async ()=>{
 			expect.assertions(1);
 
