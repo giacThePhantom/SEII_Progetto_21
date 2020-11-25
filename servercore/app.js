@@ -14,6 +14,8 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use('/',express.static('../login/static'));
+app.use('/menu/',express.static('../menu'));
+app.use('/',express.static('../home/supfolder'));
 
 
 //Start the database
@@ -23,7 +25,7 @@ const connection = mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopol
 // starting the server
 var port = process.env.PORT || 3000;
 app.listen(port, function(){
-  console.log('Gene server listening at http://localhost:' + port);  
+  console.log('Gene server listening at http://localhost:' + port);
 });
 
 
@@ -101,6 +103,4 @@ app.get('/api/v1/gene/sequence/:id', (req, res) => {
 
 
 console.log('Starting db init');
-db_init.start();
-  
-
+//db_init.start();
