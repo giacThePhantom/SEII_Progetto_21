@@ -29,7 +29,7 @@ describe('login.test', () => {
         server.close( );
 				done();
     });
-		it("get user",()=>{
+		it("get user list",()=>{
 			expect.assertions(1);
 
 			return fetch(url)
@@ -41,6 +41,31 @@ describe('login.test', () => {
 								admin:true})
 					} )
 		});
+		it("get user by id",()=>{
+			expect.assertions(1);
 
+			return fetch(url+"/1")
+					.then(r => r.json())
+					.then( data => {
+							expect(data).toEqual([{  email: "admin@unitn.com",
+								username:"admin",
+								self: "/api/v1/users/1",
+								admin:true}])
+					} )
+		});
+		it("authenticate user", async ()=>{
+			expect.assertions(1);
 
+			var response= fetch(url+"/auth",
+					{
+					 method: 'POST',
+					 body: JSON.stringify({email: 'admin@unitn.com',password:"admin"}),
+					 headers: {
+					 'Content-Type': 'application/json'
+				 }
+				 })
+				 var json = await response;
+				expect(json.status).toEqual(200);
+
+		});
 });

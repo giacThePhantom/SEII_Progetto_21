@@ -1,4 +1,9 @@
 
+const fetchPolifill = require('whatwg-fetch')
+global.fetch = fetchPolifill.fetch
+global.Request = fetchPolifill.Request
+global.Headers = fetchPolifill.Headers
+global.Response = fetchPolifill.Response
 function loaduserlist(){//function used in the test phase, it retrieves from the server the entire userlist
 	//const userlist=document.getElementById("userlist");
 
@@ -65,10 +70,10 @@ function auth(email,psw){
 				 console.log("user not found");
 				 return "errore";
 			 }
+			 return loggedUser;
 	 })
-	 .catch( error => {console.error(error); return "errore";}); // If there is any error you will catch them here
+	 .catch( error => console.error(error) ); // If there is any error you will catch them here
 
-	 return;
 }
 //function that try to authenticate, if there's no match in the database it returns a user not found error
 function authenticate(){
@@ -76,4 +81,5 @@ function authenticate(){
 	let psw=document.getElementById("psw_field").value;
 	return auth(email,psw);
 }
+
 module.exports = {auth};

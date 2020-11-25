@@ -21,6 +21,7 @@ router.get('', (req, res) => {
 });
 //API used to authenticate from the login page
 router.post('/auth', (req, res) => {
+	console.log("auth richiesta");
     let users = db.users.all()
     .filter( (entry) => {
 						console.log(req.body.password);
