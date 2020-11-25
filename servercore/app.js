@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+onst mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
 
 const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?retryWrites=true&w=majority';
@@ -72,6 +72,6 @@ app.get('/api/v1/species', function(req, res) {
 });
 
 console.log('Starting db init');
-db_init.start(connection);
+db_init.start();
   
 

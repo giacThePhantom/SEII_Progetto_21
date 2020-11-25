@@ -20,11 +20,11 @@ async function run(){
 /*
  * Saves all the gene info (now in JSONs, at the end in DB)
  */
-async function build_gene_data(connection){
+async function build_gene_data(){
 	let files = read.get_all_lists();
 	for(let file of files){
 		console.log('Reading from: ' + file);
-		let arr = await write.write_gene_data(file, connection);
+		let arr = await write.write_gene_data(file);
 		console.log(arr);
 	}
 }
@@ -34,7 +34,7 @@ async function build_gene_data(connection){
  */
 module.exports = {
 	
-	start: async (connection) => {
+	start: async () => {
 		console.log('starting');
 		//connection = run(); //TEMPORARY
 		console.log('created connection');
