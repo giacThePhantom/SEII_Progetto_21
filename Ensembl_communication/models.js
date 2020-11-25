@@ -2,6 +2,12 @@ const mongoose = require('mongoose')
 
 const { Schema } = mongoose;
 
+const species = new Schema({
+	name: String, 
+	genes: [String]
+})
+
+
 const gene = new Schema({
 	id: String,
 	version: Number,
@@ -35,6 +41,7 @@ const gene_tree = new Schema({
 
 module.exports = {
 	genes_model: mongoose.model('gene_info', gene),
-	gene_trees: mongoose.model('gene_tree', gene_tree)
+	gene_trees: mongoose.model('gene_tree', gene_tree),
+	species_model: mongoose.model('species', species)
 }
 

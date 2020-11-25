@@ -61,5 +61,16 @@ module.exports = {
 			}
 			resolve(gene_array); //resolve with value
 		});
+	},
+	write_species_data: async (list_gene_file) => {
+		let gene_IDS = read.get_list_gene(list_gene_file);
+		let name = read.get_species_from_mart_export(list_gene_file);
+		return new Promise(async (resolve, reject) => {
+			let to_be_inserted = {}
+			to_be_inserted.name = name;
+			to_be_inserted.genes = gene_IDS
+			await conn.insert_species(to_be_inserted);
+		
+		});
 	}
-};
+}

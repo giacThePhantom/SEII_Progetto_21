@@ -29,6 +29,16 @@ async function build_gene_data(){
 	}
 }
 
+
+async function build_species_data(){
+	let files = read.get_all_lists();
+	for(let file of files){
+		console.log('Reading from: ' + file);
+		let arr = await write.write_species_data(file);
+		console.log(arr);
+	}
+}
+
 /*
  * Start the program to save data from ensembl
  */
@@ -38,7 +48,8 @@ module.exports = {
 		console.log('starting');
 		//connection = run(); //TEMPORARY
 		console.log('created connection');
-		build_gene_data();
+		build_species_data();
+		//build_gene_data();
 	}
 }
 

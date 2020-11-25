@@ -1,4 +1,4 @@
-onst mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
 
 const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?retryWrites=true&w=majority';

@@ -30,6 +30,19 @@ async function gene_alredy_saved(model, gene_info){
 	return res;
 }
 
+async function species_alredy_saved(model, species_info){
+	let data = await model.find({'name': species_info.name});
+	let res;
+	if(data.length > 0){
+		res = true;
+	}
+	else{
+		res = false;
+	}
+	return res;
+}
+
+
 module.exports = {
 	/* Inserts gene in db
 	 * @param {Db} Where the data is stored.
@@ -46,6 +59,17 @@ module.exports = {
 		}
 		return to_be_saved;
 		
+	},
+	insert_species: async (species_info) => {
+		let to_be_saved = !(await species_alredy_saved(models.species_model, species_info));
+		if(to_be_saved){
+			console.log('Going to insert a species');
+			let to_be_inserted = new models.species_model(species_info);
+			console.log(to_be_inserted);
+			await to_be_inserted.save((err) => {log(err, 'Inserted correctly', 'Inserted species info');});
+			console.log('Inserted');
+		}
+		return to_be_saved;
 	}
 
 }
