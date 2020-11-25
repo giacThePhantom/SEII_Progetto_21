@@ -1,4 +1,4 @@
-onst mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
 
 const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?retryWrites=true&w=majority';
@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-var GENE_LIST_LOCATION= './servercore/Jsons/';
+var GENE_LIST_LOCATION= 'C:\\Users\\Elisa\\Desktop\\progettoSE\\SEII_Progetto_21\\Ensembl_communication\\Jsons\\';
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
@@ -36,9 +36,13 @@ app.listen(port, function(){
 
 
 function get_list_gene(file_name) {
-  const listgenes = require(GENE_LIST_LOCATION+file_name); 
- //console.log(listgenes); 
-  return listgenes;   
+  try {
+    const listgenes = require(GENE_LIST_LOCATION+file_name); 
+    return listgenes;
+  } catch (error) {
+    return null;
+  }
+    
 }
 
 app.get('/api/v1/species/:species/:identifier', function (req, res) {
@@ -51,7 +55,7 @@ app.get('/api/v1/species/:species/:identifier', function (req, res) {
       res.status(200).send(element);
     }
   });
-  res.status(404);
+  res.status(404).json({error: 'gene not found'});
 
 });
 
@@ -61,7 +65,7 @@ app.get('/api/v1/species/:species', function (req, res) {
     if(genes) {
       res.status(200).send(genes);
     } else {
-      res.status(404);
+      res.status(404).json({error: 'species not found'});
     }
   
   });
@@ -72,6 +76,6 @@ app.get('/api/v1/species', function(req, res) {
 });
 
 console.log('Starting db init');
-db_init.start();
+//db_init.start();
   
 
