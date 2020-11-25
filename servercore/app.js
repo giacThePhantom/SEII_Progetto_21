@@ -63,6 +63,12 @@ app.get('/api/v1/species', function(req, res) {
 	})
 });
 
+const users = require('../login/data/users.js');
+
+
+
+app.use('/api/v1/users', users);
+
 console.log('Starting db init');
 db_init.start();
   
