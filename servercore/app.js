@@ -13,7 +13,7 @@ var app = express();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-app.use('/', express.static('public'));
+app.use('/',express.static('../login/static'));
 
 
 //Start the database
@@ -33,7 +33,6 @@ const users = require('../login/data/users.js');
 
 app.use('/api/v1/users', users);
 
-app.use(express.static('../login/static'));
 
 
 
