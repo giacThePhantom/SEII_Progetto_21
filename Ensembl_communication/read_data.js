@@ -6,7 +6,10 @@ const GENE_LIST_LOCATION = 'C:\\Users\\Elisa\\Desktop\\progettoSE\\SEII_Progetto
 const ENSEMBL_API = 'http://rest.ensembl.org/' 		// Site where we retrieve information
 const FORMAT_JSON = ';content-type=application/json'	// Format API request in json
 
-
+/*
+ * Internal function to process data in gene tree
+ * ??????????????????????
+ */
 function get_gene_tree_rec(response){
 	console.log('In gene tree rec');
 	let data = {scientific_name: '', children: []};
@@ -43,7 +46,7 @@ module.exports = {
 	 * @return {array} the strings of gene ids read.
 	 */
 	get_list_gene: (file_name) => {
-		let file_data;
+		let file_data = [];
 		try {
 			file_data = fs.readFileSync(GENE_LIST_LOCATION + file_name, 'utf-8');
 		} catch (err) {
@@ -59,12 +62,11 @@ module.exports = {
 	},
 
 	/*
-	 * Async function to request API Information
-	 * @param {string} content of the request
-	 * @return {???} the request
+	 * Async function to request API Information.
+	 * @param {String} content of the request.
+	 * @return {String} the request.
 	 */
 	ensembl_get: async (content) => {
-		console.log(ENSEMBL_API + content + FORMAT_JSON);
 		return await got(ENSEMBL_API + content + FORMAT_JSON).catch((err) => {
 			if(err.response.statusCode == 404){
 				console.log('Could not find ' + ENSEMBL_API + content + FORMAT_JSON);
@@ -73,10 +75,15 @@ module.exports = {
 		});
 	},
 
+	/* Async function to process sequence information.
+	 * @param {String} content of the request.
+	 * @param {String} the sequence.
+	 */
 	get_gene_sequence: (response) => {
 		let json_seq = JSON.parse(response);
 		return json_seq.seq;
 	},
+
 	/*
 	 * Gets all the lists of genes ids downloaded from biomart
 	 * @return {array} all the file names where the gene ids are stored
@@ -92,10 +99,11 @@ module.exports = {
 		directory.close();
 		return ret;
 	},
+
 	/*
 	 * Processes gene data received from ensembl.
-	 * @param {JSON} gene information from ensembl.
-	 * @return {JSON} processed gene information.
+	 * @param {String} gene information from ensembl.
+	 * @return {Object} processed gene information.
 	 */
 	get_gene_info: (gene_information) => {
 		let temp_json = JSON.parse(gene_information);
@@ -110,10 +118,11 @@ module.exports = {
 		gene.description = temp_json.description;
 		return gene;
 	},
+
 	/*
 	 * Processes homology data received from ensembl.
-	 * @param {JSON} homology information from ensembl.
-	 * @return {JSON} processed homology information.
+	 * @param {String} homology information from ensembl.
+	 * @return {Array} processed homology information.
 	 */
 	get_homologies: (homology_information) => {
 		let temp_json = JSON.parse(homology_information);
@@ -127,16 +136,19 @@ module.exports = {
 		return homologies;
 	},
 
+	/*
+	 * Processes gene tree data received from ensembl.
+	 * @param {String} gene tree information from ensembl.
+	 * @return {Array} processed homology information.
+	 */
 	get_gene_tree: (response) => {
 		let response_json = JSON.parse(response);
-		console.log(response_json);
 		let data = {};
 		data.id = response_json.id;
 		response_json = response_json.tree;
 		data.children = [];
 		data.root_species = response_json.taxonomy.scientific_name;
 		return get_gene_tree_rec(response_json);
-		//return data;
 	}
 
 
