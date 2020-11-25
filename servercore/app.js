@@ -13,7 +13,7 @@ var GENE_LIST_LOCATION= './Ensembl_communication/Jsons';
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-app.use('/',express.static('../login/static'));
+app.use(express.static('../login/static'));
 app.use('/menu/',express.static('../menu'));
 app.use('/',express.static('../home/supfolder'));
 
