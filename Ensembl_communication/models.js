@@ -6,10 +6,10 @@ const gene = new Schema({
 	id: String,
 	version: Number,
 	start: Number,
-	end: Number, 
+	end: Number,
 	biotype: String,
 	chromosome: String,
-	strand: Number, 
+	strand: Number,
 	description: String,
 	sequence: String,
 	homologies: [{
@@ -37,4 +37,3 @@ module.exports = {
 	genes_model: mongoose.model('gene_info', gene),
 	gene_trees: mongoose.model('gene_tree', gene_tree)
 }
-

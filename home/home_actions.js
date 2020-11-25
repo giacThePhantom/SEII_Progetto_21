@@ -1,3 +1,16 @@
+const mongoose = require('mongoose')
+const { Schema } = mongoose;
+
+//Set up default mongoose connection
+var mongoDB = 'mongodb://127.0.0.1/genes';
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+
+//Get the default connection
+var db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+console.log(mongoose);
 
 
 /*
@@ -10,7 +23,7 @@
 */
 
 function dropdown(){
-  console.log("click");
+  //console.log("click");
   var dirslot_array = document.getElementsByTagName("DIV");
   count=0;
   for(dirslot of dirslot_array){
@@ -22,16 +35,17 @@ function dropdown(){
       let i;
       let testo="cose"
       for(i=0;i<4;i++){
-        console.log(i);
+        //console.log(i);
         let option = document.createElement("OPTION");
         option.appendChild(document.createTextNode(''+testo+i));
         option.setAttribute("value",testo+""+i);
         dropdown.appendChild(option);
       }
       count++;
-      console.log(dirslot.innerHTML);
+    //  console.log(dirslot.innerHTML);
     }
   }
+  test();
 }
 
 function rimuovi(id){
@@ -42,4 +56,32 @@ function rimuovi(id){
   }
   else   dropdown_unselected=all_dropdown[0];
   dropdown_unselected.remove(dropdown_selected.selectedIndex);
+}
+
+async function test(){
+  console.log("TEST!!!");
+
+
+
+  const gene = new Schema({
+  	id: String
+  });
+  // Compile model from schema
+  var Somegene = mongoose.model('Genes', gene );
+
+  var istanza = new Somegene({id:'ENSG00000157764'});
+  istanza.save(function (err) {
+    if (err) return handleError(err);
+  });
+
+
+
+  let data= await models.genes_model('id',ENSG00000157764);
+  //.find({'id':ENSG00000157764})
+  if(data.length>0){
+    console.log("yess");
+  }
+  else {
+    console.log("NOPE")
+  }
 }
