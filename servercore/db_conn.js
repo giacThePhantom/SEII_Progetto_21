@@ -60,5 +60,16 @@ module.exports = {
 			res = gene_found;
 		}
 		return res;
+	},
+	get_sequence_of_gene: async (id) => {
+		let sequence = await models.genes_model.findOne({'id' : id}, {_id : false, sequence : true});
+		let res;
+		if(!sequence){
+			res = {error : 'Gene ' + id + " doesn't exists"};
+		}
+		else{
+			res = sequence;
+		}
+		return res;
 	}
 }

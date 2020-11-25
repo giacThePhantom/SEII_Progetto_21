@@ -86,8 +86,22 @@ app.get('/api/v1/gene/:id', (req, res) => {
 	});
 });
 
+app.get('/api/v1/gene/sequence/:id', (req, res) => {
+	let id = req.params.id;
+	conn.get_sequence_of_gene(id).then((ret) => {
+		if(ret.error){
+			res.status(404).json(ret);
+		}
+		else{
+			res.status(200).send(ret);
+		}
+	});
+
+});
+
+
 
 console.log('Starting db init');
-//db_init.start();
+db_init.start();
   
 
