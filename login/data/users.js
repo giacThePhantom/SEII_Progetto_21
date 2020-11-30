@@ -2,55 +2,28 @@ const express = require('express');
 const router = express.Router();
 const db = require('./db.js');
 
+
 //API used during the test phase, return the entire collection of users
-router.get('', (req, res) => {
-    let users = db.users.all()
-    .filter( (entry) => {
-        if( req.query.email )
-            return entry.email == req.query.email;
-        return true;
-    }).map( (entry) => {
-        return {
-            self: '/api/v1/users/' + entry.id,
-            email: entry.email,
-						username: entry.username,
-						admin: entry.admin
-        }
-    });
+router.get('',async (req, res) => {
+		let users = await db.users();
     res.status(200).json(users);
 });
 //API used to authenticate from the login page
-router.post('/auth', (req, res) => {
+router.post('/auth', async (req, res) => {
 	console.log("auth richiesta");
-    let users = db.users.all()
-    .filter( (entry) => {
-						console.log(req.body.password);
-            return entry.email == req.body.email && entry.password== req.body.password; //checks for credentials in the database
-    }).map( (entry) => {
-        return { //format output returning only some infos
-            self: '/api/v1/users/' + entry.id,
-            email: entry.email,
-						username: entry.username,
-						admin: entry.admin
-        }
-    });
-    res.status(200).json(users);
+		let user= await db.authenticate(req.body.email,req.body.password);
+    res.status(200).json(user);
 });
 
 //get user info by id
-router.get('/:id', (req, res) => {
-    let users = db.users.all()
-    .filter( (entry) => {
-            return entry.id == req.params.id;
-    }).map( (entry) => {
-        return {
-            self: '/api/v1/users/' + entry.id,
-            email: entry.email,
-						username: entry.username,
-						admin: entry.admin
-        }
-    });
-    res.status(200).json(users);
+router.get('/:id', async (req, res) => {
+	let user = await db.get_userbyID(req.params.id);
+	console.log(user);
+	if(user)
+		res.status(200).json(user);
+	else{
+		res.status(404).json({message:"user not found"});
+	}
 });
 //insert a new user in the database (default admin:false)
 router.post('', (req, res) => {
@@ -58,16 +31,35 @@ router.post('', (req, res) => {
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
-        admin: false,
     };
-
+		console.log(user);
     if (!user.email || typeof user.email != 'string' || !checkIfEmailInString(user.email)) {
+				console.log("errore parametri")
         res.status(400).json({ error: 'The field "email" must be a non-empty string, in email format' });
         return;
     }
 
-    let userId = db.users.insert(user);
+    let userId = db.insert_user(user);
     res.location("/api/v1/users/" + userId).status(201).send();
+});
+
+router.delete('', async(req, res) => {
+    let user = {
+				id:req.body.id
+    };
+		console.log(user);
+		let del=await db.delete_user(user.id);
+		if(del.ok){
+			if(del.n==1){
+    		res.status(201).send("eliminato "+user.id+" "+JSON.stringify(del));
+			}
+			else{
+	    		res.status(201).send("nessun utente corrispondente all'ID selezionato");
+			}
+		}
+		else{
+			res.status(404).send("errore durante l'eliminazione");
+		}
 });
 
 

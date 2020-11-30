@@ -1,19 +1,5 @@
-
-function loaduserlist(){//function used in the test phase, it retrieves from the server the entire userlist
-	//const userlist=document.getElementById("userlist");
-
-	fetch("../api/v1/users")
-	.then((resp)=>resp.json())
-	.then(function(data){
-		console.log(data);
-		data.forEach((item, i) => {
-				console.log(item);
-		});
-
-	})
-}
-loaduserlist();
-
+/////////////////////////////////
+//handle the resize of the window, to get a better layout
 function getWidth() { //function used to get the window size
   if (self.innerWidth) {
     return self.innerWidth;
@@ -27,7 +13,7 @@ function getWidth() { //function used to get the window size
     return document.body.clientWidth;
   }
 }
-function sizeHandler(){ //handle the resize of the window, to get a better layout
+function sizeHandler(){
 //console.log(getWidth());
 	let topmenu=document.getElementById("topmenu");
 	if(topmenu){
@@ -43,9 +29,47 @@ function sizeHandler(){ //handle the resize of the window, to get a better layou
 }
 window.onresize=sizeHandler;
 sizeHandler();
+/////////////////////////////////
+
+
+function loaduserlist(){//function used in the test phase, it retrieves from the server the entire userlist
+	//const userlist=document.getElementById("userlist");
+
+	fetch("../api/v1/users")
+	.then((resp)=>resp.json())
+	.then(function(data){
+		data.forEach((item, i) => {
+				console.log(item);
+		});
+
+	})
+}
+
+function addUser(email,username,password){
+	console.log("aggiungo user");
+	return fetch('../api/v1/users',{
+		method:'post',
+		headers: {
+		 'Content-Type': 'application/json'
+	 },
+	 body:JSON.stringify({email:email,password:password,username:username})
+ })
+}
+function delUser(userID){
+	return fetch('../api/v1/users',{
+		method:'delete',
+		headers: {
+		 'Content-Type': 'application/json'
+	 },
+	 body:JSON.stringify({id:userID})
+ }).then(()=>{
+	 console.log(userID);
+ return userID;}
+)
+}
 
 function auth(email,psw){
-	fetch('../api/v1/users/auth',{
+	return fetch('../api/v1/users/auth',{
 		method:'post',
 		headers: {
 		 'Content-Type': 'application/json'
@@ -76,3 +100,5 @@ function authenticate(){
 	let psw=document.getElementById("psw_field").value;
 	return auth(email,psw);
 }
+
+loaduserlist();
