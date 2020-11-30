@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html width="100%">
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js "></script>
+   <script type="text/javascript">
+       $("document").ready(function() {
+           $('#topmenu').load('../../menu/menu.html');
+       });
+   </script>
+
+ <link rel="stylesheet" type="text/css" href="login_style.css">
+    <title></title>
+  </head>
+  <body width="100%">
+<div id="topmenu" style="max-height:150px;height:150px;"></div>
+<table width="100%">
+	<tr width="100%">
+		<td width="60%">
+		<table id="maincontent">
+		<tr>
+			<td><h1>Cogens</h1></td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" placeholder="Email" id="email_field">
+				<input type="text" placeholder="Password" id="psw_field">
+		</td>
+		</tr>
+		<tr>
+			<td>
+				<button onclick="authenticate()"> LOG ME IN</button>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#">or register here for free</a></td>
+		</tr>
+		<tr>
+			<td><a href="#">Continue as Guest</a></td>
+		</tr>
+	</table></td>
+		<td width="40%" class="img"><img class="profile_img" src="imgs/loginbg.png" alt="profile image"/></td>
+	</tr>
+</table>
+<script src="loginscript.js"></script>
+  </body>
+</html>
