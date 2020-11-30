@@ -44,32 +44,4 @@ module.exports = {
 		return species_found;
 	},
 
-	get_gene_info: async (id, filters) => {
-		let gene_found;
-		if(filters.format == 'condensed'){
-			gene_found = await models.genes_model.findOne({'id' : id}, {_id : false, sequence : false});
-		}
-		else{
-			gene_found = await models.genes_model.findOne({'id' : id}, {_id : false});
-		}
-		let res;
-		if(!gene_found){
-			res = {error : "Cannot find gene " + id};
-		}
-		else{
-			res = gene_found;
-		}
-		return res;
-	},
-	get_sequence_of_gene: async (id) => {
-		let sequence = await models.genes_model.findOne({'id' : id}, {_id : false, sequence : true});
-		let res;
-		if(!sequence){
-			res = {error : 'Gene ' + id + " doesn't exists"};
-		}
-		else{
-			res = sequence;
-		}
-		return res;
-	}
 }
