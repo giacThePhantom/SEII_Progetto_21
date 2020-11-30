@@ -13,9 +13,9 @@ var GENE_LIST_LOCATION= './Ensembl_communication/Jsons';
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-app.use(express.static('../login/static'));
-app.use('/menu/',express.static('../menu'));
-app.use('/',express.static('../home/supfolder'));
+app.use('/', express.static('./login/static', {fallthrough : true}));
+app.use('/menu/',express.static('./menu', {fallthrough : true}));
+app.use('/',express.static('./home/supfolder', {fallthrough : true}));
 
 
 //Start the database
@@ -103,4 +103,4 @@ app.get('/api/v1/gene/sequence/:id', (req, res) => {
 
 
 console.log('Starting db init');
-db_init.start();
+//db_init.start();
