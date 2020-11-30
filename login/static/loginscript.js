@@ -1,9 +1,4 @@
 
-const fetchPolifill = require('whatwg-fetch')
-global.fetch = fetchPolifill.fetch
-global.Request = fetchPolifill.Request
-global.Headers = fetchPolifill.Headers
-global.Response = fetchPolifill.Response
 function loaduserlist(){//function used in the test phase, it retrieves from the server the entire userlist
 	//const userlist=document.getElementById("userlist");
 
@@ -81,5 +76,3 @@ function authenticate(){
 	let psw=document.getElementById("psw_field").value;
 	return auth(email,psw);
 }
-
-module.exports = {auth};
