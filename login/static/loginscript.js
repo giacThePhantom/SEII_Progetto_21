@@ -32,10 +32,10 @@ sizeHandler();
 /////////////////////////////////
 
 
-function loaduserlist(){//function used in the test phase, it retrieves from the server the entire userlist
+async function loaduserlist(){//function used in the test phase, it retrieves from the server the entire userlist
 	//const userlist=document.getElementById("userlist");
 
-	fetch("../api/v1/users")
+	return await fetch("../api/v1/users")
 	.then((resp)=>resp.json())
 	.then(function(data){
 		data.forEach((item, i) => {
@@ -45,9 +45,9 @@ function loaduserlist(){//function used in the test phase, it retrieves from the
 	})
 }
 
-function addUser(email,username,password){
+async function addUser(email,username,password){
 	console.log("aggiungo user");
-	return fetch('../api/v1/users',{
+	return await fetch('../api/v1/users',{
 		method:'post',
 		headers: {
 		 'Content-Type': 'application/json'
@@ -55,21 +55,19 @@ function addUser(email,username,password){
 	 body:JSON.stringify({email:email,password:password,username:username})
  })
 }
-function delUser(userID){
-	return fetch('../api/v1/users',{
+async function delUser(userID){
+	return await fetch('../api/v1/users',{
 		method:'delete',
 		headers: {
 		 'Content-Type': 'application/json'
 	 },
 	 body:JSON.stringify({id:userID})
- }).then(()=>{
-	 console.log(userID);
- return userID;}
-)
+ })
 }
 
-function auth(email,psw){
-	return fetch('../api/v1/users/auth',{
+
+async function auth(email,psw){
+	return await fetch('../api/v1/users/auth',{
 		method:'post',
 		headers: {
 		 'Content-Type': 'application/json'
@@ -95,10 +93,10 @@ function auth(email,psw){
 
 }
 //function that try to authenticate, if there's no match in the database it returns a user not found error
-function authenticate(){
+async function authenticate(){
 	let email=document.getElementById("email_field").value;
 	let psw=document.getElementById("psw_field").value;
-	return auth(email,psw);
+	return await auth(email,psw);
 }
 
 loaduserlist();
