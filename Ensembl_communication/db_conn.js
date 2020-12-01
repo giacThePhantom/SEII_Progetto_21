@@ -1,19 +1,7 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
+const models = require('./models');
+const uri = 'mongodb://127.0.0.1:27017/genes';
 
-const uri = 'mongodb://127.0.0.1:27017/';
-
-/*
- * Starts a mongodb client,
- * @param {MongoClient} Client to start.
- */
-async function run(client){
-    	// Connect the client to the server
-    	await client.connect();
-    	// Establish and verify connection
-    	await client.db("admin").command({ ping: 1 });
-    	console.log("Connected successfully to server");
-  	
-}
 
 /* Prints a log message
  * @param {Object} error value.
@@ -22,17 +10,17 @@ async function run(client){
  */
 function log(err, res, msg){
 	if(err) throw err;
-	console.log(msg);
 }
 
 /* See if gene is present in genes_info.
- * @param {String} Ensembl stable ID.
+ * @param {mongoose.model} Model of the genes_info collection.
+ * @param {Object} Information of a gene.
  * @return {Boolean} True if present, false otherwise.
  */
-async function gene_alredy_saved(db_genes, gene_info){
-	let data = await db_genes.collection('genes_info').findOne({'id': gene_info.id});
+async function gene_alredy_saved(model, gene_info){
+	let data = await model.find({'id': gene_info.id});
 	let res;
-	if(data){
+	if(data.length > 0){
 		res = true;
 	}
 	else{
@@ -41,15 +29,15 @@ async function gene_alredy_saved(db_genes, gene_info){
 	return res;
 }
 
-/* See if homology is present in genes_homology.
- * @param {String} Ensembl stable ID of gene.
- * @param {String} Ensembl stable ID of homologue.
+/* See if species is present in species.
+ * @param {mongoose.model} Model of the species collection.
+ * @param {Object} Information of a species.
  * @return {Boolean} True if present, false otherwise.
  */
-async function homology_alredy_saved(db_genes, homology_info){
-	let data = await db_genes.collection('genes_homology').findOne({ $and: [{'id': homology_info.id}, {'target_id': homology_info.target_id}]});
+async function species_alredy_saved(model, species_info){
+	let data = await model.find({'name': species_info.name});
 	let res;
-	if(data){
+	if(data.length > 0){
 		res = true;
 	}
 	else{
@@ -57,68 +45,65 @@ async function homology_alredy_saved(db_genes, homology_info){
 	}
 	return res;
 }
+
 
 module.exports = {
-	/* Creates a MongoClient
-	 * @return {MongoClient} client to return
-	 */
-	connect: () => {
-		let uri_final = uri + '?useUnifiedTopology=true';
-		const client = new MongoClient(uri_final);
-		run(client).catch(console.dir);
-		return client;
-	},
-	/* Creates genes db.
-	 * @param {MongoClient} where to create the db.
-	 * @return {Db} the db created.
-	 */
-	init_db: async (client) => {
-		let db_genes = client.db('genes');
-		db_genes.createCollection('genes_info', (err, res) => log(err, res, 'created genes_info'));
-		db_genes.createCollection('genes_homology', (err, res) => log(err, res, 'created genes_homology'));
-		return db_genes;
-	},
-
-	/* Closes the mongo client.
-	 * @param {MongoClient} Client to close.
-	 */
-	close: async (client) => {
-	//	await client.close();
-	},
-	
-	/* Deletes genes db.
-	 * @param {MongoClient} where to delete the db.
-	 */
-	del_db: async (client) => {
-		let db_genes = client.db('genes');
-		db_genes.collection('genes_info').drop((err, delOK) => log(err, delOK, 'deleted genes_info'));
-		db_genes.collection('genes_homology').drop((err, delOK) => log(err, delOK, 'delete genes_homology'));
-	},
-		
-
 	/* Inserts gene in db
-	 * @param {Db} Where the data is stored.
-	 * @param{Object} Data to be stored.
+	 * @param {Object} Data to be stored.
+	 * @return {Boolean} If the data has been stored.
 	 */
-	insert_gene: async (db_genes, gene_info) => {
-		let to_be_saved = !(await gene_alredy_saved(db_genes, gene_info));
+	insert_gene: async (gene_info) => {
+		let to_be_saved = !(await gene_alredy_saved(models.genes_model, gene_info));
 		if(to_be_saved){
-			await db_genes.collection('genes_info').insertOne(gene_info, (err, res) => log(err, res, '1 info inserted'));
+			let to_be_inserted = new models.genes_model(gene_info);
+			await to_be_inserted.save((err) => {log(err, 'Inserted correctly', 'Inserted gene info');});
 		}
+		return to_be_saved;
 		
 	},
-	
-	/* Inserts gene homology in db
-	 * @param {Db} Where the data is stored.
-	 * @param{Object} Data to be stored.
-	 */
-	insert_homology: async (db_genes, gene_homology) => {
-		let to_be_saved = !(await homology_alredy_saved(db_genes, gene_homology));
-		if(to_be_saved){
-			await db_genes.collection('genes_homology').insertOne(gene_homology, (err, res) => log(err, res, '1 homology inserted'));
-		}
-	}
 
+	/* Inserts species in db
+	 * @param {Object} Data to be stored.
+	 * @return {Boolean} If the data has been stored
+	 */
+	insert_species: async (species_info) => {
+		let to_be_saved = !(await species_alredy_saved(models.species_model, species_info));
+		if(to_be_saved){
+			let to_be_inserted = new models.species_model(species_info);
+			console.log(to_be_inserted);
+			await to_be_inserted.save((err) => {log(err, 'Inserted correctly', 'Inserted species info');});
+		}
+		return to_be_saved;
+	},
+
+	get_gene_info: async (id, filters) => {
+		let gene_found;
+		if(filters.format == 'condensed'){
+			gene_found = await models.genes_model.findOne({'id' : id}, {_id : false, sequence : false});
+		}
+		else{
+			gene_found = await models.genes_model.findOne({'id' : id}, {_id : false});
+		}
+		let res;
+		if(!gene_found){
+			res = {error : "Cannot find gene " + id};
+		}
+		else{
+			res = gene_found;
+		}
+		return res;
+	},
+	get_sequence_of_gene: async (id) => {
+		let sequence = await models.genes_model.findOne({'id' : id}, {_id : false, sequence : true});
+		let res;
+		if(!sequence){
+			res = {error : 'Gene ' + id + " doesn't exists"};
+		}
+		else{
+			res = sequence;
+		}
+		return res;
+	}
 }
 
 

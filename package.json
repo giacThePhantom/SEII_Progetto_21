@@ -1,10 +1,13 @@
 {
-  "name": "progetto",
+  "name": "seii_progetto_21",
   "version": "1.0.0",
-  "description": "Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021 * Giacomo Fantoni * Ettore Favari * Filippo Gastaldello * Nicola Giuseppe Marchioro * Elisa Pettinà",
+  "description": "Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021\r * Giacomo Fantoni\r * Ettore Favari\r * Filippo Gastaldello\r * Nicola Giuseppe Marchioro\r * Elisa Pettinà",
+  "engines": {
+    "node": "12.x"
+  },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -17,7 +20,17 @@
   },
   "homepage": "https://github.com/giacThePhantom/SEII_Progetto_21#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "got": "^11.8.0",
-    "mongodb": "^3.6.3"
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.15",
+    "node-fetch": "^2.6.1",
+    "request": "^2.88.2",
+    "shuffle-array": "^1.0.1",
+    "whatwg-fetch": "^3.5.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
   }
 }
