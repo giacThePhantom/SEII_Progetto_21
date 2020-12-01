@@ -17,11 +17,12 @@ module.exports = {
 			}
 			else{
 				let gene_info = await models.genes_model.findOne({'id' : identifier}, {_id : false});
+				res = gene_info;
 				if(!gene_info){
 					res = {error : 'This gene will be uploaded shortly'};
 				}
 				console.log(gene_info);
-				res = gene_info;
+				
 			}
 		}
 		return res;
