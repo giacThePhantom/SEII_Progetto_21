@@ -1,7 +1,7 @@
-const conn = require('./db_conn');
+const conn = require('../servercore/db_conn');
 const read = require('./read_data.js');
 const write = require('./write_data.js');
-const models = require('./models')
+const models = require('./models');
 const util = require('util');
 const mongoose = require('mongoose');
 const API_ONLY_VER='archive/id/';
@@ -38,7 +38,7 @@ async function get_ensembl_gene_version(gene){
 ///*
 //get_ensembl_gene_version('ENSG00000157764')
 
-console.log(read.get_all_lists());
+conn.get_all_genes_for_species('mouse').then((ret)=>console.log(ret));
 
 
 
