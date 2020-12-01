@@ -44,7 +44,7 @@ module.exports = {
 		},
 		authenticate: async (email,password)=>{
 			let user= await models.users_model.findOne({email:email, password:password});
-			let token = jwt.sign({ email: user.email ,id:user.id}, "Group21KEY", { expiresIn: 86400 });
+			let token = jwt.sign({ email: user.email ,id:user.id}, "Group21KEY", { expiresIn: 3600 });
 			let userinfo={
 				username:user.username,
 				email:user.email,
@@ -69,5 +69,10 @@ module.exports = {
 			var userinfo=null;
 		}
 			return userinfo;
+		},
+		update_info:async(email,username,password,self)=>{
+			let id=self.substring(self.lastIndexOf("/")+1);
+			let res=await models.users_model.update({email:email,id:id},{$set:{username:username,password:password}});
+			console.log(self+" "+id+"\n"+res);
 		}
 };

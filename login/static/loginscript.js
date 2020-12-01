@@ -1,4 +1,3 @@
-var tokenInfo={};
 /////////////////////////////////
 //handle the resize of the window, to get a better layout
 function getWidth() { //function used to get the window size
@@ -79,7 +78,8 @@ function auth(email,psw){
 	 .then(function(data) {
 			 console.log("data:\n"+JSON.stringify(data));
 			 if(data){//if length=0 there is no match for the given email and password
-				 tokenInfo = data;
+				 window.localStorage.setItem("tokenInfo", JSON.stringify(data));
+				 go_to_profile();
 			 }
 			 else{
 				 console.log("user not found");
@@ -95,14 +95,5 @@ async function authenticate(){
 	let email=document.getElementById("email_field").value;
 	let psw=document.getElementById("psw_field").value;
 	return await auth(email,psw);
-}
-async function getUserInfo(userID){
-	console.log("/api/v1/users/"+userID+"?token="+tokenInfo.token);
-	return await fetch("/api/v1/users/"+userID+"?token="+tokenInfo.token)
-	.then((resp)=>resp.json())
-	.then(function(data){
-				console.log(data);
-
-	})
 }
 loaduserlist();

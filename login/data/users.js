@@ -65,7 +65,17 @@ router.get('/:id', async (req, res) => {
 		res.status(404).json({message:"user not found"});
 	}
 });
-
+router.post('/updateInfo', (req, res) => {
+    let user = {
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
+				id: req.body.self
+    };
+		console.log(user);
+    let userId = db.update_info(req.body.email,req.body.username,req.body.password,req.body.self);
+    res.status(201).send();
+});
 function checkIfEmailInString(text) {//checks wether the string is in a valid email format
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(text);

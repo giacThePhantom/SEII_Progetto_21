@@ -41,7 +41,9 @@ const gene_tree = new Schema({
 		children: [{}]
 	}]
 });
-
+/*
+ * Schema of user
+ */
 const user= new Schema({
 	id: String,
 	email: String,
@@ -57,6 +59,9 @@ const user= new Schema({
 		}]
 });
 
+/*
+ * Schema of Q&A
+ */
 const qanda= new Schema({
 	id: String,
 	questionAuthor: String,
