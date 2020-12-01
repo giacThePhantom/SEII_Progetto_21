@@ -34,13 +34,10 @@ const gene = new Schema({
  * Schema of gene tree
  */
 const gene_tree = new Schema({
-	id: String,
 	root_species: String,
-	children: [{
-		scientific_name: String,
-		children: [{}]
-	}]
 });
+
+gene_tree.add({children:[gene_tree]});
 
 const user= new Schema({
 	id: String,
