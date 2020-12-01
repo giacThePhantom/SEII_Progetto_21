@@ -1,6 +1,7 @@
 const conn = require('./db_conn');
 const read = require('./read_data.js');
 const write = require('./write_data.js');
+const models = require('./models')
 const util = require('util');
 const mongoose = require('mongoose');
 const API_ONLY_VER='archive/id/';
