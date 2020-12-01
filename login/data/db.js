@@ -1,8 +1,8 @@
 //simple database like collection of data
-const mongoose=require("mongoose")
+const mongoose=require("mongoose");
 const conn = require('../../Ensembl_communication/db_conn.js');
 const models = require('../../Ensembl_communication/models.js');
-
+const jwt = require('jsonwebtoken');
 //returns the entire collection of users
 let users= async ()=>{
 	let user = await models.users_model.find({});
@@ -27,7 +27,7 @@ async function user_already_saved(model, user_info){
 module.exports = {
     users:users,
 		insert_user:async(user_info)=>{
-			user_info.id=await models.users_model.find({}).count();
+			user_info.id=await models.users_model.find({}).countDocuments();
 			user_info.admin=false;
 			console.log(user_info);
 			let to_be_saved = !(await user_already_saved(models.users_model, user_info));
@@ -44,12 +44,15 @@ module.exports = {
 		},
 		authenticate: async (email,password)=>{
 			let user= await models.users_model.findOne({email:email, password:password});
+			let token = jwt.sign({ email: user.email ,id:user.id}, "Group21KEY", { expiresIn: 86400 });
 			let userinfo={
 				username:user.username,
 				email:user.email,
 				admin: user.admin,
-				self: "/api/v1/users/"+user.id
+				self: "/api/v1/users/"+user.id,
+				token:token
 			}
+			console.log(userinfo);
 			return userinfo;
 		},
 		get_userbyID:async(id)=>{

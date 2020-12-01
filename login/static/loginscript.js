@@ -1,3 +1,4 @@
+var tokenInfo={};
 /////////////////////////////////
 //handle the resize of the window, to get a better layout
 function getWidth() { //function used to get the window size
@@ -66,8 +67,8 @@ async function delUser(userID){
 }
 
 
-async function auth(email,psw){
-	return await fetch('../api/v1/users/auth',{
+function auth(email,psw){
+	fetch('../api/v1/users/auth',{
 		method:'post',
 		headers: {
 		 'Content-Type': 'application/json'
@@ -76,18 +77,15 @@ async function auth(email,psw){
  })
 	.then((resp) => resp.json()) // Transform the data into json
 	 .then(function(data) {
-			 //console.log(data.length);
-			 if(data.length>0){//if length=0 there is no match for the given email and password
-				 loggedUser = data[0];
-					//id at where you can find the resource if you go to /api/v1/users/:id
-				 loggedUser.id = loggedUser.self.substring(loggedUser.self.lastIndexOf('/') + 1);
-				 console.log( loggedUser.self);
+			 console.log("data:\n"+JSON.stringify(data));
+			 if(data){//if length=0 there is no match for the given email and password
+				 tokenInfo = data;
 			 }
 			 else{
 				 console.log("user not found");
 				 return "errore";
 			 }
-			 return loggedUser;
+			 return;
 	 })
 	 .catch( error => console.error(error) ); // If there is any error you will catch them here
 
@@ -98,5 +96,13 @@ async function authenticate(){
 	let psw=document.getElementById("psw_field").value;
 	return await auth(email,psw);
 }
+async function getUserInfo(userID){
+	console.log("/api/v1/users/"+userID+"?token="+tokenInfo.token);
+	return await fetch("/api/v1/users/"+userID+"?token="+tokenInfo.token)
+	.then((resp)=>resp.json())
+	.then(function(data){
+				console.log(data);
 
+	})
+}
 loaduserlist();
