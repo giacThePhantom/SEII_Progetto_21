@@ -1,35 +1,22 @@
 
-
-/*
-<select id="cars">
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="opel">Opel</option>
-  <option value="audi">Audi</option>
-</select>
-*/
-
-function dropdown(){
-  console.log("click");
+async function ld_drop_down_menu(){
   var dirslot_array = document.getElementsByTagName("DIV");
-  count=0;
+  id_drop_menu=0;
+  let list_spicies=await req_list_spicies();
   for(dirslot of dirslot_array){
     if(dirslot.id == "dropdownmenu"){
       dirslot.innerHTML='';
       dirslot.appendChild(dropdown = document.createElement("SELECT"));
-      dropdown.setAttribute("onchange",'rimuovi('+count+')');
-      dropdown.setAttribute("id",count);
-      let i;
-      let testo="cose"
-      for(i=0;i<4;i++){
-        console.log(i);
+      dropdown.setAttribute("onchange",'rimuovi('+id_drop_menu+')');
+      dropdown.setAttribute("id",id_drop_menu);
+      for(spicie of list_spicies){
+        spicie=spicie.name;
         let option = document.createElement("OPTION");
-        option.appendChild(document.createTextNode(''+testo+i));
-        option.setAttribute("value",testo+""+i);
+        option.appendChild(document.createTextNode(spicie));
+        option.setAttribute("value",spicie);
         dropdown.appendChild(option);
       }
-      count++;
-      console.log(dirslot.innerHTML);
+      id_drop_menu++;
     }
   }
 }
@@ -42,4 +29,14 @@ function rimuovi(id){
   }
   else   dropdown_unselected=all_dropdown[0];
   dropdown_unselected.remove(dropdown_selected.selectedIndex);
+}
+
+
+
+
+
+async function req_list_spicies(){
+	return await fetch('../api/v1/species')
+	.then((risp) => risp.json()) // Transform the data into json
+   .catch( error => console.error(error) ); // If there is any error you will catch them here
 }
