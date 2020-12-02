@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const conn = require('./db_conn.js');
+const conn = require('../db_endpoints.js');
 
 
 

@@ -81,5 +81,11 @@ module.exports = {
 			await conn.insert_species(to_be_inserted);
 		
 		});
+	},
+
+	write_new_gene_data: async (gene_id, list_species) => {
+		process_gene_data(gene_id, list_species).then((ret) => {
+			conn.insert_gene(ret);
+		});
 	}
 }

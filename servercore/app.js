@@ -35,13 +35,17 @@ const users = require('../login/data/users.js');
 
 app.use('/api/v1/users', users);
 
-const species = require('../Ensembl_communication/endpoint_species.js');
+const species = require('../Ensembl_communication/Endpoints/endpoint_species.js');
 
 app.use('/api/v2/species', species);
 
-const gene = require('../Ensembl_communication/endpoint_genes.js');
+const gene = require('../Ensembl_communication/Endpoints/endpoint_genes.js');
 
 app.use('/api/v2/gene', gene);
+
+const genome = require('../Ensembl_communication/Endpoints/endpoint_genome.js');
+
+app.use('/api/v2/genome', genome);
 
 
 
