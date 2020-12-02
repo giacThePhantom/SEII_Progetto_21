@@ -38,6 +38,22 @@ async function get_ensembl_gene_version(gene){
 ///*
 //get_ensembl_gene_version('ENSG00000157764')
 
+let insert_specie = async (spicie_info)=>{
+  spicie_info.id=await models.users_model.find({}).countDocuments();
+  console.log(spicie_info);
+  let to_be_saved = !(await user_already_saved(models.spicies, spicie_info));
+  if(to_be_saved){
+    let to_be_inserted = new models.spicies(spicie_info);
+    await to_be_inserted.save((err) => {console.log(err, 'Inserted correctly', 'Inserted user info');});
+  }
+  return to_be_saved;
+
+
+
+
+
+
+
 conn.get_all_genes_for_species('mouse').then((ret)=>console.log(ret));
 
 
