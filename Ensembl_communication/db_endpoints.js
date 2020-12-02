@@ -100,11 +100,13 @@ module.exports = {
 		let res;
 		if(!sequence){
 			let species = await has_to_be_saved(id);
-			if(!species)
+			if(!species){
 				res = {error : 'Gene ' + id + " doesn't exists"};
+			}
 			else{
 				res = {error : 'This gene will be updated shortly'};
 				insert_new_gene(id, species);
+			}
 		}
 		else{
 			res = sequence;
@@ -114,15 +116,51 @@ module.exports = {
 
 	get_genome_of_species: async (id) => {
 		let genome = await models.species_model.findOne({'name' : id}, {_id : false});
-		let res;
+		let res = {};
 		if(!genome){
 			res = {error: 'Genome of species: ' + id + " doesn't exists"};
 		}
 		else{
-			res = genome;
+			res.name = genome.name;
+			res.genes = [];
+			res.missing_genes = [];
+			for(let i = 0; i < 6; i++){
+				let gene = genome.genes[i];
+				let gene_found = await models.genes_model.findOne({'id' : gene}, {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false});
+				if(!gene_found){
+					console.log('Missing gene');
+					res.missing_genes.push(gene);
+					insert_new_gene(gene, id);
+				}
+				else{
+					res.genes.push(gene_found);
+				}
+			}
+			if(res.missing_genes.length){
+				res.error = 'Missing genes will be uploaded shortly';
+			}
+		}
+		return res;
+	},
+	get_genome_from_to: async (species, start, end) => {
+		let genome = await models.species_model.findOne({'name' : species}, {_id : false});
+		let res = {};
+		if(!genome){
+			res = {error: 'Genome of species: ' + species + " doesn't exists"};
+		}
+		else{
+			res.name = genome.name;
+			res.start = start;
+			res.end = end;
+			res.genes = []
+			let genes_found = await models.genes_model.find({start : {$gte : start}, end : {$lte : end}}, {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false});
+			for(let gene of genes_found){
+				if(genome.genes.includes(gene.id)){
+					res.genes.push(gene);
+				}
+			}
 		}
 		return res;
 	}
-
 
 };

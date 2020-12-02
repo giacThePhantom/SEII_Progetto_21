@@ -15,6 +15,20 @@ router.get('/:species', (req, res) => {
 	});
 });
 
+router.get('/:species/:start/:end', (req, res) => {
+	let species = req.params.species;
+	let start = req.params.start;
+	let end = req.params.end;
+	conn.get_genome_from_to(species, start, end).then((ret) => {
+		if(ret.error){
+			res.status(404).json(ret);
+		}
+		else{
+			res.status(200).send(ret);
+		}
+	});
+});
+
 
 
 
