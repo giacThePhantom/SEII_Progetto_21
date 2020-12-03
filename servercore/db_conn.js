@@ -38,6 +38,7 @@ module.exports = {
 			res = genes_found;
 		}
 		return res;
+		
 	},
 
 	get_all_species: async () => {
