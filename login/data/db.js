@@ -27,7 +27,8 @@ async function user_already_saved(model, user_info){
 module.exports = {
     users:users,
 		insert_user:async(user_info)=>{
-			user_info.id=await models.users_model.find({}).countDocuments();
+			//user_info.id=await models.users_model.find({}).countDocuments();
+			user_info.id=await models.users_model.count({});
 			user_info.admin=false;
 			console.log(user_info);
 			let to_be_saved = !(await user_already_saved(models.users_model, user_info));
@@ -71,8 +72,17 @@ module.exports = {
 			return userinfo;
 		},
 		update_info:async(email,username,password,self)=>{
+			console.log("password :"+password);
 			let id=self.substring(self.lastIndexOf("/")+1);
-			let res=await models.users_model.update({email:email,id:id},{$set:{username:username,password:password}});
+			if(!password){
+				console.log("password non modificata :"+password);
+				var res=await models.users_model.updateOne({email:email,id:id},{$set:{username:username}});
+			}
+			else{
+				console.log("password modificata:"+password);
+				var res=await models.users_model.updateOne({email:email,id:id},{$set:{username:username,password:password}});
+
+			}
 			console.log(self+" "+id+"\n"+res);
 		}
 };

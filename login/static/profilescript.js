@@ -10,6 +10,8 @@ function getUserInfo(){
 		console.log(data);
 		username.value=data.username;
 		email.value=data.email;
+		if(!data.username || !data.email)
+			throw data.message
 		return;
 	})
 	.catch(e=>{
