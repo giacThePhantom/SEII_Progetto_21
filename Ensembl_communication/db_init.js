@@ -3,7 +3,10 @@ const write = require('./write_data.js');
 const conn = require('./db_conn.js');
 
 
-
+async function albero_prova(){
+	let alberobello = await write.tree_prova('ENSG00000157764');
+	console.log(alberobello);
+}
 
 
 /*
@@ -35,8 +38,9 @@ module.exports = {
 	start: async () => {
 		console.log('starting');
 		console.log('created connection');
-		build_species_data();
-		build_gene_data();
+		//build_species_data();
+		//build_gene_data();
+		albero_prova();
 	}
 }
 

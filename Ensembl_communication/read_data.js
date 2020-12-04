@@ -10,23 +10,22 @@ const FORMAT_JSON = ';content-type=application/json'	// Format API request in js
  * Internal function to process data in gene tree
  * ??????????????????????
  */
-function get_gene_tree_rec(response){
+function get_gene_tree_rec(children_array){
 	console.log('In gene tree rec');
-	let data = {scientific_name: '', children: []};
-	if(response.children){
+	children_response =[];
+	if(children_array){
 		//data.children = [];
-		for(let child of response.children){
-			console.log('child');
-			console.log(child);
-			data.children.push({scientific_name: child.taxonomy.scientific_name, children: get_gene_tree_rec(child.children)});
-			console.log(child.children);
+		for(let child of children_array){
+			
+			let child_body={'root_species': child.taxonomy.scientific_name};
+			child_body.children=get_gene_tree_rec(child.children);
+			children_response.push(child_body);
+			console.log('child tax: '+ child.taxonomy.scientific_name);
 			//get_gene_tree_rec(child.children, data.children[data.children.length - 1]);
 		}
-	return data.children;
 	}
-	return [];
+	return children_response;
 }
-
 
 module.exports = {
 	/*
@@ -145,10 +144,9 @@ module.exports = {
 		let response_json = JSON.parse(response);
 		let data = {};
 		data.id = response_json.id;
-		response_json = response_json.tree;
-		data.children = [];
-		data.root_species = response_json.taxonomy.scientific_name;
-		return get_gene_tree_rec(response_json);
+		data.root_species = response_json.tree.taxonomy.scientific_name;
+		data.children = get_gene_tree_rec(response_json.tree.children);
+		return data;
 	}
 
 

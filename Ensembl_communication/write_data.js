@@ -37,18 +37,30 @@ async function process_gene_data(gene_id, species_list){
 			to_be_inserted.homologies.push(...read.get_homologies(homologies_response.body));
 		}
 	}
-	/*let tree_response = await read.ensembl_get('genetree/member/id/' + gene_id + '?sequence=none');
+
+	let tree_response = await read.ensembl_get('genetree/member/id/' + gene_id + '?sequence=none');
 	if(tree_response){
 		to_be_inserted.gene_tree = read.get_gene_tree(tree_response.body);
 		console.log('Tree to be inserted');
 		console.log(to_be_inserted.gene_tree);
 		console.log(to_be_inserted.gene_tree.children[1].children);
-	}*/
+	}
 	return to_be_inserted;
 }
 
 
+
 module.exports = {
+	tree_prova: async function process_gene_data_tree(gene_id){
+		let tree_response = await read.ensembl_get('genetree/member/id/' + gene_id + '?sequence=none');
+			if(tree_response){
+				tree_risp = read.get_gene_tree(tree_response.body);
+				console.log('Tree to be inserted');
+				//console.log(to_be_inserted.gene_tree);
+				//console.log(to_be_inserted.gene_tree.children[1].children);
+			}
+			return tree_risp;
+		},
 	/*
 	 * Takes the file of gene ids, gets their information and saves them in the database 
 	 * @param {string} the name of the file containing the list of ids
