@@ -12,11 +12,11 @@ const FORMAT_JSON = ';content-type=application/json'	// Format API request in js
  */
 function get_gene_tree_rec(children_array){
 	let children_response =[];
-	if(children_array){	for(let child of children_array){
+	if(children_array){
+		for(let child of children_array){
 			let child_body={'root_species': child.taxonomy.scientific_name};
 			child_body.children=get_gene_tree_rec(child.children);
 			children_response.push(child_body);
-			children_response.map(chil=>console.log(chil))
 		}
 	}
 	return children_response;
@@ -101,6 +101,7 @@ module.exports = {
 	get_gene_info: (gene_information) => {
 		let temp_json = JSON.parse(gene_information);
 		let gene = {};
+		console.log("getting gene "+temp_json.id);
 		gene.id = temp_json.id;
 		gene.species=temp_json.species,
 		gene.version = temp_json.version;

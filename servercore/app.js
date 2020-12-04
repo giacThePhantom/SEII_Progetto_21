@@ -3,7 +3,6 @@ const db_init = require('../Ensembl_communication/db_init');
 const conn = require('./db_conn')
 const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?retryWrites=true&w=majority';
 
-
 var express    = require('express');
 var bodyParser = require('body-parser');
 

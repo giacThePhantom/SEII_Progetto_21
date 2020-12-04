@@ -17,8 +17,8 @@ function log(err, res, msg){
  * @param {Object} Information of a gene.
  * @return {Boolean} True if present, false otherwise.
  */
-async function id_already_saved(model, gene_info){
-	let data = await model.find({'id': gene_info.id});
+async function id_already_saved(model, object_info){
+	let data = await model.find({'id': object_info.id});
 	let res;
 	if(data.length > 0){
 		res = true;
@@ -67,6 +67,8 @@ module.exports = {
 		if(to_be_saved){
 			let to_be_inserted = new models.trees_model(tree_info);
 			await to_be_inserted.save((err) => {log(err, 'Inserted correctly', 'Inserted tree info');});
+		}else {
+			console.log("tree already saved: "+tree_info.id);
 		}
 		return to_be_saved;
 	},
@@ -78,7 +80,6 @@ module.exports = {
 		let to_be_saved = !(await species_already_saved(models.species_model, species_info));
 		if(to_be_saved){
 			let to_be_inserted = new models.species_model(species_info);
-			console.log(to_be_inserted);
 			await to_be_inserted.save((err) => {log(err, 'Inserted correctly', 'Inserted species info');});
 		}
 		return to_be_saved;
