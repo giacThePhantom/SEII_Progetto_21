@@ -60,8 +60,8 @@ module.exports = {
 	 * @return {String} the request.
 	 */
 	ensembl_get: async (content) => {
-		return await got(ENSEMBL_API + content + FORMAT_JSON).catch((err) => {
-			if(err.response.statusCode == 404){
+		return await got(ENSEMBL_API + content.replace("\r","") + FORMAT_JSON).catch((err) => {
+			if(err.response.statusCode >= 400  ){
 				console.log('Could not find ' + ENSEMBL_API + content + FORMAT_JSON);
 			}
 			else throw err;

@@ -39,27 +39,11 @@ async function process_gene_data(gene_id, species_list){
 			to_be_inserted.homologies.push(...read.get_homologies(homologies_response.body));
 		}
 	}
-	var t0 = performance.now()
-
-	let tree_response = await read.ensembl_get('genetree/member/id/' + gene_id + '?sequence=none');
-
-	var t1 = performance.now()
-	console.log("Downloading the tree took " + (t1 - t0) + " milliseconds.")
-	if(tree_response){
-		var t0 = performance.now()
-
+let tree_response = await read.ensembl_get('genetree/member/id/' + gene_id + '?sequence=none');
+	if(tree_response && tree_response.statusCode>=200 && tree_response.statusCode<400){
 		let tree= read.get_gene_tree(tree_response.body);
-
-		var t1 = performance.now()
-		console.log("Parsing the tree took " + (t1 - t0) + " milliseconds.")
 		to_be_inserted.gene_tree = tree.id;
-		console.log('Tree to be inserted: '+to_be_inserted.gene_tree);
-		var t0 = performance.now()
-
 		await conn.insert_tree(tree);
-
-		var t1 = performance.now()
-		console.log("Saving the tree took " + (t1 - t0) + " milliseconds.")
 	}
 	return to_be_inserted;
 }
