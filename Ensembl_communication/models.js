@@ -34,12 +34,9 @@ const gene = new Schema({
  * Schema of gene tree
  */
 const gene_tree = new Schema({
-	id: String,
+	tree_id: String,
 	root_species: String,
-	children: [{
-		scientific_name: String,
-		children: [{}]
-	}]
+	children:[]
 });
 /*
  * Schema of user
