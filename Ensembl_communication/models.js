@@ -15,6 +15,7 @@ const species = new Schema({
  */
 const gene = new Schema({
 	id: String,
+	species: String,
 	version: Number,
 	start: Number,
 	end: Number,
@@ -69,7 +70,7 @@ const qanda= new Schema({
 
 module.exports = {
 	genes_model: mongoose.model('gene_info', gene),
-	gene_trees: mongoose.model('gene_tree', gene_tree),
+	trees_model: mongoose.model('gene_tree', gene_tree),
 	species_model: mongoose.model('species', species),
 	users_model: mongoose.model('user',user),
 	qandas_model:mongoose.model('qanda',qanda)

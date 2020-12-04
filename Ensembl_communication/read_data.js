@@ -8,20 +8,15 @@ const FORMAT_JSON = ';content-type=application/json'	// Format API request in js
 
 /*
  * Internal function to process data in gene tree
- * ??????????????????????
+ *
  */
 function get_gene_tree_rec(children_array){
-	console.log('In gene tree rec');
-	children_response =[];
-	if(children_array){
-		//data.children = [];
-		for(let child of children_array){
-			
+	let children_response =[];
+	if(children_array){	for(let child of children_array){
 			let child_body={'root_species': child.taxonomy.scientific_name};
 			child_body.children=get_gene_tree_rec(child.children);
 			children_response.push(child_body);
-			console.log('child tax: '+ child.taxonomy.scientific_name);
-			//get_gene_tree_rec(child.children, data.children[data.children.length - 1]);
+			children_response.map(chil=>console.log(chil))
 		}
 	}
 	return children_response;
@@ -35,7 +30,7 @@ module.exports = {
 	 */
 	get_species_from_mart_export: (file_name) => {
 		let correct_name = file_name.split('.')[0]; 			// Delete txt extension
-		correct_name = correct_name.split('_')[2];			// Delete mart_export
+		correct_name = correct_name.split('_')[2]+"_"+correct_name.split('_')[3];			// Delete mart_export
 		return correct_name;
 	},
 
@@ -56,7 +51,6 @@ module.exports = {
 			file_data.shift();		   // Delete first element (not a gene ID)
 			file_data.pop();    		   // Delete last empty element
 		}
-		shuffle(file_data);
 		return file_data;
 	},
 
@@ -108,6 +102,7 @@ module.exports = {
 		let temp_json = JSON.parse(gene_information);
 		let gene = {};
 		gene.id = temp_json.id;
+		gene.species=temp_json.species,
 		gene.version = temp_json.version;
 		gene.start = temp_json.start;
 		gene.end = temp_json.end;
@@ -146,6 +141,8 @@ module.exports = {
 		data.id = response_json.id;
 		data.root_species = response_json.tree.taxonomy.scientific_name;
 		data.children = get_gene_tree_rec(response_json.tree.children);
+
+		//inserimento nel database
 		return data;
 	}
 
