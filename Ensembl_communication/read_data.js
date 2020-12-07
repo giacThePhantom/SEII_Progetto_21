@@ -86,6 +86,9 @@ module.exports = {
 		let ret = []
 		let temp = directory.readSync();
 		while(temp != null){
+				////////////////// portion of code added only during debug: prevents useless downloads of data
+			if(temp.name.endsWith("txt"))
+			//////////////////////
 			ret.push(temp.name);
 			temp = directory.readSync();
 		}
@@ -141,7 +144,12 @@ module.exports = {
 		let data = {};
 		data.id = response_json.id;
 		data.root_species = response_json.tree.taxonomy.scientific_name;
-		data.children = get_gene_tree_rec(response_json.tree.children);
+		try{
+			data.children = get_gene_tree_rec(response_json.tree.children);
+		}catch{
+			console.log(data.id+" depth greater than 50");
+			data.id="_"+data.id;
+		}
 
 		//inserimento nel database
 		return data;
