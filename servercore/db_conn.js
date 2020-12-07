@@ -17,11 +17,12 @@ module.exports = {
 			}
 			else{
 				let gene_info = await models.genes_model.findOne({'id' : identifier}, {_id : false});
+				res = gene_info;
 				if(!gene_info){
 					res = {error : 'This gene will be uploaded shortly'};
 				}
 				console.log(gene_info);
-				res = gene_info;
+				
 			}
 		}
 		return res;
@@ -37,6 +38,7 @@ module.exports = {
 			res = genes_found;
 		}
 		return res;
+		
 	},
 
 	get_all_species: async () => {
@@ -44,32 +46,4 @@ module.exports = {
 		return species_found;
 	},
 
-	get_gene_info: async (id, filters) => {
-		let gene_found;
-		if(filters.format == 'condensed'){
-			gene_found = await models.genes_model.findOne({'id' : id}, {_id : false, sequence : false});
-		}
-		else{
-			gene_found = await models.genes_model.findOne({'id' : id}, {_id : false});
-		}
-		let res;
-		if(!gene_found){
-			res = {error : "Cannot find gene " + id};
-		}
-		else{
-			res = gene_found;
-		}
-		return res;
-	},
-	get_sequence_of_gene: async (id) => {
-		let sequence = await models.genes_model.findOne({'id' : id}, {_id : false, sequence : true});
-		let res;
-		if(!sequence){
-			res = {error : 'Gene ' + id + " doesn't exists"};
-		}
-		else{
-			res = sequence;
-		}
-		return res;
-	}
 }

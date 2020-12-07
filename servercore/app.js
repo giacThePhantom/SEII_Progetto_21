@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
 const conn = require('./db_conn')
-const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?retryWrites=true&w=majority';
-
+const uri = 'mongodb://127.0.0.1/genes';
 
 var express    = require('express');
 var bodyParser = require('body-parser');
@@ -13,9 +12,9 @@ var GENE_LIST_LOCATION= './Ensembl_communication/Jsons';
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-app.use(express.static('../login/static'));
-app.use('/menu/',express.static('../menu'));
-app.use('/',express.static('../home/supfolder'));
+app.use('/', express.static('./login/static', {fallthrough : true}));
+app.use('/menu/',express.static('./menu', {fallthrough : true}));
+app.use('/',express.static('./home', {fallthrough : true}));
 
 
 //Start the database
@@ -52,4 +51,4 @@ app.use('/api/v2/genome', genome);
 
 
 console.log('Starting db init');
-//db_init.start();
+db_init.start();

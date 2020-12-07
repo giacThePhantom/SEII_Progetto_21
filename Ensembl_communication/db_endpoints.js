@@ -116,17 +116,18 @@ module.exports = {
 
 	get_genome_of_species: async (id) => {
 		let genome = await models.species_model.findOne({'name' : id}, {_id : false});
+		console.log(genome);
 		let res = {};
 		if(!genome){
 			res = {error: 'Genome of species: ' + id + " doesn't exists"};
 		}
-		else{
+		else{	
+			let gene_list = await models.genes_model.find({'species' : genome.name}, {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false});
 			res.name = genome.name;
 			res.genes = [];
 			res.missing_genes = [];
-			for(let i = 0; i < 6; i++){
-				let gene = genome.genes[i];
-				let gene_found = await models.genes_model.findOne({'id' : gene}, {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false});
+			for(let gene_id in genome.genes){
+				let gene_found = lodash.filter(gene_list, x => x.id === gene_id);
 				if(!gene_found){
 					console.log('Missing gene');
 					res.missing_genes.push(gene);
