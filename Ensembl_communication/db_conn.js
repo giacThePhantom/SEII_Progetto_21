@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const models = require('./models');
-const uri = 'mongodb://127.0.0.1:27017/genes';
+const uri = 'mongodb+srv://Ettore:ettore@cluster0.lybx2.mongodb.net/<dbname>?retryWrites=true&w=majority';
 
 
 /* Prints a log message
@@ -18,6 +18,7 @@ function log(err, res, msg){
  * @return {Boolean} True if present, false otherwise.
  */
 async function gene_alredy_saved(model, gene_info){
+	console.log(model);
 	let data = await model.find({'id': gene_info.id});
 	let res;
 	if(data.length > 0){
@@ -47,6 +48,10 @@ async function species_alredy_saved(model, species_info){
 }
 
 
+
+
+
+
 module.exports = {
 	/* Inserts gene in db
 	 * @param {Object} Data to be stored.
@@ -59,7 +64,7 @@ module.exports = {
 			await to_be_inserted.save((err) => {log(err, 'Inserted correctly', 'Inserted gene info');});
 		}
 		return to_be_saved;
-		
+
 	},
 
 	/* Inserts species in db
@@ -105,7 +110,3 @@ module.exports = {
 		return res;
 	}
 }
-
-
-
-

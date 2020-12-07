@@ -24,7 +24,7 @@
     "express": "^4.17.1",
     "got": "^11.8.0",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.11.0",
+    "mongoose": "^5.11.4",
     "node-fetch": "^2.6.1",
     "request": "^2.88.2",
     "shuffle-array": "^1.0.1",
