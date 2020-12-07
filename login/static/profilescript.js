@@ -28,10 +28,16 @@ function updateData(){
 	let username=document.getElementById("username_field").value;
 	let email=document.getElementById("email_field").value;
 	let password=document.getElementById("password_field").value;
-	update(email,username,password);
+	let password2=document.getElementById("password2_field").value;
+	if(password==password2)
+		update(email,username,password);
+	else {
+		alert("Le password inserite non coincidono")
+	}
 }
 
 function update(email,username,password){
+
 	fetch('../api/v1/users/updateInfo',{
 		method:'post',
 		headers: {

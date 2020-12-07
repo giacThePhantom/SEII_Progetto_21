@@ -1,0 +1,38 @@
+#maincontent table{
+	width: 50%;
+	margin: auto;
+	background-color: #e3e3e3;
+  border-radius: 4px;
+	padding: 30px;
+}
+#maincontent td{
+	text-align: center;
+	min-width: 200px;
+  border-radius: 3px;
+  border-radius: 3px;
+  padding:5px;
+  font-size: 35px;
+}
+#submit_btn{
+		border:1px solid rgb(133,133,133);
+    border-radius: 4px;
+    margin:5px;
+    padding:12px;
+    font-size: 17px;
+}
+input:disabled{
+	background-color: #ffffff;
+}
+#submit_btn:hover{
+	cursor: pointer;
+	background-color: #00ee33;
+}
+
+#maincontent input{
+	min-width: 20px;
+    min-height: 20px;
+    max-height: 40px;
+    border-radius: 3px;
+    padding:5px;
+    font-size: 35px;
+}

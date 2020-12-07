@@ -63,6 +63,7 @@ module.exports = {
 				username:user.username,
 				email:user.email,
 				admin: user.admin,
+				history: user.history,
 				self: "/api/v1/users/"+user.id
 			}
 		}
