@@ -57,7 +57,7 @@ const user= new Schema({
 		}]
 });
 
-const qanda= new Schema({
+const qanda=  new Schema({
 	id: String,
 	questionAuthor: String,
 	answerAuthor: String,
