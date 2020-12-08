@@ -9,7 +9,10 @@ mongoose.set('useCreateIndex', true); //avoids deprecation error for mongodb
  * Schema of species
  */
 const species = new Schema({
-	name: String,
+	name: {
+		type : String,
+		unique : true
+	},
 	genes: [String]
 })
 

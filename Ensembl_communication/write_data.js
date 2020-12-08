@@ -89,8 +89,11 @@ module.exports = {
 		return new Promise(async (resolve, reject) => {
 			let to_be_inserted = {}
 			to_be_inserted.name = name;
-			to_be_inserted.genes = gene_IDS
+			to_be_inserted.genes = gene_IDS;
+			console.log('Inserting ' + name);
 			await conn.insert_species(to_be_inserted);
+			console.log('Inserted');
+			resolve(to_be_inserted.name);
 
 		});
 	},
