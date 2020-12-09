@@ -35,8 +35,8 @@ module.exports = {
 	start: async () => {
 		console.log('starting');
 		console.log('created connection');
-		build_species_data();
-		build_gene_data();
+		//build_species_data();
+		//build_gene_data();
 	}
 }
 
