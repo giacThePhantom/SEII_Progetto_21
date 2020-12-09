@@ -1,4 +1,29 @@
 let tokenInfo = JSON.parse(window.localStorage.getItem("tokenInfo"));
+function parseHistory(history_array,table){
+	if(history_array.length==0){
+		let row=table.insertRow();
+		row.innerHTML="<td> Nessun elemento nella cronologia ricerche </td>";
+	}
+	else{
+		var last_child;
+		history_array.forEach(element =>{
+				let row=table.insertRow();
+				let cell=row.insertCell();
+				let a = document.createElement("a");
+				a.href=element;
+				a.innerHTML=element;
+				cell.appendChild(a);
+
+
+				row=table.insertRow();
+				cell=row.insertCell();
+				let hr = document.createElement("hr");
+				cell.appendChild(hr);
+				last_child= row;
+		});
+		table.getElementsByTagName("tbody")[0].removeChild(table.getElementsByTagName("tbody")[0].lastElementChild)
+	}
+}
 function getUserInfo(){
 	//console.log(tokenInfo.self+"?token="+tokenInfo.token);
 	try{
@@ -7,9 +32,11 @@ function getUserInfo(){
 	.then(function(data){
 		let username=document.getElementById("username_field");
 		let email=document.getElementById("email_field");
+		let search_history=document.getElementById("search_history");
 		console.log(data);
 		username.value=data.username;
 		email.value=data.email;
+		parseHistory(data.history,search_history)
 		if(!data.username || !data.email)
 			throw data.message
 		return;

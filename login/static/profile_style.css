@@ -1,9 +1,14 @@
 #maincontent table{
-	width: 50%;
+	width: 70%;
 	margin: auto;
 	background-color: #e3e3e3;
   border-radius: 4px;
 	padding: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+h1{
+	text-align: center;
 }
 #maincontent td{
 	text-align: center;
@@ -11,7 +16,7 @@
   border-radius: 3px;
   border-radius: 3px;
   padding:5px;
-  font-size: 35px;
+  font-size: 25px;
 }
 #submit_btn{
 		border:1px solid rgb(133,133,133);

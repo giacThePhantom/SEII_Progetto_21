@@ -50,9 +50,7 @@ const user= new Schema({
 	username: String,
 	password: String,
 	admin: Boolean,
-	history:[{
-		research_link: String
-	}],
+	history:[String],
 	uploadedGenes:[{
 			usergeneid:String,
 			approved: Boolean
