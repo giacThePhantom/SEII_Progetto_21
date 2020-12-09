@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const models = require('./models');
-const uri = 'mongodb://127.0.0.1:27017/genes';
-
 
 /* Prints a log message
  * @param {Object} error value.
@@ -47,7 +45,6 @@ async function species_already_saved(model, species_info){
 }
 
 
-
 module.exports = {
 	/* Inserts gene in db
 	 * @param {Object} Data to be stored.
@@ -83,34 +80,5 @@ module.exports = {
 			await to_be_inserted.save((err) => {log(err, 'Inserted correctly', 'Inserted species info');});
 		}
 		return to_be_saved;
-	},
-
-	get_gene_info: async (id, filters) => {
-		let gene_found;
-		if(filters.format == 'condensed'){
-			gene_found = await models.genes_model.findOne({'id' : id}, {_id : false, sequence : false});
-		}
-		else{
-			gene_found = await models.genes_model.findOne({'id' : id}, {_id : false});
-		}
-		let res;
-		if(!gene_found){
-			res = {error : "Cannot find gene " + id};
-		}
-		else{
-			res = gene_found;
-		}
-		return res;
-	},
-	get_sequence_of_gene: async (id) => {
-		let sequence = await models.genes_model.findOne({'id' : id}, {_id : false, sequence : true});
-		let res;
-		if(!sequence){
-			res = {error : 'Gene ' + id + " doesn't exists"};
-		}
-		else{
-			res = sequence;
-		}
-		return res;
 	}
 }

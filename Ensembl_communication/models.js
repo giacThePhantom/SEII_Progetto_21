@@ -2,11 +2,17 @@ const mongoose = require('mongoose')
 
 const { Schema } = mongoose;
 
+
+mongoose.set('useCreateIndex', true); //avoids deprecation error for mongodb
+
 /*
  * Schema of species
  */
 const species = new Schema({
-	name: String,
+	name: {
+		type : String,
+		unique : true
+	},
 	genes: [String]
 })
 
@@ -14,7 +20,10 @@ const species = new Schema({
  * Schema of genes
  */
 const gene = new Schema({
-	id: String,
+	id: {
+		type : String,
+		unique : true
+	},
 	species: String,
 	version: Number,
 	start: Number,
