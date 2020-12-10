@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use('/', express.static('./login/static', {fallthrough : true}));
 app.use('/menu/',express.static('./menu', {fallthrough : true}));
 app.use('/',express.static('./home', {fallthrough : true}));
+app.use('/',express.static('./genetree/static', {fallthrough : true}));
 
 
 //Start the database
@@ -29,10 +30,11 @@ app.listen(port, function(){
 
 
 const users = require('../login/data/users.js');
-
-
-
 app.use('/api/v1/users', users);
+
+
+const genetrees = require('../genetree/genetree.js');
+app.use('/api/v2/genetree', genetrees);
 
 
 
@@ -102,4 +104,4 @@ app.get('/api/v1/gene/sequence/:id', (req, res) => {
 
 
 console.log('Starting db init');
-db_init.start();
+//db_init.start();
