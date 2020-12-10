@@ -1,4 +1,18 @@
 let tokenInfo = JSON.parse(window.localStorage.getItem("tokenInfo"));
+
+function history_element_parse(element){
+	var ret;
+	if(element.startsWith("/api/v1/gene/")){
+		ret="Gene ID: " + element.replace("/api/v1/gene/","");
+	}else if (element.startsWith("/api/v1/species/")) {
+		ret= "Species: " + element.replace("/api/v1/species/","");
+	}else {
+		ret=element;
+	}
+	return ret;
+}
+
+
 function parseHistory(history_array,table){
 	if(history_array.length==0){
 		let row=table.insertRow();
@@ -11,7 +25,7 @@ function parseHistory(history_array,table){
 				let cell=row.insertCell();
 				let a = document.createElement("a");
 				a.href=element;
-				a.innerHTML=element;
+				a.innerHTML=history_element_parse(element);
 				cell.appendChild(a);
 
 
