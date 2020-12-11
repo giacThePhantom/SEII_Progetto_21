@@ -5,6 +5,10 @@
 		<title></title>
 		<style>
 
+		.node {
+				cursor: pointer;
+			}
+
  .node circle {
 	 fill: #fff;
 	 stroke: steelblue;
@@ -12,23 +16,36 @@
  }
 
  .node text { font: 12px sans-serif; }
-
+ .node text:hover{
+	 font: 50px sans-serif;
+ }
  .link {
 	 fill: none;
 	 stroke: #ccc;
-	 stroke-width: 2px;
+	 stroke-width: 3px;
  }
+#treeRes{
+	min-height: 1000px;
+	min-width: 1000px;
+		max-height: 1000px;
+		width: 100%;
+	border: 1;
+	border: 1px solid black;
 
+	cursor: grab;
+  overflow: hidden;
+}
 	 </style>
-		<script src="show_tree_info.js" charset="utf-8"></script>
 		<script src="https://cdn.rawgit.com/caldwell/renderjson/master/renderjson.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 	</head>
 	<body>
 		<input type="text" id="tree_id_field" value="ENSGT00940000155526">
-		<button type="button" name="button" onclick="loadTree()"></button>
-		<div id="treeRes">
+		<button type="button" name="button" onclick="loadTree()"> carica albero</button>
+		<div id="treeRes" class="scroll">
 
 		</div>
+
+ 		<script src="show_tree_info.js" charset="utf-8"></script>
 	</body>
 </html>
