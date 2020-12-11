@@ -40,3 +40,10 @@ async function req_list_spicies(){
 	.then((risp) => risp.json()) // Transform the data into json
    .catch( error => console.error(error) ); // If there is any error you will catch them here
 }
+
+function clickimage(){
+  var dpmenu0= document.getElementById("0");
+  var dpmenu1= document.getElementById("1");
+  console.log(dpmenu0.value);
+  window.location = "comparison.html?specie1="+dpmenu0.value+"&specie2="+dpmenu1.value;
+}

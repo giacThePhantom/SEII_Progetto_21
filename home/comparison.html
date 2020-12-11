@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="home_style.css">
+    <link rel="stylesheet" type="text/css" href="compare_style.css">
     <script src="js_colorimage.js" charset="utf-8"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js "></script>
 
@@ -42,35 +42,16 @@
   </head>
 
 
-  <body onload="ld_drop_down_menu()">
+  <body>
     <div id="topmenu"  style="max-height:150px;height:150px;"></div>
-    <center>
-      <table id="maincontent">
-        <tr>
-          <th>
-            <div name="dropdownmenu" class="dropdown"></div>
-          </th>
-          <th>
-          </th>
-          <th>
-          <div name="dropdownmenu" class="dropdown"></div>
-          </th>
-        </tr>
-        <tr>
-          <th>
-          </th>
-          <th>
-            <div >
-              <img id="bgimg" src="imgs/dna_colori.png"></img>
-              <img id="frontimg" src="imgs/dna.png"
-                onclick="clickimage()"></img></div>
-              
-          </th>
-          <th>
-          </th>
-        </tr>
-      </table>
-    </center>
-    <script src="home_actions.js" charset="utf-8"></script>
+    <div id="maincontent">
+        <h1>La tua comparazione:</h1> 
+        <div class="titles">
+            <p id="sp1">Specie 1</p>
+            <p id="sp2">Specie 2</p>
+            
+        </div>
+    </div>
+    <script src="compare_actions.js" charset="utf-8"></script>
   </body>
 </html>

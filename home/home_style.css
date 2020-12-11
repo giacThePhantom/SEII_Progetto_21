@@ -23,8 +23,8 @@ body{
   border: 1px solid white;
   display: block;
   margin-top: 3cm;
-  margin-right: -5%;
-  margin-left: -5%;
+  margin-right: -7%;
+  margin-left: -7%;
   width: 15%;
 }
 
@@ -32,8 +32,11 @@ img:hover {
   box-shadow: 0 0 3px 3px rgba(0, 140, 186, 0.5);
 }
 
+
+
 select{
-  color: red;
+  color: black;
   margin: 25pt;
+  padding: 10px 50px;
 
 }

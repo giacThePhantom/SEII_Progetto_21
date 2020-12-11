@@ -1,0 +1,27 @@
+body{
+    background-color: lightcyan;
+}
+
+h1{
+    text-align: center;
+    color: lightslategray;
+    margin-top: -20px;
+}
+.titles p{
+    display: inline;
+    vertical-align: top;
+}
+#sp1{
+    text-align: left;
+    color: black;
+    font-size: xx-large;
+    margin-left: 30px;
+}
+
+#sp2{
+    text-align: right;
+    float:right;
+    color: black;
+    font-size: xx-large;
+    margin-right: 30px;
+}
