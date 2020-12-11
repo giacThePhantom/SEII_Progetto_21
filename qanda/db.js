@@ -1,8 +1,9 @@
 //simple database like collection of data
 const mongoose=require("mongoose")
-const conn = require('../Ensembl_communication/db_conn.js');
+const conn = require('../Ensembl_communication/db_conn.js'); //qui devo mettere il mio db 
 const models = require('../Ensembl_communication/models.js');
 const { qandas_model } = require("../Ensembl_communication/models.js");
+const uri = 'mongodb://127.0.0.1:27017/genes';
 
 //return the entire collection of qanda
 let qandas = async () => {
