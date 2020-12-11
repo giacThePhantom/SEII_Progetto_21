@@ -10,6 +10,7 @@ h1{
 .titles p{
     display: inline;
     vertical-align: top;
+    margin:0;
 }
 #sp1{
     text-align: left;
@@ -20,8 +21,9 @@ h1{
 
 #sp2{
     text-align: right;
-    float:right;
+    float: right;
     color: black;
     font-size: xx-large;
     margin-right: 30px;
 }
+

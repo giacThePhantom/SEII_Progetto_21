@@ -1,7 +1,6 @@
 
 async function ld_drop_down_menu(){
   var dirslot_array = document.getElementsByName("dropdownmenu");
-  console.log(dirslot_array);
   id_drop_menu=0;
   let list_spicies=await req_list_spicies();
   for(dirslot of dirslot_array){
@@ -44,6 +43,7 @@ async function req_list_spicies(){
 function clickimage(){
   var dpmenu0= document.getElementById("0");
   var dpmenu1= document.getElementById("1");
-  console.log(dpmenu0.value);
-  window.location = "comparison.html?specie1="+dpmenu0.value+"&specie2="+dpmenu1.value;
+  var specie00= dpmenu0.value.replace(" ", "_");
+  var specie11= dpmenu1.value.replace(" ", "_");
+  window.location = "comparison.html?specie1="+specie00+"&specie2="+specie11;
 }
