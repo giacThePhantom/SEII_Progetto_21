@@ -20,11 +20,13 @@ module.export = {
 
     let all_spicies= conn.get_all_species();
     for(spicie of all_spicies){
-      let genes = await conn.get_all_genes_for_species(spicies);
-      if(genes.length>0)
-        for(gene of genes){
-          let gene_ens_version = await get_ensembl_gene_version(gene.id);
-          if(gene_ens_version > gene.version){
+//      let genes = await conn.get_all_genes_for_species(spicies.name);
+      //console.log(spicie.genes);
+      if(spicie.genes.length>0)
+        for(gene of spicie.genes){
+          let gene_ens_version = await get_ensembl_gene_version(gene);
+          let gene_db= await get_gene_db(gene);
+          if(gene_ens_version > gene_db.version){
             console.log("C'e' da aggiornare "+gene.version);
             update_gene(gene);
           }
@@ -36,6 +38,15 @@ module.export = {
   }
 }
 
+async function get_gene_db(gene){
+  ret =  await models.genes_model.findOne({'id':gene});
+  if(!ret){
+    ret={error: "Cannot found gene " + gene};
+  }
+  return ret;
+}
+
+
 async function get_ensembl_gene_version(gene){
   return read.ensembl_get(API_ONLY_VER+gene+'?')
     .then((ret)=>{
@@ -46,7 +57,8 @@ async function get_ensembl_gene_version(gene){
 }
 
 async function get_ensembl_gene_info(gene){
-  return read.ensembl_get(API_INFO+gene.id+'?')
+  console.log(API_INFO+gene+'?');
+  return read.ensembl_get(API_INFO+gene+'?')
     .then((ret)=>{
       ret=JSON.parse(ret.body);
       return ret;
@@ -54,17 +66,18 @@ async function get_ensembl_gene_info(gene){
   );
 }
 
-async function update_gene(gene){
+async function filtre_ensembl_gene(gene){
   let gene_ens_info = get_ensembl_gene_info(gene);
-  gene.version      = gene_ens_info.version;
-  gene.start        = gene_ens_info.start;
-  gene.end          = gene_ens_info.end;
-  gene.biotype      = gene_ens_info.biotype;
-  gene.chromosome   = gene_ens_info.seq_region_name;
-  gene.strand       = gene_ens_info.strand;
-  gene.description  = gene_ens_info.description;
-  gene.sequence     = await get_ensembl_gene_sequence();
-  gene.save();
+  let filtered_gene=models.genes_model;
+  filtered_gene.version      = gene_ens_info.version;
+  filtered_gene.start        = gene_ens_info.start;
+  filtered_gene.end          = gene_ens_info.end;
+  filtered_gene.biotype      = gene_ens_info.biotype;
+  filtered_gene.chromosome   = gene_ens_info.seq_region_name;
+  filtered_gene.strand       = gene_ens_info.strand;
+  filtered_gene.description  = gene_ens_info.description;
+  filtered_gene.sequence     = await get_ensembl_gene_sequence();
+  return filtered_gene;
 }
 
 
@@ -95,7 +108,7 @@ async function get_ensembl_gene_sequence(gene){
 let see_gene_db = async ()=>{
   let all_spicies= conn.get_all_species();
   for (spicie of all_spicies){
-    let genes = await conn.get_all_genes_for_species(spicie);
+    let genes = await conn.get_all_genes_for_species(spicie.name);
     console.log(genes);
   }
 }
@@ -138,7 +151,7 @@ async function species_alredy_saved(model, species_info){
 }
 
 async function genes_alredy_saved(model, genes_info){
-	let data = await model.find({'name': genes_info.id});
+	let data = await model.find({'id': genes_info.id});
 	let res;
 	if(data.length > 0){
 		res = true;
@@ -186,14 +199,47 @@ try {
 } catch (error) {
   handleError(error);
 }
-conn.get_all_species().then((ret)=>console.log(ret));
 
-//update_all_genes();
+
+
+let update_all_genes= async ()=>{
+
+  let all_spicies= await get_all_species();
+
+  for(spicie of all_spicies){
+//    let genes = await conn.get_all_genes_for_species(spicie.name);
+
+    if( spicie.genes.length>0 ){
+      for(gene of spicie.genes){
+        let gene_ens_version = await get_ensembl_gene_version(gene);
+        let gene_db=await get_gene_db(gene);
+        if((gene_db.id===undefined)){
+          let filtered_gene = await filtre_ensembl_gene(gene);
+          console.log(filtered_gene);
+          //insert_genes();
+        }
+        else
+        if(gene_ens_version > gene_db.version){
+          console.log("C'e' da aggiornare "+gene_db.version);
+          gene_to_be_saved=filtre_ensembl_gene(gene);
+          gene_to_be_saved.save();
+        }
+        else{
+          console.log("Non c'e' da aggiornare "+gene_db);
+        }
+      }
+    }
+    else{
+      console.log("gene non e' lungo");
+    }
+  }
+}
+update_all_genes();
 
 
 
 /*
-let specie_inserted = new models.species_model({name: "ratto", genes:['ENSG00000157764']});
+let specie_inserted = new models.species_model({name: "mucca", genes:['ENSNLEG00000002139']});
 insert_species(specie_inserted);
 
 let gene_inserted = new models.genes_model({
@@ -210,7 +256,6 @@ let gene_inserted = new models.genes_model({
 });
 insert_genes(gene_inserted);
 */
-
 
 
 
