@@ -39,7 +39,7 @@ async function get_all_genes(query, excludes, gene_id_list){
 		gene_found = gene_found[0];
 		if(!gene_found){
 			res.missing_genes.push(gene_id);
-			insert_new_gene(gene_id, id);
+			//insert_new_gene(gene_id, query.species);
 		}
 		else{
 			res.genes.push(gene_found);
