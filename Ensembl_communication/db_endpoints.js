@@ -55,8 +55,9 @@ async function get_all_genes_aggregate(unwind, match, project, gene_id_list){
 	let res = {};
 	res.genes = [];
 	res.missing_genes = [];
-	let gene_list = await models.genes_model.aggregate([unwind, match, project]);
-	for(let gene_id of gene_id_list){
+	var sortino= {$sort:{start:1}};
+	res.genes = await models.genes_model.aggregate([sortino, unwind, match, project]);
+	/*for(let gene_id of gene_id_list){
 		let gene_found = lodash.filter(gene_list, x => x.id === gene_id);
 		gene_found = gene_found[0];
 		if(!gene_found){
@@ -66,7 +67,7 @@ async function get_all_genes_aggregate(unwind, match, project, gene_id_list){
 		else{
 			res.genes.push(gene_found);
 		}
-	}
+	}*/
 	if(res.missing_genes.length){
 		res.error = 'Missing genes will be uploaded shortly';
 	}
@@ -227,8 +228,8 @@ module.exports = {
 			res.species1 = await get_all_genes_aggregate({$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome2.name, species : genome1.name}}, {$project : {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}}, genome1.genes);
 			res.species1.name = genome1.name;
 			
-			res.species2 = await get_all_genes_aggregate({$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome1.name, species : genome2.name}}, {$project : {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}}, genome1.genes);
-			res.species2.name = genome2.name;
+			//res.species2 = await get_all_genes_aggregate({$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome1.name, species : genome2.name}}, {$project : {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}}, genome2.genes);
+			//res.species2.name = genome2.name;
 
 		
 		
