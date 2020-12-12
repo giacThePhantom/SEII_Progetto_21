@@ -7,23 +7,85 @@ h1{
     color: lightslategray;
     margin-top: -20px;
 }
-.titles p{
+.titles div{
     display: inline;
     vertical-align: top;
     margin:0;
 }
 #sp1{
-    text-align: left;
     color: black;
     font-size: xx-large;
     margin-left: 30px;
 }
 
 #sp2{
-    text-align: right;
-    float: right;
     color: black;
     font-size: xx-large;
     margin-right: 30px;
 }
+.center{
+		margin: auto;
+		display: block;
+}
+.filterbox div{
+	text-align: center;
+	display: inline;
+	vertical-align: top;
+	margin: auto;
+}
+.croma_cell:hover{
+	opacity: 0.5;
+}
+div{
+	font-size: 20px;
+}
+ul {
+    list-style-type: none;
+		font-size: 30px;
+		padding: 0px;
+		margin: 0;
+}
+.align-right{
+  text-align: right;
+  float: right;
+}
 
+.align-left{
+  text-align: left;
+  float: left;
+}
+tr{
+	padding: 0px;
+}
+td{
+	padding: 0px;
+}
+table{
+	margin: auto;
+}
+input{
+	min-width: 20px;
+    min-height: 20px;
+    max-height: 40px;
+    border-radius: 5px;
+    padding:5px;
+    font-size: 25px;
+}
+button{
+	border:1px solid rgb(133,133,133);
+border-radius: 4px;
+margin:5px;
+padding:12px;
+font-size: 17px;
+width: 100%;
+margin: 0;
+}
+button:hover{
+	cursor: pointer;
+	background-color: #227bba;
+	color: white;
+}
+.last_element{
+	min-height: 33.75px;
+	height: 33.75px;
+}
