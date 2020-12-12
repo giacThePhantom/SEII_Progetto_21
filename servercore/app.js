@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
 const conn = require('./db_conn')
-const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?retryWrites=true&w=majority';
-
+//const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
+const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes';
 
 var express    = require('express');
 var bodyParser = require('body-parser');
@@ -35,70 +35,19 @@ const users = require('../login/data/users.js');
 
 app.use('/api/v1/users', users);
 
+const species = require('../Ensembl_communication/Endpoints/endpoint_species.js');
+
+app.use('/api/v2/species', species);
+
+const gene = require('../Ensembl_communication/Endpoints/endpoint_genes.js');
+
+app.use('/api/v2/gene', gene);
+
+const genome = require('../Ensembl_communication/Endpoints/endpoint_genome.js');
+
+app.use('/api/v2/genome', genome);
 
 
-
-app.get('/api/v1/species/:species/:identifier', function (req, res) {
-  var species = req.params.species;
-  var identifier = req.params.identifier;
-	conn.get_gene_info_for_species(species, identifier).then((ret) => {
-		if(res.error){
-			res.status(404).json(ret);
-		}
-		else{
-			res.status(200).send(ret);
-		}
-	});
-});
-
-app.get('/api/v1/species/:species', function (req, res) {
-    var species = req.params.species;
-	conn.get_all_genes_for_species(species).then( (ret) => {
-		if(ret.error){
-			res.status(404).json(ret);
-		}
-		else{
-			res.status(200).send(ret);
-		}
-	});
-})
-
-
-
-
-app.get('/api/v1/species', function(req, res) {
-	conn.get_all_species().then((ret) => {
-		res.status(200).send(ret);
-	})
-});
-
-
-app.get('/api/v1/gene/:id', (req, res) => {
-	const filters = req.query;
-	console.log(filters);
-	let id = req.params.id;
-	conn.get_gene_info(id, filters).then( (ret) =>{
-		if(ret.error){
-			res.status(404).json(ret);
-		}
-		else{
-			res.status(200).send(ret);
-		}
-	});
-});
-
-app.get('/api/v1/gene/sequence/:id', (req, res) => {
-	let id = req.params.id;
-	conn.get_sequence_of_gene(id).then((ret) => {
-		if(ret.error){
-			res.status(404).json(ret);
-		}
-		else{
-			res.status(200).send(ret);
-		}
-	});
-
-});
 
 
 
