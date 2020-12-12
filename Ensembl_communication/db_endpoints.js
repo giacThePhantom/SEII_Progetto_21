@@ -19,7 +19,7 @@ async function has_to_be_saved(id){
 	let all_species = await models.species_model.find({}, {'name' : true, '_id' : false});
 	let species = [];
 	let ret_species;
-	
+
 	for(let temp of all_species){
 		if(await models.species_model.exists({'name' : temp.name, 'genes' : id})){
 			ret_species = temp.name;
@@ -51,12 +51,11 @@ async function get_all_genes(query, excludes, gene_id_list){
 	return res;
 }
 
-async function get_all_genes_aggregate(unwind, match, project, gene_id_list){
+async function get_all_genes_aggregate(sort,unwind, match, project, gene_id_list){
 	let res = {};
 	res.genes = [];
 	res.missing_genes = [];
-	var sortino= {$sort:{start:1}};
-	res.genes = await models.genes_model.aggregate([sortino, unwind, match, project]);
+	res.genes = await models.genes_model.aggregate([ unwind, match, project,sort]);
 	/*for(let gene_id of gene_id_list){
 		let gene_found = lodash.filter(gene_list, x => x.id === gene_id);
 		gene_found = gene_found[0];
@@ -95,7 +94,7 @@ module.exports = {
 		let res = {};
 		if(!species_found){
 			res = {error : "Cannot find species selected"};
-		}	
+		}
 		else{
 			if(!species_found.genes.includes(identifier)){
 				res = {error : 'Cannot find gene in species ' + species};
@@ -113,7 +112,7 @@ module.exports = {
 		}
 		return res;
 	},
-	
+
 	get_all_genes_for_species: async (species) => {
 		let genes_found = await models.species_model.findOne({'name' : species}, {_id : false, __v : false});
 		let res;
@@ -180,7 +179,7 @@ module.exports = {
 		if(!genome){
 			res = {error: 'Genome of species: ' + id + " doesn't exists"};
 		}
-		else{	
+		else{
 			res = await get_all_genes({'species' : genome.name}, {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}, genome.genes);
 			res.name = genome.name;
 		}
@@ -225,18 +224,33 @@ module.exports = {
 			}
 		}
 		if(!res.error){
-			res.species1 = await get_all_genes_aggregate({$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome2.name, species : genome1.name}}, {$project : {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}}, genome1.genes);
+			res.species1 = await get_all_genes_aggregate({$sort:{start:1}},{$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome2.name, species : genome1.name}},
+			 {$project : {
+				 _id : false,
+				 end:false,
+				 chromosome:false,
+				 strand:false,
+				 sequence : false,
+				 version : false,
+				 biotype : false,
+				 description : false,
+				 gene_tree : false,
+				 species : false,
+				 __v : false,
+				 'homologies._id' : false,
+				 'homologies.target_species' : false}},
+				  genome1.genes);
 			res.species1.name = genome1.name;
-			
+
 			//res.species2 = await get_all_genes_aggregate({$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome1.name, species : genome2.name}}, {$project : {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}}, genome2.genes);
 			//res.species2.name = genome2.name;
 
-		
-		
-		
+
+
+
 		}
-	
-		return res;	
+
+		return res;
 	},
 
 	get_compara_chr: async (species1, species2, chr) => {
@@ -258,16 +272,16 @@ module.exports = {
 		if(!res.error){
 			res.species1 = await get_all_genes_aggregate({$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome2.name, species : genome1.name, chromosome : chr}}, {$project : {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}}, genome1.genes);
 			res.species1.name = genome1.name;
-			
+
 			res.species2 = await get_all_genes_aggregate({$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome1.name, species : genome2.name, chromosome : chr}}, {$project : {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}}, genome1.genes);
 			res.species2.name = genome2.name;
 
-		
-		
-		
+
+
+
 		}
-	
-		return res;	
+
+		return res;
 	}
 
 
