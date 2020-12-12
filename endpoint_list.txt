@@ -19,3 +19,5 @@ genome/nonexistingspecies/1/2
 genome/mus_musculus/0/20000000
 genome/mus_musculus/4234242/0
 genome/mus_musculus/-232/-1
+genome/compara?species1=mus_musculus&species2=rattus_norvegicus
+genome/compara?species1=mus_musculus&species2=rattus_norvegicus&chr=4

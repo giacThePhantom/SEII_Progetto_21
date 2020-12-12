@@ -2,32 +2,30 @@ const express = require('express')
 const router = express.Router();
 const conn = require('../db_endpoints.js');
 
-
-router.get('/compara/:species1/:species2/:chr', (req, res) => {
-	let species1 = req.params.species1;
-	let species2 = req.params.species2;
-	let chr = req.params.chr;
-	conn.get_compara_chr(species1, species2, chr).then((ret) => {
-		if(ret.error){
-			res.status(404).json(ret);
-		}
-		else{
-			res.status(200).send(ret);
-		}
-	});
-});
-
-router.get('/compara/:species1/:species2', (req, res) => {
-	let species1 = req.params.species1;
-	let species2 = req.params.species2;
-	conn.get_compara_genomes(species1, species2).then((ret) => {
-		if(ret.error){
-			res.status(404).json(ret);
-		}
-		else{
-			res.status(200).send(ret);
-		}
-	});
+router.get('/compara', (req, res) => {
+	let species1 = req.query.species1;
+	let species2 = req.query.species2;
+	let chr = req.query.chr;
+	if(!chr){
+		conn.get_compara_genomes(species1, species2).then((ret) => {
+			if(ret.error){
+				res.status(404).json(ret);
+			}
+			else{
+				res.status(200).send(ret);
+			}
+		});
+	}
+	else{
+		conn.get_compara_chr(species1, species2, chr).then((ret) => {
+			if(ret.error){
+				res.status(404).json(ret);
+			}
+			else{
+				res.status(200).send(ret);
+			}
+		});
+	}
 });
 
 

@@ -17,11 +17,12 @@ async function ld_drop_down_menu(){
         var presentation_name= spicie.name.split("_");
         spicie= presentation_name[0]+" "+presentation_name[1];
         let option = document.createElement("OPTION");
-        
+
         option.appendChild(document.createTextNode(spicie));
         option.setAttribute("value",spicie);
         dropdown.appendChild(option);
       }
+			dropdown.value="";
       id_drop_menu++;
   }
 }
@@ -35,7 +36,7 @@ function setgradient(id){
 }
 
 async function req_list_spicies(){
-	return await fetch('../api/v1/species')
+	return await fetch('../api/v2/species')
 	.then((risp) => risp.json()) // Transform the data into json
    .catch( error => console.error(error) ); // If there is any error you will catch them here
 }
@@ -45,5 +46,9 @@ function clickimage(){
   var dpmenu1= document.getElementById("1");
   var specie00= dpmenu0.value.replace(" ", "_");
   var specie11= dpmenu1.value.replace(" ", "_");
-  window.location = "comparison.html?specie1="+specie00+"&specie2="+specie11;
+	if (specie00==specie11){
+		alert("Scegli specie distinte!");
+	}
+	else
+  	window.location = "comparison.html?specie1="+specie00+"&specie2="+specie11;
 }
