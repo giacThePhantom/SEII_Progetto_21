@@ -27,12 +27,36 @@ fetch('./api/v2/gene/' + gene + '?format=condensed').then( (ret) => {
         
         list.setAttribute("class", "lista");
 		for(let temp in gene_infos){
-			create_para(gene_infos[temp], temp+": ", list);
+
+            create_para(gene_infos[temp], temp+": ", list);
+
 			if(temp == 'gene_tree'){
                 gene_tree_id = gene_infos[temp];
                 console.log("sopra è un gene tree");
-			}
-			//console.log(gene_infos[temp]);
+            }
+            if (temp == 'homologies'){
+                listahomo=document.createElement("UL");
+                list.appendChild(listahomo);
+                gene_infos[temp].forEach(field => {
+                    let homo_id= document.createElement('LI');
+                    let homo_species=document.createElement('LI');
+                    homo_id.setAttribute("class", "gene_infos1");
+                    homo_id.innerHTML=field[0];
+                    homo_species.setAttribute("class", "gene_infos1");
+                    homo_species.innerHTML=field[1];
+
+                    listahomo.appendChild(homo_id);
+                    listahomo.appendChild(homo_species);
+
+                });
+                list.appendChild(listahomo);
+            } 
+            
+
+           /* else {
+                create_para(gene_infos[temp], temp+": ", list);
+            }*/
+			 
 
 			console.log(temp);		
 		}
@@ -53,9 +77,11 @@ function return_tree(){
 }
 
 function return_sequence(){
-    let seqSlide = document.createElement("DIV");
-    seqSlide.setAttribute("class", "sequenza");
-    seqSlide.setAttribute("id", "seqq");
+    //if (document.getElementsById("seqq")==null){
+        let seqSlide = document.createElement("TEXTAREA");
+        seqSlide.setAttribute("class", "sequenza");
+        seqSlide.setAttribute("id", "seqq");
+        seqSlide.disabled=true;
     
 
     fetch('./api/v2/gene/sequence/' + gene).then( (ret) => {
@@ -66,15 +92,10 @@ function return_sequence(){
     }).catch( error => console.error('Error in fetch' + error));
 
     list.appendChild(seqSlide);
+   //}
+    
 }
 
 function makeSlider(){
 
 }
-
-
-
-
-/*ret.json().then((gene_sequence) => {
-    seqSlide.innerHTML= gene_sequence[sequence];
-    });*/

@@ -7,7 +7,6 @@ ul {
 }
 
 .lista li {
-    
     border-top: 2px solid sienna;
     line-height: 2.7;
 }
@@ -16,12 +15,13 @@ ul {
   }
   
   .sequenza {
-      width: 90%;
-      height: 300px;
-      overflow: scroll;
-      display: block;
-      margin: auto;
-      border: 1px solid sienna;
+    width: 90%;
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: block;
+    margin: auto;
+    border: 1px solid sienna;
   }
 
   #btnTree {
@@ -36,4 +36,11 @@ ul {
 
   #gene_infos {
       font-size: xx-large;
+  }
+
+  #title {
+    display: flex;
+    flex-flow: row wrap;
+    font-size: 40px;
+    margin-left: 20px;
   }
