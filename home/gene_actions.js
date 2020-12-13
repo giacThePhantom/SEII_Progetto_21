@@ -2,28 +2,40 @@ const urlParams = new URLSearchParams(window.location.search);
 const gene = urlParams.get('gene');
 console.log(gene);
 
+
+function create_para(gene_info, ul){
+	let para = document.createElement('LI');
+	para.setAttribute('class', 'gene_infos');
+	para.innerText = gene_info;
+	ul.appendChild(para);
+}
+
+
+
 var title = document.getElementById("title");
 title.innerHTML=gene;
-
-//list_info= "blubbbbuzprgreng";
-//let list_info= await req_information_gene();
-//paragraph.innerHTML=list_info;
-
-var para = document.createElement("P");     
-//req_information_gene().then((ret)=>{para.innerText=ret.json(); document.body.appendChild(para);});     
 console.log('Requiring gene info');
-fetch('./api/v2/gene/' + gene).then( (ret) => {
+fetch('./api/v2/gene/' + gene + '?format=condensed').then( (ret) => {
 	console.log(ret);
-	ret.json().then((test) => {
-	console.log(test);
-	para.innerText = test.species;
-	document.body.appendChild(para);
+	ret.json().then((gene_infos) => {
+		//Viewing gene informations
+		var para = document.createElement("UL");
+		for(let temp in gene_infos){
+			create_para(gene_infos[temp], para);
+			if(temp == 'gene_tree'){
+				gene_tree_id = gene_infos[temp];
+			}
+			console.log(gene_infos[temp]);
+
+			console.log(temp);		
+		}
+		document.body.appendChild(para);
+		//Sequence view
+		
+
+		//Tree link
 	});	
 	
 	
 }).catch( error => console.error('Error in fetch' + error));
 
-//async function req_information_gene(){
-//	return fetch('//localhost:3000/api/v2/gene/'+gene)
-//   .catch( error => console.error(error) ); // If there is any error you will catch them here
-//}
