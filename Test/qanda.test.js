@@ -1,13 +1,13 @@
-const app = reqire("../qanda/qanda_core.js");
+const app = require("../qanda/qanda_core.js");
 const fetch = require("node-fetch");
 const url = "http://localhost:8000/api/v1/qanda"
 
-describe( () => {
+describe('qanda.test', () => {
 
     let server;
 
     beforeAll( () => {
-        const port = process.env.PORT || 8000;
+        const port = process.env.PORT || 8001;
         
         return new Promise( (resolve,reject) => {
             server = app.listen(port, resolve());
@@ -15,14 +15,14 @@ describe( () => {
         });
     });
 
-    afterAll( (done) => {
+    afterAll( async (done) => {
         console.log('Closing server');
-        server.close();
+        await server.close();
         done();
     });
 
     it("get single qanda", async () => {
-        expect.assertion(1);
+        expect.assertions(1);
         return await fetch(url+"/?id=5fd6487d76c3d02d137eaf2c")
             .then(r => r.json())
             .then( data => {
@@ -40,14 +40,15 @@ describe( () => {
     });
 
     it("get all qandas", async () =>{
-        expect.assertion(1);
+        expect.assertions(1);
         let response = await fetch (url)
-            expect(resp.status).toEqual(200);
+            expect(response.status).toEqual(200);
+        return response;
     });
 
     it("post a qanda", async () =>{
-        expect.assertion(1);
-        var response = fetch(url+"/",
+        expect.assertions(1);
+        var response = await fetch(url+"/",
             {
                 method : 'POST',
                 body : JSON.stringify(
@@ -68,8 +69,9 @@ describe( () => {
     });
 
     it("delete a qanda", async () => {
-        expetc.assertion(1);
-        let response = await fetch(url+"/?id=\"5fd64acd0a3a71319f752ae5\"")
-            expect(resp.status).toEqual(201);
+        expect.assertions(1);
+        let response = await fetch(url+"/?id=5fd64acd0a3a71319f752ae5")
+            expect(response.status).toEqual(200);
+        return response;
     });
 });
