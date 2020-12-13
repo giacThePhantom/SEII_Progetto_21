@@ -1,0 +1,1 @@
+node ./servercore/app.js
