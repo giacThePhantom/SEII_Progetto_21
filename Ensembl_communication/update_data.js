@@ -16,24 +16,34 @@ const ENSEMBL_API = 'https://rest.ensembl.org/'
 
 //Funzia
 module.export = {
-  update_all_genes: async ()=>{
+   update_all_genes: async ()=>{
+    let all_spicies= await get_all_species();
 
-    let all_spicies= conn.get_all_species();
     for(spicie of all_spicies){
-//      let genes = await conn.get_all_genes_for_species(spicies.name);
-      //console.log(spicie.genes);
-      if(spicie.genes.length>0)
+
+      if( spicie.genes.length>0 ){
         for(gene of spicie.genes){
           let gene_ens_version = await get_ensembl_gene_version(gene);
-          let gene_db= await get_gene_db(gene);
+          let gene_db=await get_gene_db(gene);
+          if( gene_db.id===undefined ){
+            let filtered_gene = await filtre_ensembl_gene(gene);
+            console.log(filtered_gene);
+            //insert_genes();
+          }
+          else
           if(gene_ens_version > gene_db.version){
-            console.log("C'e' da aggiornare "+gene.version);
-            update_gene(gene);
+            console.log("C'e' da aggiornare "+gene_db.version);
+            gene_to_be_saved=filtre_ensembl_gene(gene);
+            gene_to_be_saved.save();
           }
           else{
-            console.log("Non c'e' da aggiornare "+gene.version);
+            console.log("Non c'e' da aggiornare "+gene_db);
           }
         }
+      }
+      else{
+        console.log("gene non e' lungo");
+      }
     }
   }
 }
@@ -49,7 +59,7 @@ async function get_gene_db(gene){
 
 async function get_ensembl_gene_version(gene){
   return read.ensembl_get(API_ONLY_VER+gene+'?')
-    .then((ret)=>{
+  .then((ret)=>{
       ret=JSON.parse(ret.body);
       return ret.version;
     }
@@ -67,8 +77,9 @@ async function get_ensembl_gene_info(gene){
 }
 
 async function filtre_ensembl_gene(gene){
-  let gene_ens_info = get_ensembl_gene_info(gene);
-  let filtered_gene=models.genes_model;
+  let gene_ens_info = await get_ensembl_gene_info(gene);
+  let filtered_gene = new models.genes_model;
+  filtered_gene.id           = gene_ens_info.id;
   filtered_gene.version      = gene_ens_info.version;
   filtered_gene.start        = gene_ens_info.start;
   filtered_gene.end          = gene_ens_info.end;
@@ -76,13 +87,14 @@ async function filtre_ensembl_gene(gene){
   filtered_gene.chromosome   = gene_ens_info.seq_region_name;
   filtered_gene.strand       = gene_ens_info.strand;
   filtered_gene.description  = gene_ens_info.description;
-  filtered_gene.sequence     = await get_ensembl_gene_sequence();
+  filtered_gene.sequence     = await get_ensembl_gene_sequence(filtered_gene.id);
   return filtered_gene;
 }
 
 
 
 async function ensembl_get_plain(content){
+  console.log(ENSEMBL_API + content + FORMAT_JSON)
   return await got(ENSEMBL_API + content + FORMAT_JSON).catch((err) => {
     if(err.response.statusCode == 404){
       console.log('Could not find ' + ENSEMBL_API + content + FORMAT_JSON);
@@ -186,7 +198,9 @@ let get_all_species =async ()=>{
 //ACTIONS:
 
 const { MongoClient } = require("mongodb");
-const uri ='mongodb+srv://Ettore:Ettore@cluster0.lybx2.mongodb.net/gene?retryWrites=true&w=majority'
+//const uri ='mongodb+srv://Ettore:Ettore@cluster0.lybx2.mongodb.net/gene?retryWrites=true&w=majority'
+const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes';
+
 //const client = new MongoClient(uri,{useUnifiedTopology: true});
 //const dbName = "gene";
 
@@ -213,7 +227,7 @@ let update_all_genes= async ()=>{
       for(gene of spicie.genes){
         let gene_ens_version = await get_ensembl_gene_version(gene);
         let gene_db=await get_gene_db(gene);
-        if((gene_db.id===undefined)){
+        if( gene_db.id===undefined ){
           let filtered_gene = await filtre_ensembl_gene(gene);
           console.log(filtered_gene);
           //insert_genes();
