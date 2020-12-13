@@ -1,3 +1,25 @@
-#maincontent {
-    background-color: bisque;
+body {
+    background-color: rgb(196, 255, 204);
 }
+
+ul {
+    list-style: none;
+}
+
+.lista li {
+    
+    border-top: 2px solid sienna;
+    line-height: 2.7;
+}
+.slidecontainer {
+    width: 100%;
+  }
+  
+  .sequenza {
+      width: 90%;
+      height: 300px;
+      overflow: scroll;
+      display: block;
+      margin: auto;
+      border: 1px solid sienna;
+  }
