@@ -11,7 +11,6 @@
 						$('#topmenu').load('/menu/menu.html');
 				});
 		</script>
-     </script>
   </head>
 
 
@@ -19,13 +18,62 @@
     <div id="topmenu"  style="max-height:150px;height:150px;"></div>
 
     <div id="maincontent">
-		<div id="nome_gene"> Blublublule mille boleee </div>
-		<td>
-			<ul class="align-right" id="gene_list_top">
-				<button>Cliccami porcone</button>
-			</ul>
-		</td>
+			<table id="filter_options" width=50% style="margin-bottom: 5%">
 
+				<tr>
+					<td colspan="3" style="text-align:center">
+						<h2>Filter your results:</h2>
+					</td>
+				</tr>
+				<tr width=100% style="text-align:center">
+					<td>
+						<input type="text" placeholder="name filter" id="name_filter"/>
+					</td>
+					<td>
+						<input type="number" placeholder="start filter" id="start_filter" />
+					</td>
+					<td>
+						<input type="text" placeholder="chromosome filter" id="chr_filter" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align:center">
+						<button onclick="filterRes()"> Search</button>
+					</td>
+				</tr>
+			</table>
+				<table width=100% >
+					<tr>
+						<td colspan="3">
+							<div class="titles" id="namespecies">
+									<div id="sp1">Specie 1</div>
+									<div id="sp2">Specie 2</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<ul class="align-right" id="species1_list_top">
+							</ul>
+						</td>
+						<td rowspan="2">
+							<svg class="center" id="content"></svg>
+						</td>
+						<td>
+							<ul class="align-left" id="species2_list_top">
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<ul class="align-right" id="species1_list_bottom">
+							</ul>
+						</td>
+						<td>
+							<ul class="align-left" id="species2_list_bottom">
+							</ul>
+						</td>
+					</tr>
+				</table>
     </div>
     <script src="compare_actions.js" charset="utf-8"></script>
   </body>

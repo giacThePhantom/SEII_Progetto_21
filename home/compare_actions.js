@@ -37,15 +37,17 @@ function req_list_genes(){
 	})
   /* .catch( error => console.error(error) )*/; // If there is any error you will catch them here
 }
-function filterArr(name_filter,start_filter){
+function filterArr(name_filter,start_filter,chr_filter){
 	if(!start_filter)
 		start_filter=0;
 	if(!name_filter)
 		name_filter="";
-	console.log(name_filter,start_filter);
+	if(!chr_filter)
+		chr_filter="";
+	console.log(name_filter,start_filter,chr_filter);
 	console.log(all_list);
 	array_crom=all_list.filter((el)=>{
-		return el.id.startsWith(name_filter) && el.start>start_filter;
+		return el.id.startsWith(name_filter) && el.chromosome && el.chromosome.startsWith(chr_filter) && el.start>start_filter;
 	})
 	console.log(array_crom);
 	f(200,100,Math.ceil(array_crom.length/2));
@@ -53,7 +55,8 @@ function filterArr(name_filter,start_filter){
 function filterRes() {
 	let name_filter=document.getElementById("name_filter").value;
 	let start_filter=document.getElementById("start_filter").value;
-	filterArr(name_filter,start_filter);
+	let chr_filter=document.getElementById("chr_filter").value;
+	filterArr(name_filter,start_filter,chr_filter);
 }
 var f = ((width,height,sections) => {
 	let length=sections*height;
