@@ -147,9 +147,9 @@ var f = ((width,height,sections) => {
 			li1.appendChild(document.createTextNode(array_crom[i]["id"]));
 		else
 			li1.appendChild(document.createTextNode(" "));
-		li1.style.marginTop="66.25px";
+		li1.style.marginTop="66px";
 		if(i==0)
-			li1.style.marginTop="16.25px";
+			li1.style.marginTop="16px";
 		ul_sp1_top.appendChild(li1);
 
 		let li2 = document.createElement("li");
@@ -158,9 +158,9 @@ var f = ((width,height,sections) => {
 		else{
 			li2.setAttribute("class","last_element")
 		}
-		li2.style.marginTop="66.25px";
+		li2.style.marginTop="66px";
 		if(i==0)
-			li2.style.marginTop="16.25px";
+			li2.style.marginTop="16px";
 		ul_sp1_bottom.appendChild(li2);
 
 
@@ -187,9 +187,9 @@ var f = ((width,height,sections) => {
 		let li3 = document.createElement("li");
 		if(i<array_crom.length)
 			li3.appendChild(document.createTextNode(array_crom[i]["homologies"]["target_id"]));
-		li3.style.marginTop="66.25px";
+		li3.style.marginTop="66px";
 		if(i==0)
-			li3.style.marginTop="16.25px";
+			li3.style.marginTop="16px";
 		ul_sp2_top.appendChild(li3);
 
 		let li4 = document.createElement("li");
@@ -198,9 +198,9 @@ var f = ((width,height,sections) => {
 		else{
 			li4.setAttribute("class","last_element")
 		}
-		li4.style.marginTop="66.25px";
+		li4.style.marginTop="66px";
 		if(i==0)
-			li4.style.marginTop="16.25px";
+			li4.style.marginTop="16px";
 		ul_sp2_bottom.appendChild(li4);
 	}
 });
