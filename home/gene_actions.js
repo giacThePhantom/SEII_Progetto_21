@@ -73,6 +73,63 @@ function return_tree(){
         showTree.setAttribute("id", "treeRes");
         showTree.setAttribute("class", "scroll");
         document.getElementById("showT").appendChild(showTree);
+        slider= document.getElementById("treeRes");
+
+        slider.addEventListener("mousedown", e => {
+            console.log("mousedown");
+          isDown = true;
+          slider.classList.add("active");
+          startX = e.pageX - slider.offsetLeft;
+          startY = e.pageY - slider.offsetTop;
+          scrollLeft = slider.scrollLeft;
+          scrollTop = slider.scrollTop;
+            slider.style.cursor="grabbing";
+        });
+        slider.addEventListener("mouseleave", () => {
+          isDown = false;
+            slider.style.cursor="grab";
+          slider.classList.remove("active");
+        });
+        slider.addEventListener("mouseup", () => {
+          isDown = false;
+            slider.style.cursor="grab";
+            slider.classList.remove("active");
+            });
+            slider.addEventListener("mousemove", e => {
+              if (!isDown) return;
+              e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+              const y = e.pageY - slider.offsetTop;
+              const walkX = x - startX;
+              const walkY = y - startY;
+                console.log(walkY,scrollTop-walkY,walkX,scrollLeft-walkX);
+              slider.scrollLeft = scrollLeft - walkX;
+              slider.scrollTop = scrollTop - walkY;
+            });
+        
+            var viewBox = {x:0,y:0,w:width,h:height};
+            var scale = 1;
+        slider.onmousewheel = function(e) {
+            e.preventDefault();
+            var w = viewBox.w;
+            var h = viewBox.h;
+            var mx = e.offsetX;//mouse x
+            var my = e.offsetY;
+            var dw = w*Math.sign(e.deltaY)*(-0.1);
+            var dh = h*Math.sign(e.deltaY)*(-0.1);
+            var dx = dw*mx/width;
+            var dy = dh*my/height;
+            viewBox = {x:viewBox.x+dx,y:viewBox.y+dy,w:viewBox.w-dw,h:viewBox.h-dh};
+            scale = width/viewBox.w;
+            handle_text(scale)
+            svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
+        };
+
+
+
+
+
+
 
         visualizeTree(gene_tree_id);
 }
@@ -299,61 +356,14 @@ function click(d) {
       let treeID= document.getElementById("tree_id_field").value;
       visualizeTree(treeID);
   }
-  const slider = document.querySelector(".scroll");
+  var slider;
+
   let isDown = false;
   let startX;
   let startY;
   let scrollLeft;
   let scrollTop;
-  slider.addEventListener("mousedown", e => {
-      console.log("mousedown");
-    isDown = true;
-    slider.classList.add("active");
-    startX = e.pageX - slider.offsetLeft;
-    startY = e.pageY - slider.offsetTop;
-    scrollLeft = slider.scrollLeft;
-    scrollTop = slider.scrollTop;
-      slider.style.cursor="grabbing";
-  });
-  slider.addEventListener("mouseleave", () => {
-    isDown = false;
-      slider.style.cursor="grab";
-    slider.classList.remove("active");
-  });
-  slider.addEventListener("mouseup", () => {
-    isDown = false;
-      slider.style.cursor="grab";
-      slider.classList.remove("active");
-      });
-      slider.addEventListener("mousemove", e => {
-        if (!isDown) return;
-        e.preventDefault();
-          const x = e.pageX - slider.offsetLeft;
-        const y = e.pageY - slider.offsetTop;
-        const walkX = x - startX;
-        const walkY = y - startY;
-          console.log(walkY,scrollTop-walkY,walkX,scrollLeft-walkX);
-        slider.scrollLeft = scrollLeft - walkX;
-        slider.scrollTop = scrollTop - walkY;
-      });
   
-      var viewBox = {x:0,y:0,w:width,h:height};
-      var scale = 1;
-  slider.onmousewheel = function(e) {
-      e.preventDefault();
-      var w = viewBox.w;
-      var h = viewBox.h;
-      var mx = e.offsetX;//mouse x
-      var my = e.offsetY;
-      var dw = w*Math.sign(e.deltaY)*(-0.1);
-      var dh = h*Math.sign(e.deltaY)*(-0.1);
-      var dx = dw*mx/width;
-      var dy = dh*my/height;
-      viewBox = {x:viewBox.x+dx,y:viewBox.y+dy,w:viewBox.w-dw,h:viewBox.h-dh};
-      scale = width/viewBox.w;
-      handle_text(scale)
-      svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
-  };
   function handle_text(scale) {
       var nodes = slider.getElementsByClassName("node");
       for(let item of nodes){

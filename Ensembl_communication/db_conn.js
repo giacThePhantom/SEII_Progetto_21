@@ -80,5 +80,11 @@ module.exports = {
 			await to_be_inserted.save((err) => {log(err, 'Inserted correctly', 'Inserted species info');});
 		}
 		return to_be_saved;
-	}
+	},
+
+	get_treebyID:async(id)=>{
+        let tree = await models.trees_model.findOne({'id': id});
+        return tree;
+    }
+
 }

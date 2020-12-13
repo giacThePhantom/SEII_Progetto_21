@@ -47,9 +47,13 @@ const genome = require('../Ensembl_communication/Endpoints/endpoint_genome.js');
 
 app.use('/api/v2/genome', genome);
 
+const genetrees = require('../genetree/genetree.js');
 
+app.use('/api/v2/genetree', genetrees);
 
 
 
 console.log('Starting db init');
 //db_init.start();
+
+
