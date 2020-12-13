@@ -9,13 +9,23 @@
 			$('#topmenu').load('/menu/menu.html');
 		});
 	</script>
+	 <link rel="stylesheet" type="text/css" href="profile_style.css">
 	<title></title>
 </head>
 
 <body>
 	<div id="topmenu" style="margin-bottom:150px;max-height:150px"></div>
 	<div id="maincontent">
+		<h1>Profile Info</h1>
 			<table>
+				<tr>
+					<td>
+						Email:
+					</td>
+					<td>
+						<input type="text" id="email_field" name="email_field" disabled/>
+					</td>
+				</tr>
 				<tr>
 					<td>
 						Username:
@@ -25,28 +35,36 @@
 					</td>
 				</tr>
 				<tr>
-					<td>
-						Email:
-					</td>
-					<td>
-						<input type="text" id="email_field" name="email_field" />
+					<td colspan="2">
+					<hr>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						Password:
+						Nuova password:
 					</td>
 					<td>
 						<input type="text" id="password_field"  name="password_field" />
 					</td>
 				</tr>
 				<tr>
+					<td>
+						Ripeti nuova password:
+					</td>
+					<td>
+						<input type="text" id="password2_field"  name="password2_field" />
+					</td>
+				</tr>
+				<tr>
 					<td colspan="2">
-						<button onclick="updateData()">Aggiorna Dati</button>
+						<button id="submit_btn"onclick="updateData()">Aggiorna Dati</button>
 					</td>
 				</tr>
 			</table>
-			<input type="hidden" id="tokenInfo" name="tokenInfo">
+				<h1>Search history</h1>
+				<table id="search_history">
+
+				</table>
 
 	</div>
 	<script src="profilescript.js"></script>

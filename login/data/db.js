@@ -36,6 +36,7 @@ module.exports = {
 				let to_be_inserted = new models.users_model(user_info);
 				await to_be_inserted.save((err) => {console.log(err, 'Inserted correctly', 'Inserted user info');});
 			}
+			console.log("fdsgfs"+to_be_saved);
 			return to_be_saved;
 
 		},
@@ -59,13 +60,13 @@ module.exports = {
 		get_userbyID:async(id)=>{
 			let user = await models.users_model.findOne({'id': id});
 			if(user){
-				var userinfo={
-					username:user.username,
-					email:user.email,
-					admin: user.admin,
-					self: "/api/v1/users/"+user.id
-				}
-
+			var userinfo={
+				username:user.username,
+				email:user.email,
+				admin: user.admin,
+				history: user.history,
+				self: "/api/v1/users/"+user.id
+			}
 		}
 		else{
 			var userinfo=null;
