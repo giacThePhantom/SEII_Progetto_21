@@ -59,12 +59,13 @@ module.exports = {
 		get_userbyID:async(id)=>{
 			let user = await models.users_model.findOne({'id': id});
 			if(user){
-			var userinfo={
-				username:user.username,
-				email:user.email,
-				admin: user.admin,
-				self: "/api/v1/users/"+user.id
-			}
+				var userinfo={
+					username:user.username,
+					email:user.email,
+					admin: user.admin,
+					self: "/api/v1/users/"+user.id
+				}
+
 		}
 		else{
 			var userinfo=null;

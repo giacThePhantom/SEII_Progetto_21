@@ -24,9 +24,9 @@ router.post('', (req, res) => {
         username: req.body.username,
         password: req.body.password,
     };
-		console.log(user);
+	console.log(user);
     if (!user.email || typeof user.email != 'string' || !checkIfEmailInString(user.email)) {
-				console.log("errore parametri")
+		console.log("errore parametri")
         res.status(400).json({ error: 'The field "email" must be a non-empty string, in email format' });
         return;
     }
@@ -37,21 +37,21 @@ router.post('', (req, res) => {
 
 router.delete('', async(req, res) => {
     let user = {
-				id:req.body.id
+		id:req.body.id
     };
-		console.log(user);
-		let del=await db.delete_user(user.id);
-		if(del.ok){
-			if(del.n==1){
-    		res.status(201).send("eliminato "+user.id+" "+JSON.stringify(del));
-			}
-			else{
-	    		res.status(201).send("nessun utente corrispondente all'ID selezionato");
-			}
+	console.log(user);
+	let del=await db.delete_user(user.id);
+	if(del.ok){
+		if(del.n==1){
+		res.status(201).send("eliminato "+user.id+" "+JSON.stringify(del));
 		}
 		else{
-			res.status(404).send("errore durante l'eliminazione");
+			res.status(201).send("nessun utente corrispondente all'ID selezionato");
 		}
+	}
+	else{
+		res.status(404).send("errore durante l'eliminazione");
+	}
 });
 router.use('', tokenChecker);
 

@@ -228,7 +228,6 @@ module.exports = {
 			 {$project : {
 				 _id : false,
 				 end:false,
-				 chromosome:false,
 				 strand:false,
 				 sequence : false,
 				 version : false,
