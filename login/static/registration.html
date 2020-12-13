@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Registration</title>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js "></script>
+	 <script type="text/javascript">
+			 $("document").ready(function() {
+					 $('#topmenu').load('/menu/menu.html');
+			 });
+	 </script>
+	 <link rel="stylesheet" type="text/css" href="register_style.css">
+	</head>
+	<body>
+<div id="topmenu" style="max-height:150px;height:150px;"></div>
+<div id="maincontent">
+	<h1>Registration form</h1>
+	<table>
+			<tr>
+				<td>
+					Email:
+				</td>
+				<td>
+					<input type="email" id="email_field" name="email" placeholder="mario.rossi@gmail.com" required/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Username:
+				</td>
+				<td>
+					<input type="text" id="username_field" name="username" placeholder="Mario_Rossi" required/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Password:
+				</td>
+				<td>
+					<input type="password" id="password_field" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required/>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					Repeat password:
+				</td>
+				<td>
+					<input type="password" id="passwordre_field"  placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" id="submit_btn" value="Register now!" onclick="register()"/>
+				</td>
+			</tr>
+	</table>
+</form>
+<div id="info"></div>
+</div>
+<script src="registrationscript.js"></script>
+	</body>
+</html>

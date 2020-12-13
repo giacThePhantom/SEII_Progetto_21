@@ -18,7 +18,7 @@ router.post('/auth', async (req, res) => {
 });
 
 //insert a new user in the database (default admin:false)
-router.post('', (req, res) => {
+router.post('',async (req, res) => {
     let user = {
         email: req.body.email,
         username: req.body.username,
@@ -31,8 +31,12 @@ router.post('', (req, res) => {
         return;
     }
 
-    let userId = db.insert_user(user);
-    res.location("/api/v1/users/" + userId).status(201).send();
+    let userId = await db.insert_user(user);
+		if(userId){
+    	res.location("/api/v1/users/" + userId).status(201).json({ok:"User correctly registered"});
+		}else {
+			res.status(400).json({error:"This email is already in our database"})
+		}
 });
 
 router.delete('', async(req, res) => {

@@ -36,6 +36,7 @@ module.exports = {
 				let to_be_inserted = new models.users_model(user_info);
 				await to_be_inserted.save((err) => {console.log(err, 'Inserted correctly', 'Inserted user info');});
 			}
+			console.log("fdsgfs"+to_be_saved);
 			return to_be_saved;
 
 		},

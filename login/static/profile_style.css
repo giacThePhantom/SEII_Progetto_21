@@ -25,12 +25,13 @@ h1{
     padding:12px;
     font-size: 17px;
 }
-input:disabled{
+#maincontent input:disabled{
 	background-color: #ffffff;
 }
 #submit_btn:hover{
 	cursor: pointer;
-	background-color: #00ee33;
+	background-color: #227bba;
+	color: white;
 }
 
 #maincontent input{
