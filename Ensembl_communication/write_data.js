@@ -70,12 +70,12 @@ module.exports = {
 		let gene_array = [];
 		let gene_IDS = read.get_list_gene(list_gene_file);
 		////////////////// portion of code added only during debug: prevents useless downloads of data
-		let already_saved_genes=read.get_list_gene("already_saved.json");
+		/*let already_saved_genes=read.get_list_gene("already_saved.json");
 		var parsed_gene_IDS = gene_IDS.filter(function(value, index, arr){
 			 return !already_saved_genes.includes(value); //only returns elements not in already_saved_genes array
 	 });
 	 console.log("old array: "+gene_IDS.length+" new array: "+parsed_gene_IDS.length);
-	 gene_IDS=parsed_gene_IDS.slice(); //copies elements from one array to the other
+	 gene_IDS=parsed_gene_IDS.slice(); //copies elements from one array to the other*/
 	 /////////////////////////////////
 
 		let species_array = get_other_species(list_gene_file);
