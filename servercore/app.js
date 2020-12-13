@@ -52,4 +52,4 @@ app.use('/api/v2/genome', genome);
 
 
 console.log('Starting db init');
-//db_init.start();
+db_init.start();
