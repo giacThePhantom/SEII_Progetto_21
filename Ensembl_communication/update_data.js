@@ -30,19 +30,13 @@ module.export = {
             console.log(filtered_gene);
             //insert_genes();
           }
-          else
-          if(gene_ens_version > gene_db.version){
-            console.log("C'e' da aggiornare "+gene_db.version);
-            gene_to_be_saved=filtre_ensembl_gene(gene);
-            gene_to_be_saved.save();
-          }
           else{
-            console.log("Non c'e' da aggiornare "+gene_db);
+            if(gene_ens_version > gene_db.version){
+              gene_to_be_saved=filtre_ensembl_gene(gene);
+              gene_to_be_saved.save();
+            }
           }
         }
-      }
-      else{
-        console.log("gene non e' lungo");
       }
     }
   }
@@ -116,78 +110,6 @@ async function get_ensembl_gene_sequence(gene){
 
 
 
-// DEBUG:
-let see_gene_db = async ()=>{
-  let all_spicies= conn.get_all_species();
-  for (spicie of all_spicies){
-    let genes = await conn.get_all_genes_for_species(spicie.name);
-    console.log(genes);
-  }
-}
-
-let see_spicies_db = async()=>{
-  let all_spicies= conn.get_all_species();
-  console.log(all_spicies);
-}
-
-let insert_species =  async (species_info) => {
-  let to_be_saved = !(await species_alredy_saved(models.species_model, species_info));
-  if(to_be_saved){
-    let to_be_inserted = new models.species_model(species_info);
-    console.log(to_be_inserted);
-    await to_be_inserted.save((err) => {console.log(err, 'Inserted correctly', 'Inserted species info');});
-  }
-  return to_be_saved;
-}
-
-let insert_genes =  async (genes_info) => {
-  let to_be_saved = !(await genes_alredy_saved(models.genes_model, genes_info));
-  if(to_be_saved){
-    let to_be_inserted = new models.genes_model(genes_info);
-    console.log(to_be_inserted);
-    await to_be_inserted.save((err) => {console.log(err, 'Inserted correctly', 'Inserted species info');});
-  }
-  return to_be_saved;
-}
-
-async function species_alredy_saved(model, species_info){
-	let data = await model.find({'name': species_info.name});
-	let res;
-	if(data.length > 0){
-		res = true;
-	}
-	else{
-		res = false;
-	}
-	return res;
-}
-
-async function genes_alredy_saved(model, genes_info){
-	let data = await model.find({'id': genes_info.id});
-	let res;
-	if(data.length > 0){
-		res = true;
-	}
-	else{
-		res = false;
-	}
-	return res;
-}
-
-
-
-let get_all_species =async ()=>{
-  let species_found = await models.species_model.find({}, {_id : false});
-  return species_found;
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -221,8 +143,6 @@ let update_all_genes= async ()=>{
   let all_spicies= await get_all_species();
 
   for(spicie of all_spicies){
-//    let genes = await conn.get_all_genes_for_species(spicie.name);
-
     if( spicie.genes.length>0 ){
       for(gene of spicie.genes){
         let gene_ens_version = await get_ensembl_gene_version(gene);
@@ -230,7 +150,6 @@ let update_all_genes= async ()=>{
         if( gene_db.id===undefined ){
           let filtered_gene = await filtre_ensembl_gene(gene);
           console.log(filtered_gene);
-          //insert_genes();
         }
         else
         if(gene_ens_version > gene_db.version){
@@ -249,39 +168,3 @@ let update_all_genes= async ()=>{
   }
 }
 update_all_genes();
-
-
-
-/*
-let specie_inserted = new models.species_model({name: "mucca", genes:['ENSNLEG00000002139']});
-insert_species(specie_inserted);
-
-let gene_inserted = new models.genes_model({
-  id:'ENSG00000157764',
-  version:'14',
-  start: 12,
-  end: 13,
-  biotype:'eheh',
-  chromosome:'21',
-  strand:34,
-  description:"e' una prova",
-  sequence:'LOLLONE',
-  gene_tree:'questo'
-});
-insert_genes(gene_inserted);
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
