@@ -1,13 +1,9 @@
 const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
 const conn = require('./db_conn')
-<<<<<<< HEAD
-const uri = 'mongodb://localhost:27017/genes?retryWrites=true&w=majority'
-
-=======
 //const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
 const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes';
->>>>>>> pagina_principale
+
 
 var express    = require('express');
 var bodyParser = require('body-parser');
@@ -21,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use('/', express.static('./login/static', {fallthrough : true}));
 app.use('/menu/',express.static('./menu', {fallthrough : true}));
 app.use('/',express.static('./home', {fallthrough : true}));
+app.use('/', express.static('./qanda/static', {fallthrough : true}));
 
 
 //Start the database
@@ -51,6 +48,10 @@ app.use('/api/v2/gene', gene);
 const genome = require('../Ensembl_communication/Endpoints/endpoint_genome.js');
 
 app.use('/api/v2/genome', genome);
+
+const qanda = require('../qanda/qanda.js');
+
+app.use('/api/v2/qanda', qanda);
 
 
 

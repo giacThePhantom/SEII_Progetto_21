@@ -5,7 +5,7 @@ const db = require('./db.js');
 //get all the qanda in the collection
 router.get('',async (req,res) => {
     console.log('\nGET request received\nLooking for ID ...');
-    
+
     if(!req.query.id){
         console.log("not found\nGET all qanda");
         let qandas = await db.qandas();
@@ -15,7 +15,6 @@ router.get('',async (req,res) => {
             res.status(404).json({message : 'Qandas not found'});
         }
     }else{
-
         console.log("found...\nLooking for qanda with ID : ",req.query.id," ...\n\n");
         let qanda = await db.get_qanda_by_id(req.query.id);
         if(qanda){
@@ -46,14 +45,14 @@ router.post('', async (req,res) => {
         console.log('Parameter error, all parameters need to be string');
         res.status(400).json({message : 'All parameters need to be string'});
     }
-    
+
 });
 
 //delete an existing qanda
 router.delete('', async(req,res) => {
 
     let qanda_id = req.query.id;    //non prende l'id, { id : undefined };
-    
+
     console.log("qanda ID : ",qanda_id);
     let del = await db.delete_qanda(qanda_id);
     if(del.ok){

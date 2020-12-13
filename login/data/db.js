@@ -65,13 +65,7 @@ module.exports = {
 					admin: user.admin,
 					self: "/api/v1/users/"+user.id
 				}
-			}
-<<<<<<< HEAD
-			else{
-				var userinfo=null;
-			}
-				return userinfo;
-=======
+
 		}
 		else{
 			var userinfo=null;
@@ -91,6 +85,5 @@ module.exports = {
 
 			}
 			console.log(self+" "+id+"\n"+res);
->>>>>>> pagina_principale
 		}
 };

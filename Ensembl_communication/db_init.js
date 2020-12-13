@@ -40,13 +40,8 @@ module.exports = {
 	start: async () => {
 		console.log('starting');
 		console.log('created connection');
-<<<<<<< HEAD
-		//build_species_data();
-		//build_gene_data();
-=======
 		await build_species_data();
 		console.log('Written all species data');
 		build_gene_data();
->>>>>>> pagina_principale
 	}
 }
