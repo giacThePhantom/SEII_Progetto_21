@@ -5,8 +5,6 @@ Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021
 * Filippo Gastaldello
 * Nicola Giuseppe Marchioro
 * Elisa Pettinà
-<<<<<<< HEAD
-
 ## Product Backlog
 
 | Name | User story | How to Demo | Importance | Estimate |
