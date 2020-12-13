@@ -203,6 +203,12 @@ var f = ((width,height,sections) => {
 			li4.style.marginTop="16px";
 		ul_sp2_bottom.appendChild(li4);
 	}
+
+	let top_l=document.getElementById("left_top_cell");
+	let top_r=document.getElementById("right_top_cell");
+	let max= (top_l.offsetWidth>top_r.offsetWidth)?top_l.offsetWidth:top_r.offsetWidth;
+	top_l.width=max;
+	top_r.width=max;
 });
 /*rndwidth=(Math.floor(Math.random() * 10)+10)*9;
 rndheight=(Math.floor(Math.random() * 5)+5)*9;
