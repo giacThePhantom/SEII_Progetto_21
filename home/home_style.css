@@ -1,15 +1,3 @@
-.button {
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  background-color: green;
-}
 
 .test{
   text-align: center;
@@ -20,4 +8,35 @@
 
 body{
   background-color: white;
+}
+
+#bgimg{
+  z-index: 1;
+}
+
+#maincontent img{
+  transition: background-image 30s;
+  position: fixed;
+  background-image: linear-gradient(to bottom right, lightgray, lightgray);
+  z-index: 5;
+  border-radius: 50%;
+  border: 1px solid white;
+  display: block;
+  margin-top: 3cm;
+  margin-right: -7%;
+  margin-left: -7%;
+  width: 15%;
+}
+
+img:hover {
+  box-shadow: 0 0 3px 3px rgba(0, 140, 186, 0.5);
+}
+
+
+
+select{
+  color: black;
+  margin: 25pt;
+  padding: 10px 50px;
+
 }

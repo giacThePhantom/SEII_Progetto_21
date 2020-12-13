@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Compare genes</title>
+    <link rel="stylesheet" type="text/css" href="compare_style.css">
+    <script src="js_colorimage.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js "></script>
+		<script type="text/javascript">
+				$("document").ready(function() {
+						$('#topmenu').load('/menu/menu.html');
+				});
+		</script>
+  </head>
+
+
+  <body>
+    <div id="topmenu"  style="max-height:150px;height:150px;"></div>
+
+    <div id="maincontent">
+			<table id="filter_options" width=50% style="margin-bottom: 5%">
+
+				<tr>
+					<td colspan="3" style="text-align:center">
+						<h2>Filter your results:</h2>
+					</td>
+				</tr>
+				<tr width=100% style="text-align:center">
+					<td>
+						<input type="text" placeholder="name filter" id="name_filter"/>
+					</td>
+					<td>
+						<input type="number" placeholder="start filter" id="start_filter" />
+					</td>
+					<td>
+						<input type="text" placeholder="chromosome filter" id="chr_filter" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align:center">
+						<button onclick="filterRes()"> Search</button>
+					</td>
+				</tr>
+			</table>
+				<table width=100%>
+					<tr>
+						<td colspan="3">
+							<div class="titles" id="namespecies">
+									<div id="sp1">Specie 1</div>
+									<div id="sp2">Specie 2</div>
+						</td>
+					</tr>
+					</table>
+					<table>
+					<tr>
+						<td id="left_top_cell">
+							<ul class="align-right" id="species1_list_top">
+							</ul>
+						</td>
+						<td rowspan="2">
+							<svg class="center" id="content"></svg>
+						</td>
+						<td id="right_top_cell">
+							<ul class="align-left" id="species2_list_top">
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<ul class="align-right" id="species1_list_bottom">
+							</ul>
+						</td>
+						<td>
+							<ul class="align-left" id="species2_list_bottom">
+							</ul>
+						</td>
+					</tr>
+				</table>
+    </div>
+    <script src="compare_actions.js" charset="utf-8"></script>
+  </body>
+</html>

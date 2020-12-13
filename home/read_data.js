@@ -8,19 +8,25 @@ const FORMAT_JSON = ';content-type=application/json'	// Format API request in js
 
 /*
  * Internal function to process data in gene tree
- *
+ * ??????????????????????
  */
-function get_gene_tree_rec(children_array){
-	let children_response =[];
-	if(children_array){
-		for(let child of children_array){
-			let child_body={'root_species': child.taxonomy.scientific_name};
-			child_body.children=get_gene_tree_rec(child.children);
-			children_response.push(child_body);
+function get_gene_tree_rec(response){
+	console.log('In gene tree rec');
+	let data = {scientific_name: '', children: []};
+	if(response.children){
+		//data.children = [];
+		for(let child of response.children){
+			console.log('child');
+			console.log(child);
+			data.children.push({scientific_name: child.taxonomy.scientific_name, children: get_gene_tree_rec(child.children)});
+			console.log(child.children);
+			//get_gene_tree_rec(child.children, data.children[data.children.length - 1]);
 		}
+	return data.children;
 	}
-	return children_response;
+	return [];
 }
+
 
 module.exports = {
 	/*
@@ -30,7 +36,7 @@ module.exports = {
 	 */
 	get_species_from_mart_export: (file_name) => {
 		let correct_name = file_name.split('.')[0]; 			// Delete txt extension
-		correct_name = correct_name.split('_')[2]+"_"+correct_name.split('_')[3];			// Delete mart_export
+		correct_name = correct_name.split('_')[2];			// Delete mart_export
 		return correct_name;
 	},
 
@@ -51,6 +57,7 @@ module.exports = {
 			file_data.shift();		   // Delete first element (not a gene ID)
 			file_data.pop();    		   // Delete last empty element
 		}
+		shuffle(file_data);
 		return file_data;
 	},
 
@@ -60,8 +67,8 @@ module.exports = {
 	 * @return {String} the request.
 	 */
 	ensembl_get: async (content) => {
-		return await got(ENSEMBL_API + content.replace("\r","") + FORMAT_JSON).catch((err) => {
-			if(err.response.statusCode >= 400  ){
+		return await got(ENSEMBL_API + content + FORMAT_JSON).catch((err) => {
+			if(err.response.statusCode == 404){
 				console.log('Could not find ' + ENSEMBL_API + content + FORMAT_JSON);
 			}
 			else throw err;
@@ -86,9 +93,6 @@ module.exports = {
 		let ret = []
 		let temp = directory.readSync();
 		while(temp != null){
-				////////////////// portion of code added only during debug: prevents useless downloads of data
-			if(temp.name.endsWith("txt"))
-			//////////////////////
 			ret.push(temp.name);
 			temp = directory.readSync();
 		}
@@ -104,9 +108,7 @@ module.exports = {
 	get_gene_info: (gene_information) => {
 		let temp_json = JSON.parse(gene_information);
 		let gene = {};
-		console.log("getting gene "+temp_json.id);
 		gene.id = temp_json.id;
-		gene.species=temp_json.species,
 		gene.version = temp_json.version;
 		gene.start = temp_json.start;
 		gene.end = temp_json.end;
@@ -143,16 +145,10 @@ module.exports = {
 		let response_json = JSON.parse(response);
 		let data = {};
 		data.id = response_json.id;
-		data.root_species = response_json.tree.taxonomy.scientific_name;
-		try{
-			data.children = get_gene_tree_rec(response_json.tree.children);
-		}catch{
-			console.log(data.id+" depth greater than 50");
-			data.id="_"+data.id;
-		}
-
-		//inserimento nel database
-		return data;
+		response_json = response_json.tree;
+		data.children = [];
+		data.root_species = response_json.taxonomy.scientific_name;
+		return get_gene_tree_rec(response_json);
 	}
 
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('./db.js');
+const tokenChecker = require('./tokenchecker.js');
 
 
 //API used during the test phase, return the entire collection of users
@@ -12,19 +13,10 @@ router.get('',async (req, res) => {
 router.post('/auth', async (req, res) => {
 	console.log("auth richiesta");
 		let user= await db.authenticate(req.body.email,req.body.password);
+		console.log("userrrrrrrrrrrrrr.\n"+JSON.stringify(user));
     res.status(200).json(user);
 });
 
-//get user info by id
-router.get('/:id', async (req, res) => {
-	let user = await db.get_userbyID(req.params.id);
-	console.log(user);
-	if(user)
-		res.status(200).json(user);
-	else{
-		res.status(404).json({message:"user not found"});
-	}
-});
 //insert a new user in the database (default admin:false)
 router.post('', (req, res) => {
     let user = {
@@ -61,9 +53,29 @@ router.delete('', async(req, res) => {
 		res.status(404).send("errore durante l'eliminazione");
 	}
 });
+router.use('', tokenChecker);
 
-
-
+//get user info by id
+router.get('/:id', async (req, res) => {
+	let user = await db.get_userbyID(req.params.id);
+	console.log(user);
+	if(user)
+		res.status(200).json(user);
+	else{
+		res.status(404).json({message:"user not found"});
+	}
+});
+router.post('/updateInfo', (req, res) => {
+    let user = {
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
+				id: req.body.self
+    };
+		console.log(user);
+    let userId = db.update_info(req.body.email,req.body.username,req.body.password,req.body.self);
+    res.status(201).send();
+});
 function checkIfEmailInString(text) {//checks wether the string is in a valid email format
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(text);

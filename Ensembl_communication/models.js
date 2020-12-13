@@ -2,11 +2,17 @@ const mongoose = require('mongoose')
 
 const { Schema } = mongoose;
 
+
+mongoose.set('useCreateIndex', true); //avoids deprecation error for mongodb
+
 /*
  * Schema of species
  */
 const species = new Schema({
-	name: String,
+	name: {
+		type : String,
+		unique : true
+	},
 	genes: [String]
 })
 
@@ -14,7 +20,11 @@ const species = new Schema({
  * Schema of genes
  */
 const gene = new Schema({
-	id: String,
+	id: {
+		type : String,
+		unique : true
+	},
+	species: String,
 	version: Number,
 	start: Number,
 	end: Number,
@@ -36,12 +46,11 @@ const gene = new Schema({
 const gene_tree = new Schema({
 	id: String,
 	root_species: String,
-	children: [{
-		scientific_name: String,
-		children: [{}]
-	}]
+	children:[]
 });
-
+/*
+ * Schema of user
+ */
 const user= new Schema({
 	id: String,
 	email: String,
@@ -57,6 +66,9 @@ const user= new Schema({
 		}]
 });
 
+/*
+ * Schema of Q&A
+ */
 const qanda= new Schema({
 	id: String,
 	questionAuthor: String,
@@ -67,7 +79,7 @@ const qanda= new Schema({
 
 module.exports = {
 	genes_model: mongoose.model('gene_info', gene),
-	gene_trees: mongoose.model('gene_tree', gene_tree),
+	trees_model: mongoose.model('gene_tree', gene_tree),
 	species_model: mongoose.model('species', species),
 	users_model: mongoose.model('user',user),
 	qandas_model:mongoose.model('qanda',qanda)
