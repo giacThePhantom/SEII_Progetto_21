@@ -34,8 +34,9 @@ ul {
     background-color: lightblue;
   }
 
-  #gene_infos {
-      font-size: xx-large;
+  .gene_infos {
+      font-size: large;
+
   }
 
   #title {
@@ -44,3 +45,35 @@ ul {
     font-size: 40px;
     margin-left: 20px;
   }
+
+  .node {
+    cursor: pointer;
+}
+
+.node circle {
+fill: #fff;
+stroke: steelblue;
+stroke-width: 3px;
+}
+
+.node text { font: 12px sans-serif; }
+.node text:hover{
+font: 50px sans-serif;
+}
+.link {
+fill: none;
+stroke: #ccc;
+stroke-width: 3px;
+}
+#treeRes{
+min-height: 1000px;
+min-width: 1000px;
+max-height: 1000px;
+width: 98%;
+border: 1;
+border: 1px solid black;
+
+cursor: grab;
+overflow: hidden;
+}
+
