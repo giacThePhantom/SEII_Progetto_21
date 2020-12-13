@@ -27,30 +27,31 @@ async function qanda_already_saved(model, qanda_info){
 module.exports = {
     qandas:qandas,
         insert_qanda:async(qanda_info) => {
-            qanda_info.id = await models.qandas_model.find({}).count();
             let to_be_saved = !(await qanda_already_saved(models.qandas_model,qanda_info));
             if(to_be_saved){
                 let to_be_inserted = await new models.qandas_model(qanda_info);
-                await to_be_inserted.save((err) => {console.log(err,'Inserted correctly','inserted qanda info');});
-                return qanda_info.id;
+                await to_be_inserted.save((err) => {console.log(err,'inserted qanda info');});
+                return to_be_inserted._id;
             }else{
                 return to_be_saved;
             }
         },
         delete_qanda:async(id) => {
-            let data = models.qandas_model.deleteOne({'id':id});
+            console.log("DELETE request received for ID : ",id);
+            let data = models.qandas_model.deleteOne({'_id':id});
+            console.log(data, "\n\n");
             return data;
         },
         get_qanda_by_id:async(id) => {
-            let qanda = await models.qandas_model.findOne({'id':id});
+            let qanda = await models.qandas_model.findOne({'_id':id});
             if(qanda){
                 var qanda_info = {
-                    id: qanda.id,
+                    _id: qanda._id,
                     questionAuthor: qanda.questionAuthor,
                     answerAuthor: qanda.answerAuthor,
                     questionText: qanda.questionText,
                     answerText: qanda.answerText,
-                    self: "api/v1/qanda/"+qanda.id
+                    self: "api/v1/qanda/"+qanda._id
                 }
             }else{
                 var qanda_info = null;

@@ -4,28 +4,32 @@ const db = require('./db.js');
 
 //get all the qanda in the collection
 router.get('',async (req,res) => {
-    console.log('get \'/\' received');
-    let qandas = await db.qandas();
-    if(qandas){
-        res.status(200).json(qandas);
+    console.log('\nGET request received\nLooking for ID ...');
+    
+    if(!req.query.id){
+        console.log("not found\nGET all qanda");
+        let qandas = await db.qandas();
+        if(qandas){
+            res.status(200).json(qandas);
+        }else{
+            res.status(404).json({message : 'Qandas not found'});
+        }
     }else{
-        res.status(404).json({message : 'Qandas not found'});
-    }
-});
 
-//get qanda info by id
-router.get('/:id',async (req,res) => {
-    let qanda = await db.get_qanda_by_id(req.params.id);
-    console.log(qanda);
-    if(qanda){
-        res.status(200).json(qanda);
-    }else{
-        res.status(404).json({message : 'qanda not found'});
+        console.log("found...\nLooking for qanda with ID : ",req.query.id," ...\n\n");
+        let qanda = await db.get_qanda_by_id(req.query.id);
+        if(qanda){
+            console.log(qanda);
+            res.status(200).json(qanda);
+        }else{
+            res.status(404).json({message : 'qanda not found\n'});
+        }
     }
 });
 
 //insert a new qanda in the db
 router.post('', async (req,res) => {
+    console.log("\n\nPOST request received\n");
     let qanda = {
         questionAuthor: req.body.questionAuthor,
         answerAuthor: req.body.answerAuthor,
@@ -37,7 +41,7 @@ router.post('', async (req,res) => {
     if(typeof(qanda.questionAuthor) == "string" && typeof(qanda.answerAuthor) == "string" && typeof(qanda.questionText) == "string" && typeof(qanda.answerText) == "string"){
         let qanda_id = await db.insert_qanda(qanda); //insert_qanda non ritorna id, giusto?
         res.location('/api/v1/qanda/'+ qanda_id).status(201).send();
-        console.log('inserted qanda with id',qanda_id);
+        console.log('Inserted qanda with id',qanda_id, "\n");
     }else{
         console.log('Parameter error, all parameters need to be string');
         res.status(400).json({message : 'All parameters need to be string'});
@@ -47,14 +51,14 @@ router.post('', async (req,res) => {
 
 //delete an existing qanda
 router.delete('', async(req,res) => {
-    let qanda = {
-        id : req.body.id
-    }
-    console.log(qanda);
-    let del = await db.delete_qanda(qanda.id);
+
+    let qanda_id = req.query.id;    //non prende l'id, { id : undefined };
+    
+    console.log("qanda ID : ",qanda_id);
+    let del = await db.delete_qanda(qanda_id);
     if(del.ok){
         if(del.n==1){
-            res.status(201).send('Eliminato '+qanda.id+' '+JSON.stringify(del));
+            res.status(201).send('Eliminato '+qanda_id+' '+JSON.stringify(del));
         }else{
             res.status(201).send('Nessuna qanda corrispondente all\'ID passato');
         }
