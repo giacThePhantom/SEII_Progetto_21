@@ -58,11 +58,11 @@ function return_sequence(){
     seqSlide.setAttribute("id", "seqq");
     
 
-    fetch('./api/v2/sequence/gene/' + gene).then( (ret) => {
+    fetch('./api/v2/gene/sequence/' + gene).then( (ret) => {
         console.log(ret);
         ret.json().then((gene_sequence) => {
-        seqSlide.innerHTML= gene_sequence[sequence];
-        });
+            seqSlide.innerHTML= gene_sequence["sequence"];
+            });
     }).catch( error => console.error('Error in fetch' + error));
 
     list.appendChild(seqSlide);
@@ -71,3 +71,10 @@ function return_sequence(){
 function makeSlider(){
 
 }
+
+
+
+
+/*ret.json().then((gene_sequence) => {
+    seqSlide.innerHTML= gene_sequence[sequence];
+    });*/

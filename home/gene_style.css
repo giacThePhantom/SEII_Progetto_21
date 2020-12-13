@@ -23,3 +23,17 @@ ul {
       margin: auto;
       border: 1px solid sienna;
   }
+
+  #btnTree {
+    padding: 5px 20px;
+    background-color: lightblue;
+  }
+
+  #btnSeq{
+    padding: 5px 20px;
+    background-color: lightblue;
+  }
+
+  #gene_infos {
+      font-size: xx-large;
+  }
