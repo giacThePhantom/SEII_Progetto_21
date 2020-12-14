@@ -1,36 +1,7 @@
 const fetch = require("node-fetch");
-const url = "http://localhost:3000/api/v2/species"
+const url = "https://se-2-progetto-21.herokuapp.com/api/v2/species"
 
 describe('species.test', () => {
-
-    let server;
-
-    beforeAll( () => {
-        const port = process.env.PORT || 3000;
-
-        // Promisifying app.listen and return promise,
-        // letting Jest wait for its resolution before starting tests.
-        // https://github.com/nodejs/node/issues/21482
-        // https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Promise
-        return new Promise( (resolve, reject) => {
-		console.log("Test");
-		console.log("app");
-            server = app.listen(port, resolve());
-		console.log(server);
-            console.log(`Server listening on port ${port}`);
-        });
-
-    });
-
-    afterAll( (done) => {
-        // Notifying Jest by calling done() in the callback of the close method.
-        // No promise used here.
-        // https://github.com/visionmedia/supertest/issues/520
-        console.log(`Closing server`);
-	return new Promise( (resolve, reject) => {
-		server.close(resolve());
-	});
-    });
 	it("get species", () => {
 		expect.assertions(1);
 
