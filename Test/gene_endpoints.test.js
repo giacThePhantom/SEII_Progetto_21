@@ -79,14 +79,3 @@ describe('gene-api.test', () => {
                 expect(resp.status).toEqual(404);
     });
 })
-
-/*
-            gene/nonexistinggene ok
-            gene/nonexistinggene?format=condensed
-            gene/nonexistinggene?format=full
-            gene/ENSMUSG00000118659
-            gene/ENSMUSG00000118659?format=condensed
-            gene/ENSMUSG00000118659?format=full
-            gene/sequence/nonexistinggene
-            gene/sequence/ENSMUSG00000118659*/
-
