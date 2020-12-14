@@ -150,14 +150,14 @@ describe('genome.test', () => {
 		expect.assertions(1);
 		return fetc(url + 'compara?species1=nonexistingspecies1&species2=mus_musculus&chr=B').then(r => r.json()).then(data => {
 			expect(data).toStrictEqual({
-				error:"Genome of species: nonexistingspecies1 exists"
+				error:"Chromosome: B doesn't exist";
 			});
 		});
 	});
 
-	it('genome compara nonexistingspecies1 with mus_musculus', () => {
+	it('genome compara mus_musculus with rattus_norvegicus', () => {
 		expect.assertions(1);
-		return fetc(url + 'compara?species1=nonexistingspecies1&species2=mus_musculus').then(r => r.json()).then(data => {
+		return fetc(url + 'compara?species1=mus_musculus&species2=rattus_norvegicus&chr=1').then(r => r.json()).then(data => {
 			expect(data).toStrictEqual({
 				error:"Genome of species: nonexistingspecies1 exists"
 			});
