@@ -20,6 +20,7 @@ var title = document.getElementById("title");
 title.innerHTML=gene;
 console.log('Requiring gene info');
 let list = document.createElement("UL");
+var gene_tree_id=null;
 fetch('./api/v2/gene/' + gene + '?format=condensed').then( (ret) => {
 	console.log(ret);
 	ret.json().then((gene_infos) => {
@@ -54,20 +55,29 @@ fetch('./api/v2/gene/' + gene + '?format=condensed').then( (ret) => {
 			 
 
 			console.log(temp);		
-		}
-        document.body.appendChild(list);
+        }
         
+        document.body.appendChild(list);
         //GENE TREE
-        create_para("<button id= \"btnTree\", onclick= \"return_tree()\"> Tree </button> <div id=\"showT\"> </div>", "", list);
+        if (!gene_tree_id){
+            create_para("<button class= \"listbuttons\", id= \"noTree\", onclick= \"return_noTreeAlert()\"> Tree </button>", "", list);
+            
+        }
+        else 
+            create_para("<button class= \"listbuttons\", id= \"btnTree\", onclick= \"return_tree()\"> Tree </button> <div id=\"showT\"> </div>", "", list);
         
         //GENE SEQUENCE
-        create_para("<button id= \"btnSeq\", onclick= \"return_sequence()\"> Sequence </button>", "", list);
+        create_para("<button class= \"listbuttons\", id= \"btnSeq\", onclick= \"return_sequence()\"> Sequence </button>", "", list);
            
         
 	});	
 	
 	
 }).catch( error => console.error('Error in fetch' + error));
+
+function return_noTreeAlert(){
+    alert("Sorry, we don't have any information about this gene gene's tree in our database");
+}
 
 function return_tree(){
     //expand the entire tree
@@ -152,7 +162,7 @@ function return_tree(){
             handle_text(scale)
             svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
         };
-
+        
         visualizeTree(gene_tree_id);
 }
 
@@ -222,9 +232,8 @@ function click(d) {
   var margin = {top: 20, right: 120, bottom: 20, left: 120};
   width = 10000 - margin.right - margin.left;
   height = 10000 - margin.top - margin.bottom;
+
   function visualizeTree(treeID){
-  
-  
   i = 0, duration=1;
   
   tree = d3.layout.tree()
@@ -301,8 +310,7 @@ function click(d) {
         .text(function(d) { return d.root_species; })
         .style("fill-opacity", 1);
   
-  
-  
+
       // Transition nodes to their new position.
     var nodeUpdate = node.transition()
         .duration(duration)

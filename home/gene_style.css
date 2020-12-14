@@ -34,6 +34,11 @@ ul {
     background-color: lightblue;
   }
 
+  .listbuttons{
+    padding: 5px 20px;
+    background-color: lightblue;
+  }
+
   .gene_infos {
       font-size: large;
 
@@ -44,6 +49,10 @@ ul {
     flex-flow: row wrap;
     font-size: 40px;
     margin-left: 20px;
+  }
+
+  #noTree {
+      font:italic;
   }
 
   .node {
