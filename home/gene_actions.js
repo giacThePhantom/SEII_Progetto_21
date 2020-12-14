@@ -92,16 +92,15 @@ function return_tree(){
     btn_root.innerHTML="View root";
     btn_root.setAttribute("id", "btn_root");
     btn_root.setAttribute("class", "button");
+    btn_root.setAttribute("onclick", "recenter()");
 
     //collapse root
     var btn_collapse = document.createElement("BUTTON");
     btn_collapse.innerHTML="Collapse tree";
     btn_collapse.setAttribute("id", "btn_coll");
     btn_collapse.setAttribute("class", "button");
-    btn_collapse.setAttribute("onclick","collapse(root)")
+    btn_collapse.setAttribute("onclick","collapseAll(root)")
    
-
-    
 
     document.getElementById("showT").appendChild(btn_expand);
     document.getElementById("showT").appendChild(btn_root);
@@ -261,6 +260,11 @@ function click(d) {
       duration=200;
   });
   }
+
+  function recenter (){
+    slider.scrollTo((root.x0-slider.offsetWidth/2),(root.y0-slider.offsetHeight/2));
+  }
+
   function update(source) {
   
     // Compute the new tree layout.
