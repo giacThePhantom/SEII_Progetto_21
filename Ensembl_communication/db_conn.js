@@ -51,7 +51,7 @@ module.exports = {
 	 * @return {Boolean} If the data has been stored.
 	 */
 	get_db_genes: async (species) => {
-		return await models.genes_model.find({"target_species":species}, {id : true});
+		return await models.genes_model.find({"species":species}, {id : true});
 	},
 
 	insert_gene: async (gene_info) => {
