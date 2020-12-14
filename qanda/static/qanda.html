@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>FAQ</title>
+    <link rel="stylesheet" type="text/css" href="qanda.css">
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js "></script>
+		<script type="text/javascript">
+        $("document").ready(function() {
+            $('#topmenu').load('/menu/menu.html');
+        });
+    </script>
+  </head>
+
+  <body>
+		<div id="topmenu"  style="max-height:150px;height:150px;"></div>
+		<div id="maincontent">
+			<ul id="faqcontainer">
+			</ul>
+			<h1>Submit your question<h1>
+			<table id="faqform" width=50%>
+				<tr>
+					<td>
+						<input type="text" id="name_field" placeholder="name"/>
+					</td>
+					<td>
+						<input type="text" id="surname_field"  placeholder="surname"/>
+				</td>
+				</tr>
+				<tr>
+				<td colspan="2">
+			<input type="email" id="email_field"  placeholder="email"/>
+			</td>
+				</tr>
+				<tr>
+				<td colspan="2">
+					<textarea id="question_field" ></textarea>
+				</td>
+				</tr>
+				<tr>
+				<td colspan="2">
+					<button onclick="askQuestion()">Ask a question</button>
+				</td>
+				</tr>
+			</table>
+	<script src="qandascript.js"></script>
+  </body>
+</html>

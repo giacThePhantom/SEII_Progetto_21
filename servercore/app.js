@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
-const conn = require('./db_conn')
 //const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
-const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes';
-
+const uri='mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?authSource=admin&replicaSet=atlas-12eua9-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'
 var express    = require('express');
 var bodyParser = require('body-parser');
 
@@ -16,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use('/', express.static('./login/static', {fallthrough : true}));
 app.use('/menu/',express.static('./menu', {fallthrough : true}));
 app.use('/',express.static('./home', {fallthrough : true}));
+app.use('/', express.static('./qanda/static', {fallthrough : true}));
 
 
 //Start the database
@@ -47,6 +46,10 @@ const genome = require('../Ensembl_communication/Endpoints/endpoint_genome.js');
 
 app.use('/api/v2/genome', genome);
 
+const qanda = require('../qanda/qanda.js');
+
+app.use('/api/v2/qanda', qanda);
+
 const genetrees = require('../genetree/genetree.js');
 
 app.use('/api/v2/genetree', genetrees);
@@ -54,6 +57,6 @@ app.use('/api/v2/genetree', genetrees);
 
 
 console.log('Starting db init');
-//db_init.start();
+db_init.start();
 
 

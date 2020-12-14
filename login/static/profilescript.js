@@ -1,4 +1,58 @@
 let tokenInfo = JSON.parse(window.localStorage.getItem("tokenInfo"));
+
+function history_element_parse(element){
+	var ret;
+	if(element.startsWith("/api/v1/gene/")){
+		ret="Gene ID: " + element.replace("/api/v1/gene/","");
+	}else if (element.startsWith("/api/v1/species/")) {
+		ret= "Species: " + element.replace("/api/v1/species/","");
+	}else if (element.startsWith("/compara?")) {
+			ret= "Compara: " + element.replace("/compara?","").replace("specie1=","").replace("&specie2="," e ");
+	}else {
+		ret=element;
+	}
+	return ret;
+}
+
+async function deleteUser(){
+	console.log(tokenInfo.self.substring(tokenInfo.self.lastIndexOf("/")+1));
+	await fetch('../api/v1/users',{
+		method:'delete',
+		headers: {
+		 'Content-Type': 'application/json'
+	 },
+	 body:JSON.stringify({token:tokenInfo,id:tokenInfo.self.substring(tokenInfo.self.lastIndexOf("/")+1)})
+ }).then(()=>{
+	 window.location="/home.html";
+ 		window.localStorage.removeItem("tokenInfo")
+ });
+}
+
+function parseHistory(history_array,table){
+	if(history_array.length==0){
+		let row=table.insertRow();
+		row.innerHTML="<td> Nessun elemento nella cronologia ricerche </td>";
+	}
+	else{
+		var last_child;
+		history_array.forEach(element =>{
+				let row=table.insertRow();
+				let cell=row.insertCell();
+				let a = document.createElement("a");
+				a.href=element;
+				a.innerHTML=history_element_parse(element);
+				cell.appendChild(a);
+
+
+				row=table.insertRow();
+				cell=row.insertCell();
+				let hr = document.createElement("hr");
+				cell.appendChild(hr);
+				last_child= row;
+		});
+		table.getElementsByTagName("tbody")[0].removeChild(table.getElementsByTagName("tbody")[0].lastElementChild)
+	}
+}
 function getUserInfo(){
 	//console.log(tokenInfo.self+"?token="+tokenInfo.token);
 	try{
@@ -7,9 +61,11 @@ function getUserInfo(){
 	.then(function(data){
 		let username=document.getElementById("username_field");
 		let email=document.getElementById("email_field");
+		let search_history=document.getElementById("search_history");
 		console.log(data);
 		username.value=data.username;
 		email.value=data.email;
+		parseHistory(data.history,search_history)
 		if(!data.username || !data.email)
 			throw data.message
 		return;
@@ -28,10 +84,16 @@ function updateData(){
 	let username=document.getElementById("username_field").value;
 	let email=document.getElementById("email_field").value;
 	let password=document.getElementById("password_field").value;
-	update(email,username,password);
+	let password2=document.getElementById("password2_field").value;
+	if(password==password2)
+		update(email,username,password);
+	else {
+		alert("Le password inserite non coincidono")
+	}
 }
 
 function update(email,username,password){
+
 	fetch('../api/v1/users/updateInfo',{
 		method:'post',
 		headers: {

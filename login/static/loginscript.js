@@ -45,25 +45,7 @@ async function loaduserlist(){//function used in the test phase, it retrieves fr
 	})
 }
 
-async function addUser(email,username,password){
-	console.log("aggiungo user");
-	return await fetch('../api/v1/users',{
-		method:'post',
-		headers: {
-		 'Content-Type': 'application/json'
-	 },
-	 body:JSON.stringify({email:email,password:password,username:username})
- })
-}
-async function delUser(userID){
-	return await fetch('../api/v1/users',{
-		method:'delete',
-		headers: {
-		 'Content-Type': 'application/json'
-	 },
-	 body:JSON.stringify({id:userID})
- })
-}
+
 
 
 function auth(email,psw){
