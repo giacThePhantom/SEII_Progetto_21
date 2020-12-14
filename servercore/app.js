@@ -15,7 +15,7 @@ app.use('/', express.static('./login/static', {fallthrough : true}));
 app.use('/menu/',express.static('./menu', {fallthrough : true}));
 app.use('/',express.static('./home', {fallthrough : true}));
 app.use('/', express.static('./qanda/static', {fallthrough : true}));
-
+app.use('/', express.static('./about', {fallthrough : true}))
 
 //Start the database
 const connection = mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
