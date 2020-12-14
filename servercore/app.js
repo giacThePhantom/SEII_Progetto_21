@@ -50,9 +50,13 @@ const qanda = require('../qanda/qanda.js');
 
 app.use('/api/v2/qanda', qanda);
 
+const genetrees = require('../genetree/genetree.js');
 
+app.use('/api/v2/genetree', genetrees);
 
 
 
 console.log('Starting db init');
-//db_init.start();
+db_init.start();
+
+

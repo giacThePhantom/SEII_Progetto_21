@@ -146,5 +146,11 @@ module.exports = {
 	get_all_species: async () => {
 		let species_found = await models.species_model.find({}, {name: true, _id : false});
 		return species_found;
-	}
+	},
+	
+	get_treebyID:async(id)=>{
+        let tree = await models.trees_model.findOne({'id': id});
+        return tree;
+    }
+
 }

@@ -1,3 +1,88 @@
-#maincontent {
-    background-color: bisque;
+body {
+    background-color: rgb(196, 255, 204);
 }
+
+ul {
+    list-style: none;
+}
+
+.lista li {
+    border-top: 2px solid sienna;
+    line-height: 2.7;
+}
+.slidecontainer {
+    width: 100%;
+  }
+  
+  .sequenza {
+    width: 90%;
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: block;
+    margin: auto;
+    border: 1px solid sienna;
+  }
+
+  #btnTree {
+    padding: 5px 20px;
+    background-color: lightblue;
+  }
+
+  #btnSeq{
+    padding: 5px 20px;
+    background-color: lightblue;
+  }
+
+  .listbuttons{
+    padding: 5px 20px;
+    background-color: lightblue;
+  }
+
+  .gene_infos {
+      font-size: large;
+
+  }
+
+  #title {
+    display: flex;
+    flex-flow: row wrap;
+    font-size: 40px;
+    margin-left: 20px;
+  }
+
+  #noTree {
+      font:italic;
+  }
+
+  .node {
+    cursor: pointer;
+}
+
+.node circle {
+fill: #fff;
+stroke: steelblue;
+stroke-width: 3px;
+}
+
+.node text { font: 12px sans-serif; }
+.node text:hover{
+font: 50px sans-serif;
+}
+.link {
+fill: none;
+stroke: #ccc;
+stroke-width: 3px;
+}
+#treeRes{
+min-height: 1000px;
+min-width: 1000px;
+max-height: 1000px;
+width: 98%;
+border: 1;
+border: 1px solid black;
+
+cursor: grab;
+overflow: hidden;
+}
+
