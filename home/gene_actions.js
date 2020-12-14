@@ -4,9 +4,9 @@ console.log(gene);
 
 /**
  * Populates the ul element of html page with gene informations
- * @param {*} gene_info 
- * @param {*} temp 
- * @param {*} ul 
+ * @param {*} gene_info
+ * @param {*} temp
+ * @param {*} ul
  */
 
 
@@ -25,7 +25,7 @@ fetch('./api/v2/gene/' + gene + '?format=condensed').then( (ret) => {
 	console.log(ret);
 	ret.json().then((gene_infos) => {
 		//Viewing gene informations
-        
+
         list.setAttribute("class", "lista");
 		for(let temp in gene_infos){
 
@@ -46,33 +46,33 @@ fetch('./api/v2/gene/' + gene + '?format=condensed').then( (ret) => {
 
                 });
                 list.appendChild(listahomo);
-            } 
-            
+            }
+
 
             else {
                 create_para(gene_infos[temp], temp+": ", list);
             }
-			 
 
-			console.log(temp);		
+
+			console.log(temp);
         }
-        
+
         document.body.appendChild(list);
         //GENE TREE
         if (!gene_tree_id){
             create_para("<button class= \"listbuttons\", id= \"noTree\", onclick= \"return_noTreeAlert()\"> Tree </button>", "", list);
-            
+
         }
-        else 
+        else
             create_para("<button class= \"listbuttons\", id= \"btnTree\", onclick= \"return_tree()\"> Tree </button> <div id=\"showT\"> </div>", "", list);
-        
+
         //GENE SEQUENCE
         create_para("<button class= \"listbuttons\", id= \"btnSeq\", onclick= \"return_sequence()\"> Sequence </button>", "", list);
-           
-        
-	});	
-	
-	
+
+
+	});
+
+
 }).catch( error => console.error('Error in fetch' + error));
 
 function return_noTreeAlert(){
@@ -100,7 +100,7 @@ function return_tree(){
     btn_collapse.setAttribute("id", "btn_coll");
     btn_collapse.setAttribute("class", "button");
     btn_collapse.setAttribute("onclick","collapseAll(root)")
-   
+
 
     document.getElementById("showT").appendChild(btn_expand);
     document.getElementById("showT").appendChild(btn_root);
@@ -143,7 +143,7 @@ function return_tree(){
               slider.scrollLeft = scrollLeft - walkX;
               slider.scrollTop = scrollTop - walkY;
             });
-        
+
             var viewBox = {x:0,y:0,w:width,h:height};
             var scale = 1;
         slider.onmousewheel = function(e) {
@@ -161,7 +161,7 @@ function return_tree(){
             handle_text(scale)
             svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
         };
-        
+
         visualizeTree(gene_tree_id);
 }
 
@@ -183,7 +183,7 @@ function return_sequence(){
 
     list.appendChild(seqSlide);
    //}
-    
+
 }
 
 // Toggle children on click.
@@ -234,13 +234,13 @@ function click(d) {
 
   function visualizeTree(treeID){
   i = 0, duration=1;
-  
+
   tree = d3.layout.tree()
       .size([height, width]);
-  
+
   diagonal = d3.svg.diagonal()
       .projection(function(d) { return [d.x, d.y]; });
-  
+
   svg = d3.select("#treeRes").append("svg")
       .attr("width", width + margin.right + margin.left)
       .attr("height", height + margin.top + margin.bottom)
@@ -248,9 +248,9 @@ function click(d) {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   svgImage = document.getElementById("svgImage");
-  
+
   // load the external data
-  d3.json("http://localhost:3000/api/v2/genetree/"+treeID, function(error, treeData) {
+  d3.json("/api/v2/genetree/"+treeID, function(error, treeData) {
     root = treeData;
       root.x0 = height / 2;
       root.y0 = 0;
@@ -266,18 +266,18 @@ function click(d) {
   }
 
   function update(source) {
-  
+
     // Compute the new tree layout.
     var nodes = tree.nodes(root).reverse(),
         links = tree.links(nodes);
-  
+
     // Normalize for fixed-depth.
     nodes.forEach(function(d) { d.y = d.depth * 100;});
-  
+
     // Declare the nodes…
     var node = svg.selectAll("g.node")
         .data(nodes, function(d) { return d.id || (d.id = ++i); });
-  
+
     // Enter the nodes.
     var nodeEnter = node.enter().append("g")
         .attr("class", "node")
@@ -295,16 +295,16 @@ function click(d) {
                 text=this.getElementsByTagName("text")[0];
                           text.style.fontSize=12;
                           this.style.zIndex=0;
-  
+
                 // Get x & y co-ordinates
                 console.log(d3.mouse(this));
             })
-  
+
     nodeEnter.append("circle")
         .attr("r", 20)
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-  
-  
+
+
     nodeEnter.append("text")
         .attr("x", function(d) {
             return d.children || d._children ? -23 : 23; })
@@ -313,35 +313,35 @@ function click(d) {
             return d.children || d._children ? "end" : "start"; })
         .text(function(d) { return d.root_species; })
         .style("fill-opacity", 1);
-  
+
 
       // Transition nodes to their new position.
     var nodeUpdate = node.transition()
         .duration(duration)
         .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-  
+
     nodeUpdate.select("circle")
         .attr("r", 20)
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
       nodeUpdate.select("text")
          .style("fill-opacity", 1);
-  
-  
+
+
       var nodeExit = node.exit().transition()
         .duration(duration)
         .attr("transform", function(d) { return "translate(" + source.x + "," + source.y + ")"; })
         .remove();
-  
+
     nodeExit.select("circle")
         .attr("r", 1e-6);
-  
+
     nodeExit.select("text")
         .style("fill-opacity", 1e-6);
-  
+
     // Declare the links…
     var link = svg.selectAll("path.link")
         .data(links, function(d) { return d.target.id; });
-  
+
     // Enter the links.
       link.enter().insert("path", "g")
        .attr("class", "link")
@@ -349,12 +349,12 @@ function click(d) {
        var o = {x: source.x0, y: source.y0};
        return diagonal({source: o, target: o});
        });
-  
+
        // Transition links to their new position.
      link.transition()
          .duration(duration)
          .attr("d", diagonal);
-  
+
      // Transition exiting nodes to the parent's new position.
      link.exit().transition()
          .duration(duration)
@@ -363,15 +363,15 @@ function click(d) {
            return diagonal({source: o, target: o});
          })
          .remove();
-  
+
      // Stash the old positions for transition.
      nodes.forEach(function(d) {
        d.x0 = d.x;
        d.y0 = d.y;
      });
-  
-  
-  
+
+
+
   }
   function getTreeInfo(treeID) {
       console.log("http://localhost:3000/api/v2/genetree/"+treeID);
@@ -382,7 +382,7 @@ function click(d) {
         visualizeTree(data)
           })
   }
-  
+
   function loadTree(){
       let treeID= document.getElementById("tree_id_field").value;
       visualizeTree(treeID);
@@ -394,12 +394,11 @@ function click(d) {
   let startY;
   let scrollLeft;
   let scrollTop;
-  
+
   function handle_text(scale) {
       var nodes = slider.getElementsByClassName("node");
       for(let item of nodes){
           //item.children[1].style.fontSize=12/scale
       }
-  
+
   }
-  

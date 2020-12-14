@@ -50,8 +50,8 @@ module.exports = {
 	 * @param {Object} Data to be stored.
 	 * @return {Boolean} If the data has been stored.
 	 */
-	get_db_genes: async () => {
-		return await models.genes_model.find({}, {id : true});
+	get_db_genes: async (species) => {
+		return await models.genes_model.find({"species":species}, {id : true});
 	},
 
 	insert_gene: async (gene_info) => {
@@ -151,7 +151,7 @@ module.exports = {
 		let species_found = await models.species_model.find({}, {name: true, _id : false});
 		return species_found;
 	},
-	
+
 	get_treebyID:async(id)=>{
         let tree = await models.trees_model.findOne({'id': id});
         return tree;
