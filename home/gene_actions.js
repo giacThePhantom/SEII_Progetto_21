@@ -62,6 +62,7 @@ fetch('./api/v2/gene/' + gene + '?format=condensed').then( (ret) => {
         
         //GENE SEQUENCE
         create_para("<button id= \"btnSeq\", onclick= \"return_sequence()\"> Sequence </button>", "", list);
+           
         
 	});	
 	
@@ -69,6 +70,33 @@ fetch('./api/v2/gene/' + gene + '?format=condensed').then( (ret) => {
 }).catch( error => console.error('Error in fetch' + error));
 
 function return_tree(){
+    //expand the entire tree
+   var btn_expand = document.createElement("BUTTON");
+    btn_expand.innerHTML="Expand tree";
+    btn_expand.setAttribute("id", "btn_expand");
+    btn_expand.setAttribute("class", "button");
+    btn_expand.setAttribute("onclick","expandAll(root)")
+
+    //view root
+    var btn_root = document.createElement("BUTTON");
+    btn_root.innerHTML="View root";
+    btn_root.setAttribute("id", "btn_root");
+    btn_root.setAttribute("class", "button");
+
+    //collapse root
+    var btn_collapse = document.createElement("BUTTON");
+    btn_collapse.innerHTML="Collapse tree";
+    btn_collapse.setAttribute("id", "btn_coll");
+    btn_collapse.setAttribute("class", "button");
+    btn_collapse.setAttribute("onclick","collapse(root)")
+   
+
+    
+
+    document.getElementById("showT").appendChild(btn_expand);
+    document.getElementById("showT").appendChild(btn_root);
+    document.getElementById("showT").appendChild(btn_collapse);
+
     var showTree = document.createElement("DIV");
         showTree.setAttribute("id", "treeRes");
         showTree.setAttribute("class", "scroll");
@@ -125,15 +153,8 @@ function return_tree(){
             svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
         };
 
-
-
-
-
-
-
         visualizeTree(gene_tree_id);
 }
-
 
 
 function return_sequence(){
@@ -142,7 +163,7 @@ function return_sequence(){
         seqSlide.setAttribute("class", "sequenza");
         seqSlide.setAttribute("id", "seqq");
         seqSlide.disabled=true;
-    
+
 
     fetch('./api/v2/gene/sequence/' + gene).then( (ret) => {
         console.log(ret);
@@ -155,8 +176,6 @@ function return_sequence(){
    //}
     
 }
-
-
 
 // Toggle children on click.
 function click(d) {
