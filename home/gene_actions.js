@@ -167,7 +167,7 @@ function return_tree(){
 
 
 function return_sequence(){
-    //if (document.getElementsById("seqq")==null){
+    if (!document.getElementById("seqq")){
         let seqSlide = document.createElement("TEXTAREA");
         seqSlide.setAttribute("class", "sequenza");
         seqSlide.setAttribute("id", "seqq");
@@ -182,8 +182,8 @@ function return_sequence(){
     }).catch( error => console.error('Error in fetch' + error));
 
     list.appendChild(seqSlide);
-   //}
-
+   }
+    
 }
 
 // Toggle children on click.
