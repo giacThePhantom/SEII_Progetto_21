@@ -484,34 +484,44 @@ paths :
                   message:
                     type: string                
   /qanda/{id} :
-    get:
-      description : Returns the list of a Q&A identified by its ID
       parameters :
-        - name : id
-          in : query
-          description : Specify the ID of the Q&A to return
-          schema :
-            type : integer
-      responses :
-        '200' :
-          description : Succesfully returned a Q&A object
-          content :
-            application/json :
-              schema :
-                type : object
-                properties :
-                  qanda :
-                    type : array
-                    items :
-                      type : object
-                      properties:
-                        id:
-                          type : string
-                        questionAuthor :
-                          type : string
-                        answerAuthor :
-                          type : string
-                        questionText :
-                          type : string
-                        answerText :
-                          type : string
+      - name : id
+        in : query
+        description : Specify the ID of the Q&A
+        schema :
+          type : integer
+      get:
+        description : Returns the Q&A identified by the ID
+        responses :
+          '200' :
+            description : Succesfully returned a Q&A object
+            content :
+              application/json :
+                schema :
+                  type : object
+                  properties :
+                    qanda :
+                      type : array
+                      items :
+                        type : object
+                        properties:
+                          id:
+                            type : string
+                          questionAuthor :
+                            type : string
+                          answerAuthor :
+                            type : string
+                          questionText :
+                            type : string
+                          answerText :
+                            type : string
+      delete:
+        summary: DELETE
+        description : Delete a specific Q&A identified by its ID
+        responses:
+          '201':
+            description: Deleted
+          '204':
+            description: id not found
+          '404':
+            description: Unauthorized
