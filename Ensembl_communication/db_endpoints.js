@@ -117,7 +117,7 @@ module.exports = {
 
 	insert_search:async(user_info,search_info)=>{
 		let ret={errore:"errore"};
-		if(user_info.token){
+		if(user_info && user_info.token){
 		console.log(user_info,search_info,user_info.self);
 		jwt.verify(user_info.token,"Group21KEY",async  function(err, decoded) {
 			if (!err && decoded.email==user_info.email) {
