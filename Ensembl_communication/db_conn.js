@@ -50,6 +50,10 @@ module.exports = {
 	 * @param {Object} Data to be stored.
 	 * @return {Boolean} If the data has been stored.
 	 */
+	get_db_genes: async () => {
+		return await models.genes_model.find({}, {id : true});
+	},
+
 	insert_gene: async (gene_info) => {
 		let to_be_saved = !(await id_already_saved(models.genes_model, gene_info));
 		if(to_be_saved){
