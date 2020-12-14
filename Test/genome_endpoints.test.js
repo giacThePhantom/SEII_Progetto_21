@@ -15,5 +15,41 @@ describe('genome.test', () => {
 	it("genome of mus_musculus", () => {
 		expect.assertions(1);
 
-		return fetch(url + 
+		return fetch(url + 'mus_musculus').then r => r.json()).then(data => {
+			expect(data).toStrictEqual(
+
+			);
+		});
+	});
+				
+	it("genome of non existing species from 0 to 1000", () => {
+		expect.assertions(1);
+
+		return fetch(url + 'mus_musculus/0/1000').then r => r.json()).then(data => {
+			expect(data).toStrictEqual(
+
+			);
+		});
+	});
+	
+	it("genome of mus_musculus from 0 to 1000", () => {
+		expect.assertions(1);
+
+		return fetch(url + 'mus_musculus').then r => r.json()).then(data => {
+			expect(data).toStrictEqual(
+
+			);
+		});
+	});
+
+	it("genome of mus_musculus ", () => {
+		expect.assertions(1);
+
+		return fetch(url + 'mus_musculus').then r => r.json()).then(data => {
+			expect(data).toStrictEqual(
+
+			);
+		});
+	});
+
 });
