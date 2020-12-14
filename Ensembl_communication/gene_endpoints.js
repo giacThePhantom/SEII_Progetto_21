@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const conn = require('./db_conn.js');
 
-router.get('/api/v1/gene/:id', (req, res) => {
+router.get('/api/v2/gene/:id', (req, res) => {
 	const filters = req.query;
 	console.log(filters);
 	let id = req.params.id;
@@ -16,7 +16,7 @@ router.get('/api/v1/gene/:id', (req, res) => {
 	});
 });
 
-router.get('/api/v1/gene/sequence/:id', (req, res) => {
+router.get('/api/v2/gene/sequence/:id', (req, res) => {
 	let id = req.params.id;
 	conn.get_sequence_of_gene(id).then((ret) => {
 		if(ret.error){

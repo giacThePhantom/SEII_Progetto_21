@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
-//const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
-const uri='mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?authSource=admin&replicaSet=atlas-12eua9-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'
+const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
+//const uri='mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?authSource=admin&replicaSet=atlas-12eua9-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'
 var express    = require('express');
 var bodyParser = require('body-parser');
 
@@ -15,7 +15,7 @@ app.use('/', express.static('./login/static', {fallthrough : true}));
 app.use('/menu/',express.static('./menu', {fallthrough : true}));
 app.use('/',express.static('./home', {fallthrough : true}));
 app.use('/', express.static('./qanda/static', {fallthrough : true}));
-
+app.use('/', express.static('./about', {fallthrough : true}))
 
 //Start the database
 const connection = mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -23,7 +23,7 @@ const connection = mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopol
 
 // starting the server
 var port = process.env.PORT || 3000;
-app.listen(port, function(){
+let server = app.listen(port, function(){
   console.log('Gene server listening at http://localhost:' + port);
 });
 
@@ -32,7 +32,7 @@ const users = require('../login/data/users.js');
 
 
 
-app.use('/api/v1/users', users);
+app.use('/api/v2/users', users);
 
 const species = require('../Ensembl_communication/Endpoints/endpoint_species.js');
 
@@ -54,9 +54,7 @@ const genetrees = require('../genetree/genetree.js');
 
 app.use('/api/v2/genetree', genetrees);
 
-
+module.exports = {app, server};
 
 console.log('Starting db init');
 db_init.start();
-
-

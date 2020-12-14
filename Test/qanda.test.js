@@ -1,26 +1,7 @@
-const app = require("../qanda/qanda_core.js");
 const fetch = require("node-fetch");
-const url = "http://localhost:8000/api/v1/qanda"
+const url = "https://se-2-progetto-21.herokuapp.com/api/v2/qanda"
 
 describe('qanda.test', () => {
-
-    let server;
-
-    beforeAll( () => {
-        const port = process.env.PORT || 8001;
-        
-        return new Promise( (resolve,reject) => {
-            server = app.listen(port, resolve());
-            console.log('Server listening on port ${port}');
-        });
-    });
-
-    afterAll( async (done) => {
-        console.log('Closing server');
-        await server.close();
-        done();
-    });
-
     it("get single qanda", async () => {
         expect.assertions(1);
         return await fetch(url+"/?id=5fd6487d76c3d02d137eaf2c")
@@ -58,7 +39,7 @@ describe('qanda.test', () => {
                         "questionText" : "tre",
                         "answerText" : "quattro"
                     }),
-                headers : 
+                headers :
                     {
                         'content-type' : 'application/json'
                     }
