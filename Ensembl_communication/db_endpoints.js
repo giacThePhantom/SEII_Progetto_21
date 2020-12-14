@@ -270,7 +270,32 @@ module.exports = {
 			}
 		}
 		if(!res.error){
-			res.species1 = await get_all_genes_aggregate({$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome2.name, species : genome1.name, chromosome : chr}}, {$project : {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}}, genome1.genes);
+			res.species1 = await get_all_genes_aggregate({$sort : {start:1}}, {
+					$unwind : {
+						path: '$homologies'
+					}
+				}, 
+				{
+					$match : {
+						'homologies.target_species' : genome2.name, 
+						species : genome1.name, 
+						chromosome : chr
+					}
+				}, 
+				{
+					$project : {
+						_id : false, 
+						sequence : false, 
+						version : false, 
+						biotype : false, 
+						description : false, 
+						gene_tree : false, 
+						species : false, __v : false, 
+						'homologies._id' : false
+					}
+				}, 
+				genome1.genes
+			);
 			res.species1.name = genome1.name;
 
 		//	res.species2 = await get_all_genes_aggregate({$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome1.name, species : genome2.name, chromosome : chr}}, {$project : {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}}, genome1.genes);
