@@ -58,7 +58,6 @@ module.exports = {
 		}
 		return to_be_saved;
 	},
-
 	insert_tree: async (tree_info) => {
 		let to_be_saved = !(await id_already_saved(models.trees_model, tree_info));
 		if(to_be_saved){

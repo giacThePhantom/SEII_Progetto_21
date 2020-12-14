@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
-const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
-
+//const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
+const uri='mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?authSource=admin&replicaSet=atlas-12eua9-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'
 var express    = require('express');
 var bodyParser = require('body-parser');
 
@@ -55,4 +55,4 @@ app.use('/api/v2/qanda', qanda);
 
 
 console.log('Starting db init');
-db_init.start();
+//db_init.start();

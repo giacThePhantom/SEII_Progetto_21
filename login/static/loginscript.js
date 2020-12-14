@@ -45,15 +45,7 @@ async function loaduserlist(){//function used in the test phase, it retrieves fr
 	})
 }
 
-async function delUser(userID){
-	return await fetch('../api/v1/users',{
-		method:'delete',
-		headers: {
-		 'Content-Type': 'application/json'
-	 },
-	 body:JSON.stringify({id:userID})
- })
-}
+
 
 
 function auth(email,psw){

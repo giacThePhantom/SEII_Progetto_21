@@ -39,6 +39,7 @@ router.post('',async (req, res) => {
 		}
 });
 
+router.use('', tokenChecker);
 router.delete('', async(req, res) => {
     let user = {
 		id:req.body.id
@@ -57,7 +58,6 @@ router.delete('', async(req, res) => {
 		res.status(404).send("errore durante l'eliminazione");
 	}
 });
-router.use('', tokenChecker);
 
 //get user info by id
 router.get('/:id', async (req, res) => {
