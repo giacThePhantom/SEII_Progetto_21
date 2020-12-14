@@ -51,9 +51,9 @@ router.get('/:species/:start/:end', (req, res) => {
 
 
 
-router.get('/:species', async (req, res) => {
+router.get('/:species', (req, res) => {
 	let species = req.params.species;
-	await conn.get_genome_of_species(species).then((ret) => {
+	conn.get_genome_of_species(species).then((ret) => {
 		if(ret.error){
 			res.status(404).json(ret);
 		}
