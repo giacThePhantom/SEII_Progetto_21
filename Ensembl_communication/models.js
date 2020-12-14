@@ -77,10 +77,37 @@ const qanda= new Schema({
 	answerText: String
 });
 
+
+const user_add_gene = new Schema({
+	user: String,
+	id: {
+		type : String,
+		unique : true
+	},
+	species: String,
+	version: Number,
+	start: Number,
+	end: Number,
+	biotype: String,
+	chromosome: String,
+	strand: Number,
+	description: String,
+	sequence: String,
+	homologies: [{
+		target_id: String,
+		target_species: String
+	}],
+	gene_tree: String
+});
+
+
+
+
 module.exports = {
 	genes_model: mongoose.model('gene_info', gene),
 	trees_model: mongoose.model('gene_tree', gene_tree),
 	species_model: mongoose.model('species', species),
 	users_model: mongoose.model('user',user),
-	qandas_model:mongoose.model('qanda',qanda)
+	qandas_model: mongoose.model('qanda',qanda),
+	user_gene_model: mongoose.model('user_add_gene',user_add_gene)
 }
