@@ -103,7 +103,6 @@ describe('genome.test', () => {
 
 	it('genome compara nonexistingspecie1 with nonexistingspecies2', () => {
 		expect.assertions(1);
-		jest.setTimeout(1200000);
 		return fetc(url + 'compara?species1=nonexistingspecies1&species2=nonexistingspecies2').then(r => r.json()).then(data => {
 			expect(data).toStrictEqual({
 				error:[
@@ -118,14 +117,53 @@ describe('genome.test', () => {
 		expect.assertions(1);
 		jest.setTimeout(1200000);
 		return fetc(url + 'compara?species1=mus_musculus&species2=rattus_norvegicus').then(r => r.json()).then(data => {
-			expect(data).toStrictEqual({
-				error:[
-					"Genome of species: nonexistingspecies2doesn't exists",
-					"Genome of species: nonexistingspecies1doesn't exists"
-				]
+			expect(data.species1.genes[0]).toStrictEqual({
+				id:"ENSMUSG00000000103",
+				start:2106015,
+				chromosome:"Y",
+				homologies:{
+					target_id:"ENSRNOG00000053042"
+				}
 			});
 		});
 	});
+
+	it('genome compara mus_musculus with nonexistingspecies2', () => {
+		expect.assertions(1);
+		return fetc(url + 'compara?species1=mus_musculus&species2=nonexistingspecies2').then(r => r.json()).then(data => {
+			expect(data).toStrictEqual({
+				error:"Genome of species: nonexistingspecies2 exists"
+			});
+		});
+	});
+
+	it('genome compara nonexistingspecies1 with mus_musculus', () => {
+		expect.assertions(1);
+		return fetc(url + 'compara?species1=nonexistingspecies1&species2=mus_musculus').then(r => r.json()).then(data => {
+			expect(data).toStrictEqual({
+				error:"Genome of species: nonexistingspecies1 exists"
+			});
+		});
+	});
+
+	it('genome compara mus_musculus with rattus_norvegicus on chromosome B', () => {
+		expect.assertions(1);
+		return fetc(url + 'compara?species1=nonexistingspecies1&species2=mus_musculus&chr=B').then(r => r.json()).then(data => {
+			expect(data).toStrictEqual({
+				error:"Genome of species: nonexistingspecies1 exists"
+			});
+		});
+	});
+
+	it('genome compara nonexistingspecies1 with mus_musculus', () => {
+		expect.assertions(1);
+		return fetc(url + 'compara?species1=nonexistingspecies1&species2=mus_musculus').then(r => r.json()).then(data => {
+			expect(data).toStrictEqual({
+				error:"Genome of species: nonexistingspecies1 exists"
+			});
+		});
+	});
+
 
 
 
