@@ -1,6 +1,6 @@
-const app = require("../login/login_core.js");
+const app = require("../servercore/app.js");
 const fetch = require("node-fetch");
-const url = "http://localhost:3000/api/v1/users"
+const url = "http://localhost:3000/api/v2/species"
 
 
 describe('login.test', () => {
@@ -15,7 +15,10 @@ describe('login.test', () => {
         // https://github.com/nodejs/node/issues/21482
         // https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Promise
         return new Promise( (resolve, reject) => {
+		console.log("Test");
+		console.log("app");
             server = app.listen(port, resolve());
+		console.log(server);
             console.log(`Server listening on port ${port}`);
         });
 
@@ -26,11 +29,17 @@ describe('login.test', () => {
         // No promise used here.
         // https://github.com/visionmedia/supertest/issues/520
         console.log(`Closing server`);
-        server.close( );
-				done();
+	return new Promise( (resolve, reject) => {
+		server.close(resolve());
+	});
     });
 	it("get species", () => {
 		expect.assertions(1);
 
 		return fetch(url).then( r => r.json()).then(data => {
-			expect(data).toEqual
+			expect(data).toStrictEqual(
+				[{"name":"rattus_norvegicus"},{"name":"danio_rerio"},{"name":"mus_musculus"},{"name":"gallus_gallus"},{"name":"homo_sapiens"}]
+			);
+		});
+	});
+});
