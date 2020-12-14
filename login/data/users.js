@@ -33,7 +33,7 @@ router.post('',async (req, res) => {
 
     let userId = await db.insert_user(user);
 		if(userId){
-    	res.location("/api/v1/users/" + userId).status(201).json({ok:"User correctly registered"});
+    	res.location("/api/v2/users/" + userId).status(201).json({ok:"User correctly registered"});
 		}else {
 			res.status(400).json({error:"This email is already in our database"})
 		}

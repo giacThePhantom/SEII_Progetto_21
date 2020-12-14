@@ -1,6 +1,6 @@
 const app = require("../login/login_core.js");
 const fetch = require("node-fetch");
-const url = "http://localhost:3000/api/v1/users"
+const url = "http://localhost:3000/api/v2/users"
 
 
 describe('login.test', () => {

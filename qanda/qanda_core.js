@@ -13,8 +13,8 @@ app.use(express.json());
 
 const qanda = require('./qanda.js');
 const users = require('../login/data/users.js');
-app.use('/api/v1/users', users);
-app.use('/api/v1/qanda',qanda);
+app.use('/api/v2/users', users);
+app.use('/api/v2/qanda',qanda);
 
 
 

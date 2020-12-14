@@ -35,7 +35,7 @@ sizeHandler();
 async function loaduserlist(){//function used in the test phase, it retrieves from the server the entire userlist
 	//const userlist=document.getElementById("userlist");
 
-	return await fetch("../api/v1/users")
+	return await fetch("../api/v2/users")
 	.then((resp)=>resp.json())
 	.then(function(data){
 		data.forEach((item, i) => {
@@ -49,7 +49,7 @@ async function loaduserlist(){//function used in the test phase, it retrieves fr
 
 
 function auth(email,psw){
-	fetch('../api/v1/users/auth',{
+	fetch('../api/v2/users/auth',{
 		method:'post',
 		headers: {
 		 'Content-Type': 'application/json'

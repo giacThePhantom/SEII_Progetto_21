@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
-//const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
-const uri='mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?authSource=admin&replicaSet=atlas-12eua9-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'
+const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
+//const uri='mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes?authSource=admin&replicaSet=atlas-12eua9-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'
 var express    = require('express');
 var bodyParser = require('body-parser');
 
@@ -32,7 +32,7 @@ const users = require('../login/data/users.js');
 
 
 
-app.use('/api/v1/users', users);
+app.use('/api/v2/users', users);
 
 const species = require('../Ensembl_communication/Endpoints/endpoint_species.js');
 
@@ -58,5 +58,3 @@ app.use('/api/v2/genetree', genetrees);
 
 console.log('Starting db init');
 db_init.start();
-
-

@@ -1,7 +1,7 @@
 
 async function addUser(email,username,password){
 	console.log("aggiungo user");
-	return await fetch('./api/v1/users',{
+	return await fetch('./api/v2/users',{
 		method:'post',
 		headers: {
 		 'Content-Type': 'application/json'
