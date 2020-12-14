@@ -21,10 +21,10 @@ async function deleteUser(){
 		headers: {
 		 'Content-Type': 'application/json'
 	 },
-	 body:JSON.stringify({token:tokenInfo,id:tokenInfo.self.substring(tokenInfo.self.lastIndexOf("/")+1)})
+	 body:JSON.stringify({token:tokenInfo.token,id:tokenInfo.self.substring(tokenInfo.self.lastIndexOf("/")+1)})
  }).then(()=>{
 	 window.location="/home.html";
- 		window.localStorage.removeItem("tokenInfo")
+ 	 window.localStorage.removeItem("tokenInfo")
  });
 }
 
@@ -54,8 +54,8 @@ function parseHistory(history_array,table){
 	}
 }
 function getUserInfo(){
-	//console.log(tokenInfo.self+"?token="+tokenInfo.token);
 	try{
+		console.log(tokenInfo.self+"?token="+tokenInfo.token);
 	fetch(tokenInfo.self+"?token="+tokenInfo.token)
 	.then((resp)=>resp.json())
 	.then(function(data){

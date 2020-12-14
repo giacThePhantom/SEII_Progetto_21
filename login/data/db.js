@@ -41,7 +41,9 @@ module.exports = {
 
 		},
 		delete_user:async(id)=>{
+			console.log("tryng to delete user "+id);
 			let data = await models.users_model.deleteOne({'id': id});
+			console.log("data",data);
 			return data;
 		},
 		authenticate: async (email,password)=>{
@@ -58,7 +60,7 @@ module.exports = {
 			}
 		}
 		else { userinfo={errore:"errore durante l'accesso"}}
-			
+
 			console.log(userinfo);
 			return userinfo;
 		},
