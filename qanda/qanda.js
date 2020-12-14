@@ -59,7 +59,7 @@ router.delete('', async(req,res) => {
         if(del.n==1){
             res.status(201).send('Eliminato '+qanda_id+' '+JSON.stringify(del));
         }else{
-            res.status(201).send('Nessuna qanda corrispondente all\'ID passato');
+            res.status(204).send('Nessuna qanda corrispondente all\'ID passato');
         }
     }else{
         res.status(404).send('Errore durante l\'eliminazione');
