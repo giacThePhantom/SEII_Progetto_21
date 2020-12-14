@@ -9,22 +9,22 @@ describe('login.test', () => {
 			return fetch(url)
 					.then(r => r.json())
 					.then( data => {
-							expect(data[0]).toEqual({email: "admin@unitn.com",
-								username:"admin",
-								self: "/api/v2/users/1",
-								admin:true})
+							expect(data[0]).toEqual({email: "nicola.marchioro@studenti.unitn.com",
+								username:"NicolaMarchioro1",
+								self: "/api/v2/users/0",
+								admin:false})
 					} )
 		});
 		it("get user by id",()=>{
 			expect.assertions(1);
 
-			return fetch(url+"/1")
+			return fetch(url+"/0")
 					.then(r => r.json())
 					.then( data => {
-							expect(data).toEqual([{  email: "admin@unitn.com",
-								username:"admin",
-								self: "/api/v2/users/1",
-								admin:true}])
+							expect(data).toContain([{email: "nicola.marchioro@studenti.unitn.com",
+								username:"NicolaMarchioro1",
+								id: "0",
+								admin:false}])
 					} )
 		});
 
@@ -43,7 +43,7 @@ describe('login.test', () => {
 			var response= fetch(url+"/auth",
 					{
 					 method: 'POST',
-					 body: JSON.stringify({email: 'admin@unitn.com',password:"admin"}),
+					 body: JSON.stringify({email: "nicola.marchioro@studenti.unitn.com",password:"admin"}),
 					 headers: {
 					 'Content-Type': 'application/json'
 				 }

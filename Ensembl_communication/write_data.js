@@ -70,7 +70,7 @@ module.exports = {
 		let gene_array = [];
 		let gene_IDS = read.get_list_gene(list_gene_file);
 		////////////////// portion of code added only during debug: prevents useless downloads of data
-		let already_saved_genes= await conn.get_db_genes();
+		let already_saved_genes= await conn.get_db_genes(list_gene_file);
 		already_saved_genes = already_saved_genes.map(a => a.id);
 		console.log(already_saved_genes);
 		var parsed_gene_IDS = gene_IDS.filter(function(value, index, arr){
