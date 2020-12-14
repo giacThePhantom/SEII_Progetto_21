@@ -33,12 +33,13 @@ router.post('',async (req, res) => {
 
     let userId = await db.insert_user(user);
 		if(userId){
-    	res.location("/api/v1/users/" + userId).status(201).json({ok:"User correctly registered"});
+    	res.location("/api/v2/users/" + userId).status(201).json({ok:"User correctly registered"});
 		}else {
 			res.status(400).json({error:"This email is already in our database"})
 		}
 });
 
+router.use('', tokenChecker);
 router.delete('', async(req, res) => {
     let user = {
 		id:req.body.id
@@ -57,7 +58,6 @@ router.delete('', async(req, res) => {
 		res.status(404).send("errore durante l'eliminazione");
 	}
 });
-router.use('', tokenChecker);
 
 //get user info by id
 router.get('/:id', async (req, res) => {

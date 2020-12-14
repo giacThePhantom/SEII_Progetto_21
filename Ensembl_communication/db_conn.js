@@ -58,7 +58,6 @@ module.exports = {
 		}
 		return to_be_saved;
 	},
-
 	insert_tree: async (tree_info) => {
 		let to_be_saved = !(await id_already_saved(models.trees_model, tree_info));
 		if(to_be_saved){
@@ -147,5 +146,11 @@ module.exports = {
 	get_all_species: async () => {
 		let species_found = await models.species_model.find({}, {name: true, _id : false});
 		return species_found;
-	}
+	},
+	
+	get_treebyID:async(id)=>{
+        let tree = await models.trees_model.findOne({'id': id});
+        return tree;
+    }
+
 }

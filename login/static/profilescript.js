@@ -2,16 +2,31 @@ let tokenInfo = JSON.parse(window.localStorage.getItem("tokenInfo"));
 
 function history_element_parse(element){
 	var ret;
-	if(element.startsWith("/api/v1/gene/")){
-		ret="Gene ID: " + element.replace("/api/v1/gene/","");
-	}else if (element.startsWith("/api/v1/species/")) {
-		ret= "Species: " + element.replace("/api/v1/species/","");
+	if(element.startsWith("/api/v2/gene/")){
+		ret="Gene ID: " + element.replace("/api/v2/gene/","");
+	}else if (element.startsWith("/api/v2/species/")) {
+		ret= "Species: " + element.replace("/api/v2/species/","");
+	}else if (element.startsWith("/compara?")) {
+			ret= "Compara: " + element.replace("/comparison.html?","").replace("specie1=","").replace("&specie2="," e ");
 	}else {
 		ret=element;
 	}
 	return ret;
 }
 
+async function deleteUser(){
+	console.log(tokenInfo.self.substring(tokenInfo.self.lastIndexOf("/")+1));
+	await fetch('../api/v2/users',{
+		method:'delete',
+		headers: {
+		 'Content-Type': 'application/json'
+	 },
+	 body:JSON.stringify({token:tokenInfo,id:tokenInfo.self.substring(tokenInfo.self.lastIndexOf("/")+1)})
+ }).then(()=>{
+	 window.location="/home.html";
+ 		window.localStorage.removeItem("tokenInfo")
+ });
+}
 
 function parseHistory(history_array,table){
 	if(history_array.length==0){
@@ -79,7 +94,7 @@ function updateData(){
 
 function update(email,username,password){
 
-	fetch('../api/v1/users/updateInfo',{
+	fetch('../api/v2/users/updateInfo',{
 		method:'post',
 		headers: {
 		 'Content-Type': 'application/json'

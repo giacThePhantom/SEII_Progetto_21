@@ -39,7 +39,7 @@ router.post('', async (req,res) => {
     //check that all the parameters are strings
     if(typeof(qanda.questionAuthor) == "string" && typeof(qanda.answerAuthor) == "string" && typeof(qanda.questionText) == "string" && typeof(qanda.answerText) == "string"){
         let qanda_id = await db.insert_qanda(qanda); //insert_qanda non ritorna id, giusto?
-        res.location('/api/v1/qanda/'+ qanda_id).status(201).send();
+        res.location('/api/v2/qanda/'+ qanda_id).status(201).send();
         console.log('Inserted qanda with id',qanda_id, "\n");
     }else{
         console.log('Parameter error, all parameters need to be string');

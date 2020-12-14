@@ -23,7 +23,8 @@ else{
 }
 var array_crom,all_list;
 function req_list_genes(){
-	return fetch('./api/v2/genome/compara?species1='+specie1+"&species2="+specie2)
+	let tokenInfo = JSON.parse(window.localStorage.getItem("tokenInfo"));
+	return fetch('./api/v2/genome/compara?species1='+specie1+"&species2="+specie2+"&token="+JSON.stringify(tokenInfo))
 	.then((risp) =>risp.json())
 	.then((data)=>{
 		console.log(data);
@@ -127,7 +128,7 @@ var f = ((width,height,sections) => {
 		rect1.setAttribute("fill",colors[i%2]);
 		//rect1.setAttribute("onclick","window.location=\"/api/v2/gene/"+array_crom[i]["id"]+"\"");
 		if(i<array_crom.length)
-			rect1.setAttribute("onclick","window.open(\"/api/v2/gene/"+(array_crom[i]["id"])+"\",\"_blank\")");
+			rect1.setAttribute("onclick","window.open(\"/gene_view.html?gene="+(array_crom[i]["id"])+"\",\"_blank\")");
 		rect1.setAttribute("class","croma_cell");
 		container.appendChild(rect1);
 
@@ -137,7 +138,7 @@ var f = ((width,height,sections) => {
 		rect2.setAttribute("fill",colors[i%2+2]);
 		//rect2.setAttribute("onclick","window.location=\"/api/v2/gene/"+(array_crom[i]["homologies"]["target_id"])+"\"");
 		if(i<array_crom.length)
-			rect2.setAttribute("onclick","window.open(\"/api/v2/gene/"+(array_crom[i]["homologies"]["target_id"])+"\",\"_blank\")");
+			rect2.setAttribute("onclick","window.open(\"/gene_view.html?gene="+(array_crom[i]["homologies"]["target_id"])+"\",\"_blank\")");
 		rect2.setAttribute("class","croma_cell");
 		container.appendChild(rect2);
 
@@ -171,7 +172,7 @@ var f = ((width,height,sections) => {
 		rect3.setAttribute("d",pathString);
 		rect3.setAttribute("fill",colors[(i+1)%2]);
 		if(i+sections<array_crom.length)
-			rect3.setAttribute("onclick","window.open(\"/api/v2/gene/"+(array_crom[i+sections]["id"])+"\",\"_blank\")");
+			rect3.setAttribute("onclick","window.open(\"/gene_view.html?gene="+(array_crom[i+sections]["id"])+"\",\"_blank\")");
 		rect3.setAttribute("class","croma_cell");
 		container.appendChild(rect3);
 
@@ -180,7 +181,7 @@ var f = ((width,height,sections) => {
 		rect4.setAttribute("d",pathString);
 		rect4.setAttribute("fill",colors[(i+1)%2+2]);
 		if(i+sections<array_crom.length)
-			rect4.setAttribute("onclick","window.open(\"/api/v2/gene/"+(array_crom[i+sections]["homologies"]["target_id"])+"\",\"_blank\")");
+			rect4.setAttribute("onclick","window.open(\"/gene_view.html?gene="+(array_crom[i+sections]["homologies"]["target_id"])+"\",\"_blank\")");
 		rect4.setAttribute("class","croma_cell");
 		container.appendChild(rect4);
 

@@ -1,0 +1,45 @@
+[
+     {
+"id": "ENSGALG00000000003",
+"version": 5,
+"start": 20328226,
+"end": 20347898,
+"biotype": "protein_coding",
+"chromosome": "1",
+"strand": 1,
+"name": "ensembl",
+"description": "pannexin 2 [Source:NCBI gene;Acc:426934]"
+},
+{
+"id": "ENSGALG00000000011",
+"version": 7,
+"start": 32362856,
+"end": 32366096,
+"biotype": "protein_coding",
+"chromosome": "6",
+"strand": -1,
+"name": "ensembl",
+"description": "chromosome 10 open reading frame 88 [Source:HGNC Symbol;Acc:HGNC:25822]"
+},
+{
+"id": "ENSGALG00000000038",
+"version": 6,
+"start": 1969779,
+"end": 1971563,
+"biotype": "protein_coding",
+"chromosome": "11",
+"strand": 1,
+"name": "ensembl",
+"description": "chymotrypsinogen B2 [Source:NCBI gene;Acc:431235]"
+},
+{
+"id": "ENSGALG00000000044",
+"version": 7,
+"start": 13962836,
+"end": 13964455,
+"biotype": "protein_coding",
+"chromosome": "14",
+"strand": 1,
+"name": "ensembl",
+"description": "WAP, follistatin/kazal, immunoglobulin, kunitz and netrin domain containing 1 [Source:HGNC Symbol;Acc:HGNC:30912]"
+}]

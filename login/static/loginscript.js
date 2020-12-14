@@ -35,7 +35,7 @@ sizeHandler();
 async function loaduserlist(){//function used in the test phase, it retrieves from the server the entire userlist
 	//const userlist=document.getElementById("userlist");
 
-	return await fetch("../api/v1/users")
+	return await fetch("../api/v2/users")
 	.then((resp)=>resp.json())
 	.then(function(data){
 		data.forEach((item, i) => {
@@ -45,19 +45,11 @@ async function loaduserlist(){//function used in the test phase, it retrieves fr
 	})
 }
 
-async function delUser(userID){
-	return await fetch('../api/v1/users',{
-		method:'delete',
-		headers: {
-		 'Content-Type': 'application/json'
-	 },
-	 body:JSON.stringify({id:userID})
- })
-}
+
 
 
 function auth(email,psw){
-	fetch('../api/v1/users/auth',{
+	fetch('../api/v2/users/auth',{
 		method:'post',
 		headers: {
 		 'Content-Type': 'application/json'

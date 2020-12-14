@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const url = "http://localhost:3000/api/v1/users"
+const url = "https://se-2-progetto-21.herokuapp.com/api/v2/users"
 
 
 describe('login.test', () => {
@@ -9,9 +9,9 @@ describe('login.test', () => {
 			return fetch(url)
 					.then(r => r.json())
 					.then( data => {
-							expect(data[0]).toEqual({  email: "admin@unitn.com",
+							expect(data[0]).toEqual({email: "admin@unitn.com",
 								username:"admin",
-								self: "/api/v1/users/1",
+								self: "/api/v2/users/1",
 								admin:true})
 					} )
 		});
@@ -23,7 +23,7 @@ describe('login.test', () => {
 					.then( data => {
 							expect(data).toEqual([{  email: "admin@unitn.com",
 								username:"admin",
-								self: "/api/v1/users/1",
+								self: "/api/v2/users/1",
 								admin:true}])
 					} )
 		});

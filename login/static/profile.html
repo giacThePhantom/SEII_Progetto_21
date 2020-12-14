@@ -23,7 +23,7 @@
 						Email:
 					</td>
 					<td>
-						<input type="text" id="email_field" name="email_field" disabled/>
+						<input type="email" id="email_field" name="email_field" disabled/>
 					</td>
 				</tr>
 				<tr>
@@ -44,7 +44,7 @@
 						Nuova password:
 					</td>
 					<td>
-						<input type="text" id="password_field"  name="password_field" />
+						<input type="password" id="password_field"  name="password_field" />
 					</td>
 				</tr>
 				<tr>
@@ -52,12 +52,17 @@
 						Ripeti nuova password:
 					</td>
 					<td>
-						<input type="text" id="password2_field"  name="password2_field" />
+						<input type="password" id="password2_field"  name="password2_field" />
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<button id="submit_btn"onclick="updateData()">Aggiorna Dati</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button id="deleteacc_btn" onclick="deleteUser()">Elimina account</button>
 					</td>
 				</tr>
 			</table>

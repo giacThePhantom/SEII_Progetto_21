@@ -1,9 +1,7 @@
-const app = require("../servercore/app.js");
 const fetch = require("node-fetch");
 const url = "http://localhost:3000/api/v2/species"
 
-
-describe('login.test', () => {
+describe('species.test', () => {
 
     let server;
 

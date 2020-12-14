@@ -2,6 +2,7 @@ const process_new_gene_data = require('./write_data.js').write_new_gene_data;
 const mongoose = require('mongoose');
 const models = require('./models');
 const lodash = require('lodash');
+const jwt = require('jsonwebtoken');
 async function insert_new_gene(id, species){
 	let all_species = await models.species_model.find({}, {'name' : true, '_id' : false});
 	let final_species = [];
@@ -113,6 +114,22 @@ module.exports = {
 		return res;
 	},
 
+
+	insert_search:async(user_info,search_info)=>{
+		let ret={errore:"errore"};
+		console.log(user_info,search_info,user_info.self);
+		jwt.verify(user_info.token,"Group21KEY",async  function(err, decoded) {
+			if (!err && decoded.email==user_info.email) {
+				let id=user_info.self.substring(user_info.self.lastIndexOf("/")+1);
+				console.log(user_info.email,id);
+				ret=await models.users_model.updateOne({email:user_info.email, id:id},{$push:{history:search_info}});
+			}
+			else{
+				console.log("errore token");
+			}
+		});
+		return ret;
+	},
 	get_all_genes_for_species: async (species) => {
 		let genes_found = await models.species_model.findOne({'name' : species}, {_id : false, __v : false});
 		let res;

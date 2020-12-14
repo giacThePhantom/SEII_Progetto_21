@@ -1,6 +1,6 @@
 const app = require("../qanda/qanda_core.js");
 const fetch = require("node-fetch");
-const url = "http://localhost:8000/api/v1/qanda"
+const url = "http://localhost:3000/api/v2/qanda"
 
 describe('qanda.test', () => {
 
@@ -8,7 +8,7 @@ describe('qanda.test', () => {
 
     beforeAll( () => {
         const port = process.env.PORT || 8001;
-        
+
         return new Promise( (resolve,reject) => {
             server = app.listen(port, resolve());
             console.log('Server listening on port ${port}');
@@ -58,7 +58,7 @@ describe('qanda.test', () => {
                         "questionText" : "tre",
                         "answerText" : "quattro"
                     }),
-                headers : 
+                headers :
                     {
                         'content-type' : 'application/json'
                     }
