@@ -1,5 +1,5 @@
 const express = require('express')
-sconst router = express.Router();
+const router = express.Router();
 const conn = require('../db_endpoints.js');
 
 router.get('/compara', (req, res) => {
