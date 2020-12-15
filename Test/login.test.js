@@ -8,7 +8,7 @@ describe('login.test', () => {
 			return fetch(url)
 					.then(r => r.json())
 					.then( data => {
-						expect({email:data[0]["email"],id:data[0]["id"]}).toEqual( {email:"nicola.marchioro@studenti.unitn.it",id:"0"})
+						expect({email:data[0]["email"],id:data[0]["id"]}).toEqual( {email:"nicola.marchioro@studenti.unitn.it",id:"1"})
 					} )
 		});
 		it("get user by id and correct token",()=>{
@@ -18,8 +18,8 @@ describe('login.test', () => {
 					.then(r => r.json())
 					.then( data => {
 							expect(data).toEqual({email: "nicola.marchioro@studenti.unitn.it",
-								username:"NicolaMarchioro1",
-								self: "/api/v2/users/0",
+								username:"NicolaMarchioro",
+								self: "/api/v2/users/1",
 								admin:false,
 							history:[]})
 					} )
