@@ -64,7 +64,7 @@ function sendQuestion(email,name,surname,text) {
 	 })
 	 .then((resp) => resp.json())
 	 .then((res)=>{
-		 console.log(res);
+		 alert(res.message);
 	 })
 	 .catch( error => console.error(error) );
 
