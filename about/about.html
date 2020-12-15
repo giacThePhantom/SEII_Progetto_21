@@ -27,15 +27,15 @@
     <style type="text/css">code{white-space: pre;}</style>
     <style > .navbar {color:white}</style>
 	<style > .navbar-inverse {color:white} .navbar-nav>li>a {background-color:#227bba}</style>
-<style>.center {
+<style> .videocenter {margin: auto;  width: 500px}</style>
+<style>.center {margin: auto;
 
 
-  margin: auto;
+  width: 70%;
 
+  padding: 10px;}</style>
 
-    width: 60%;
-
-    padding: 10px;
+  
 
 
 }
@@ -58,7 +58,7 @@
           <ul class="nav navbar-nav">
 
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;backgroung-color:227bba">Index<span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;background-color:227bba">Index<span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#genome" style="color:black">Genome</a></li>
 		<li><a href="#nucleotides" style="color:black;margin-left:20px">  Nucleotides</a></li>
@@ -145,15 +145,19 @@
 <li><p>Genes list: <a href="https://www.ensembl.org/biomart/martview">Ensembl - biomart - martview</a></p></li>
 <li><p>Genes data: <a href="https://rest.ensembl.org">Ensembl rest API</a></p></li>
 </ul>
+
 <h1 id="how">How to use</h1>
 <div class="center">
-<video  controls width="400", autoplay loop>
-  <source src="/media/home.mp4" type="video/mp4">
-    <source src="/media/home.ogg" type="video/ogg">
-	      Your browser does not support the video tag.
-</video>
 
-<p class="center">This is what you can do:</p>
+    <video  controls="controls"; class= "videocenter"; autoplay loop>
+      <source src="/media/home.mp4" type="video/mp4">
+        <source src="/media/home.ogg" type="video/ogg">
+            Your browser does not support the video tag.
+    </video>
+ 
+ 
+    <p class="center">This is what you can do:</p>
+
 		<ul  class="center">
 			<li> First, choose your reference species in the left dropdown menu. </li>
       <li> Then, choose the second species in the left dropdown menu. </li>
@@ -161,12 +165,13 @@
 			<li> You will see the DNA button changing colors. Once full colored, you can click to redirected to the comparison page. </li>
 			<li> Choose two different species, otherwise you will get an alert. </li>
 		</ul>
+ 
 
 </div>
 
 <h2 id="genome-view">How to compare two genomes</h2>
 <div class="center">
-<video controls width="400",  autoplay loop>
+<video  controls="controls"; class= "videocenter",  autoplay loop>
   <source src="/media/genome.mp4" type="video/mp4">
     <source src="/media/genome.ogg" type="video/ogg">
 	      Your browser does not support the video tag.
@@ -186,11 +191,8 @@
 
 <h2 id="gene-sequence">Navigate in the genes informations</h2>
 <div class="center">
-<video controls width="400", autoplay loop>
-  <source src="/media/gene_view.mp4" type="video/mp4">
-    <source src="/media/gene_view.ogg" type="video/ogg">
-	      Your browser does not support the video tag.
-</video>
+  <img src="media/geneinfo.png", width="500px">
+
 <p class="center">This is what you can do:</p>
 		<ul  class="center">
 			<li> In the gene information page there will be displayed many information about a single gene previously selected. </li>
@@ -215,14 +217,14 @@
 </div>
 <h2 id="tree-view">Navigate in the tree view</h2>
 <div class="center">
-<video controls width="400", autoplay loop>
+<video controls="controls"; class= "videocenter", autoplay loop>
 	  <source src="/media/gene_view.mp4" type="video/mp4">
       <source src="/media/gene_view.ogg" type="video/ogg">
 	      Your browser does not support the video tag.
 </video>
 <p class="center">This is what you can do:</p>
 		<ul  class="center">
-			<li> "Gene" trees represent the evolutionary history of the genes included in the study. </li>
+			<li> Gene trees represent the evolutionary history of the genes included in the study. </li>
 			<li> Gene trees can provide evidence for gene duplication events, as well as speciation events.</li>
 			<li> Sequences from different homologs can be included in a gene tree; the subsequent analyses should cluster orthologs, thus demonstrating the evolutionary history of the orthologs.
         <a href="https://www.ncbi.nlm.nih.gov/Class/NAWBIS/Modules/Phylogenetics/phylo10.html#:~:text=%22Gene%22%20trees%20represent%20the%20evolutionary,as%20well%20as%20speciation%20events.">www.ncbi.nlm.nih.gov</a>
