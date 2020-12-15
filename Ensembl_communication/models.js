@@ -14,7 +14,10 @@ const species = new Schema({
  * Schema of genes
  */
 const gene = new Schema({
-	id: String,
+	id: {
+		type: String,
+		unique: true
+	},
 	version: Number,
 	start: Number,
 	end: Number,
