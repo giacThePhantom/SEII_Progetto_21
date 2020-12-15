@@ -1,11 +1,10 @@
-
 const fetch = require("node-fetch");
 const url = "https://se-2-progetto-21-test.herokuapp.com/api/v2/gene"
 
 
 describe('gene-api.test', () => {
-    
-    //gene/QWERTY 
+
+    //gene/QWERTY
     it("get 404 status of non existing", async()=>{
         expect.assertions(1);
         let resp = await fetch (url+"QWERTY")

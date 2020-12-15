@@ -95,7 +95,6 @@ function updateData(){
 }
 
 function update(email,username,password){
-
 	fetch('../api/v2/users/updateInfo',{
 		method:'post',
 		headers: {
