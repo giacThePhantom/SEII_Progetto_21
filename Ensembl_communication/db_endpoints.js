@@ -220,10 +220,10 @@ module.exports = {
 		let genome2 = await models.species_model.findOne({'name' : species2}, {_id : false, __v : false});
 		let res = {};
 		if(!genome1){
-			res = {error : 'Genome of species: ' + species1 +  "doesn't exists"};
+			res = {error : 'Genome of species: ' + species1 +  " doesn't exists"};
 		}
 		if(!genome2){
-			let msg = 'Genome of species: ' + species2 + "doesn't exists";
+			let msg = 'Genome of species: ' + species2 + " doesn't exists";
 			if(res.error){
 				res.error = [msg, res.error];
 			}
@@ -258,10 +258,10 @@ module.exports = {
 		let genome2 = await models.species_model.findOne({'name' : species2}, {_id : false, __v : false});
 		let res = {};
 		if(!genome1){
-			res = {error : 'Genome of species: ' + species1 + "doesn't exists"};
+			res = {error : 'Genome of species: ' + species1 + " doesn't exists"};
 		}
 		if(!genome2){
-			let msg = 'Genome of species: ' + species2 + "doesn't exists";
+			let msg = 'Genome of species: ' + species2 + " doesn't exists";
 			if(res.error){
 				res.error = [msg, res.error];
 			}
