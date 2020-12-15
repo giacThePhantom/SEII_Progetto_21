@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const db_init = require('../Ensembl_communication/db_init');
 const conn = require('./db_conn')
-//const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
-const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes';
+const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
+//const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes';
 
 
 var express    = require('express');
