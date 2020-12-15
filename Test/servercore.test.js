@@ -18,7 +18,7 @@ describe('servercore.test', () => {
             let resp = await fetch (url+"/chicken")
 					expect(resp.status).toEqual(200);
         });
-        
+
         it("get not found status", async()=>{
 			expect.assertions(1);
             let resp = await fetch (url+"/butterfly")
