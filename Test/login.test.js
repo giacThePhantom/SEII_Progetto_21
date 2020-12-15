@@ -60,8 +60,8 @@ describe('login.test', () => {
 						})
 				});
 
-
-				it("create user with already registered email", async ()=>{
+				let id;
+				it("create user with new email", async ()=>{
 
 						expect.assertions(1);
 					return fetch(url,
@@ -73,9 +73,12 @@ describe('login.test', () => {
 						 }
 						 })	.then(r => r.json())
 							 .then( data => {
-						expect(data).toEqual( {ok:"User correctly registered"});
+								 id=data.id+"";
+						expect(data.ok).toEqual( "User correctly registered");
 						})
 				});
+
+				let token;
 		it("authenticate user", async ()=>{
 			expect.assertions(1);
 
@@ -86,16 +89,21 @@ describe('login.test', () => {
 					 headers: {
 					 'Content-Type': 'application/json'
 				 }
-			 }).then((res)=>{	expect(res.status).toEqual(200)});
-
+			 }).then((res)=>{
+				 expect(res.status).toEqual(200);
+			 return res.json();
+		 })
+		.then((data)=>{
+			 token=data.token;
 		});
+	});
 		it("delete user", async ()=>{
 		expect.assertions(1);
 
 		return fetch(url,
 			{
 			 method: 'DELETE',
-			 body: JSON.stringify({id: "1",token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlbWFpbEBlbWFpbC51bml0bi5pdCIsImlkIjoiMSIsImlhdCI6MTYwNzk4NTY2MSwiZXhwIjoxNjA3OTg5MjYxfQ.8z7kB_E2xPGLVtYzt_Vbs_wMzfUspGh8iD66a_VU3RI"}),
+			 body: JSON.stringify({id: id,token:token}),
 			 headers: {
 			 'Content-Type': 'application/json'
 		 }

@@ -35,9 +35,12 @@ module.exports = {
 			if(to_be_saved){
 				let to_be_inserted = new models.users_model(user_info);
 				await to_be_inserted.save((err) => {console.log(err, 'Inserted correctly', 'Inserted user info');});
+				return user_info.id;
+			}
+			else {
+				return false;
 			}
 			console.log("fdsgfs"+to_be_saved);
-			return to_be_saved;
 
 		},
 		delete_user:async(id)=>{
