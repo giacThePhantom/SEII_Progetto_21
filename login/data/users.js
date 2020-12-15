@@ -11,9 +11,9 @@ router.get('',async (req, res) => {
 });
 //API used to authenticate from the login page
 router.post('/auth', async (req, res) => {
-	console.log("auth richiesta");
+	//console.log("auth richiesta");
 		let user= await db.authenticate(req.body.email,req.body.password);
-		console.log("userrrrrrrrrrrrrr.\n"+JSON.stringify(user));
+		//console.log("userrrrrrrrrrrrrr.\n"+JSON.stringify(user));
     res.status(200).json(user);
 });
 
@@ -24,9 +24,9 @@ router.post('',async (req, res) => {
         username: req.body.username,
         password: req.body.password,
     };
-	console.log(user);
+	//console.log(user);
     if (!user.email || typeof user.email != 'string' || !checkIfEmailInString(user.email)) {
-		console.log("errore parametri")
+		//console.log("errore parametri")
         res.status(400).json({ error: 'The field "email" must be a non-empty string, in email format' });
         return;
     }
@@ -44,7 +44,7 @@ router.delete('', async(req, res) => {
     let user = {
 		id:req.body.id
     };
-	console.log(user);
+	//console.log(user);
 	let del=await db.delete_user(user.id);
 	if(del.ok){
 		if(del.n==1){
@@ -62,7 +62,7 @@ router.delete('', async(req, res) => {
 //get user info by id
 router.get('/:id', async (req, res) => {
 	let user = await db.get_userbyID(req.params.id);
-	console.log(user);
+	//console.log(user);
 	if(user)
 		res.status(200).json(user);
 	else{
@@ -76,7 +76,7 @@ router.post('/updateInfo', (req, res) => {
         password: req.body.password,
 				id: req.body.self
     };
-		console.log(user);
+		//console.log(user);
     let userId = db.update_info(req.body.email,req.body.username,req.body.password,req.body.self);
     res.status(201).send();
 });

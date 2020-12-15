@@ -14,16 +14,16 @@ function getWidth() { //function used to get the window size
   }
 }
 function sizeHandler(){
-//console.log(getWidth());
+////console.log(getWidth());
 	let topmenu=document.getElementById("topmenu");
 	if(topmenu){
 	if(getWidth()>1160)
 	{
 		topmenu.style.height="100px";
-		//console.log("size100");
+		////console.log("size100");
 	}else{
 		topmenu.style.height="150px";
-		//console.log("size150");
+		////console.log("size150");
 	}
 }
 }
@@ -39,7 +39,7 @@ async function loaduserlist(){//function used in the test phase, it retrieves fr
 	.then((resp)=>resp.json())
 	.then(function(data){
 		data.forEach((item, i) => {
-				console.log(item);
+				//console.log(item);
 		});
 
 	})
@@ -58,13 +58,13 @@ function auth(email,psw){
  })
 	.then((resp) => resp.json()) // Transform the data into json
 	 .then(function(data) {
-			 console.log("data:\n"+JSON.stringify(data));
+			 //console.log("data:\n"+JSON.stringify(data));
 			 if(data){//if length=0 there is no match for the given email and password
 				 window.localStorage.setItem("tokenInfo", JSON.stringify(data));
 				 go_to_profile();
 			 }
 			 else{
-				 console.log("user not found");
+				 //console.log("user not found");
 				 return "errore";
 			 }
 			 return;

@@ -26,7 +26,7 @@ module.export = {
           let gene_db=await get_gene_db(gene);
           if( gene_db.id === undefined ){
             let filtered_gene = await filtre_ensembl_gene(gene);
-            console.log(filtered_gene);
+            //console.log(filtered_gene);
           }
           else{
             if(gene_ens_version > gene_db.version){
@@ -88,7 +88,7 @@ async function get_ensembl_gene_version(gene){
   * @return {Object} the parsed gene form ensembl
   */
 async function get_ensembl_gene_info(gene){
-  console.log(API_INFO+gene+'?');
+  //console.log(API_INFO+gene+'?');
   return read.ensembl_get(API_INFO+gene+'?')
     .then((ret)=>{
       ret=JSON.parse(ret.body);
@@ -128,10 +128,10 @@ async function filtre_ensembl_gene(gene){
  * @return {String} the request.
  */
 async function ensembl_get_plain(content){
-  console.log(ENSEMBL_API + content + CONTENT_JSON)
+  //console.log(ENSEMBL_API + content + CONTENT_JSON)
   return await got(ENSEMBL_API + content + CONTENT_JSON).catch((err) => {
     if(err.response.statusCode == 404){
-      console.log('Could not find ' + ENSEMBL_API + content + CONTENT_JSON);
+      //console.log('Could not find ' + ENSEMBL_API + content + CONTENT_JSON);
     }
     else throw err;
   });

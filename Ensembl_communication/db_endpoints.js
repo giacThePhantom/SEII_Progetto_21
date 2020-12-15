@@ -107,15 +107,15 @@ module.exports = {
 	insert_search:async(user_info,search_info)=>{
 		let ret={errore:"errore"};
 		if(user_info && user_info.token){
-		console.log(user_info,search_info,user_info.self);
+		//console.log(user_info,search_info,user_info.self);
 		jwt.verify(user_info.token,"Group21KEY",async  function(err, decoded) {
 			if (!err && decoded.email==user_info.email) {
 				let id=user_info.self.substring(user_info.self.lastIndexOf("/")+1);
-				console.log(user_info.email,id);
+				//console.log(user_info.email,id);
 				ret=await models.users_model.updateOne({email:user_info.email, id:id},{$push:{history:search_info}});
 			}
 			else{
-				console.log("errore token");
+				//console.log("errore token");
 			}
 		});
 	}
@@ -182,7 +182,7 @@ module.exports = {
 
 	get_genome_of_species: async (id) => {
 		let genome = await models.species_model.findOne({'name' : id}, {_id : false, __v : false});
-		console.log(genome);
+		//console.log(genome);
 		let res = {};
 		if(!genome){
 			res = {error: 'Genome of species: ' + id + " doesn't exists"};

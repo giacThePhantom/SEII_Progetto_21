@@ -19,7 +19,7 @@ async function user_already_saved(model, user_info){
 	else{
 		res = false;
 	}
-	//console.log("res: "+res);
+	////console.log("res: "+res);
 	return res;
 
 }
@@ -30,23 +30,23 @@ module.exports = {
 			//user_info.id=await models.users_model.find({}).countDocuments();
 			user_info.id=await models.users_model.count({})+1;
 			user_info.admin=false;
-			console.log(user_info);
+			//console.log(user_info);
 			let to_be_saved = !(await user_already_saved(models.users_model, user_info));
 			if(to_be_saved){
 				let to_be_inserted = new models.users_model(user_info);
-				await to_be_inserted.save((err) => {console.log(err, 'Inserted correctly', 'Inserted user info');});
+				await to_be_inserted.save();//(err) => {//console.log(err, 'Inserted correctly', 'Inserted user info');});
 				return user_info.id;
 			}
 			else {
 				return false;
 			}
-			console.log("fdsgfs"+to_be_saved);
+			//console.log("fdsgfs"+to_be_saved);
 
 		},
 		delete_user:async(id)=>{
-			console.log("tryng to delete user "+id);
+			//console.log("tryng to delete user "+id);
 			let data = await models.users_model.deleteOne({'id': id});
-			console.log("data",data);
+			//console.log("data",data);
 			return data;
 		},
 		authenticate: async (email,password)=>{
@@ -64,7 +64,7 @@ module.exports = {
 		}
 		else { userinfo={errore:"errore durante l'accesso"}}
 
-			console.log(userinfo);
+			//console.log(userinfo);
 			return userinfo;
 		},
 		get_userbyID:async(id)=>{
@@ -84,17 +84,17 @@ module.exports = {
 			return userinfo;
 		},
 		update_info:async(email,username,password,self)=>{
-			console.log("password :"+password);
+			//console.log("password :"+password);
 			let id=self.substring(self.lastIndexOf("/")+1);
 			if(!password){
-				console.log("password non modificata :"+password);
+				//console.log("password non modificata :"+password);
 				var res=await models.users_model.updateOne({email:email,id:id},{$set:{username:username}});
 			}
 			else{
-				console.log("password modificata:"+password);
+				//console.log("password modificata:"+password);
 				var res=await models.users_model.updateOne({email:email,id:id},{$set:{username:username,password:password}});
 
 			}
-			console.log(self+" "+id+"\n"+res);
+			//console.log(self+" "+id+"\n"+res);
 		}
 };

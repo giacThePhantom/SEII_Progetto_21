@@ -55,9 +55,9 @@ module.exports = {
 		let tree_response = await read.ensembl_get('genetree/member/id/' + gene_id + '?sequence=none');
 			if(tree_response){
 				tree_risp = read.get_gene_tree(tree_response.body);
-				console.log('Tree to be inserted');
-				//console.log(to_be_inserted.gene_tree);
-				//console.log(to_be_inserted.gene_tree.children[1].children);
+				//console.log('Tree to be inserted');
+				////console.log(to_be_inserted.gene_tree);
+				////console.log(to_be_inserted.gene_tree.children[1].children);
 			}
 			return tree_risp;
 		},
@@ -70,14 +70,14 @@ module.exports = {
 		let gene_array = [];
 		let gene_IDS = read.get_list_gene(list_gene_file);
 		////////////////// portion of code added only during debug: prevents useless downloads of data
-		console.log(list_gene_file.replace(".txt","").replace("mart_export_",""));
+		//console.log(list_gene_file.replace(".txt","").replace("mart_export_",""));
 		let already_saved_genes= await conn.get_db_genes(list_gene_file.replace(".txt","").replace("mart_export_",""));
 		already_saved_genes = already_saved_genes.map(a => a.id);
-		console.log(already_saved_genes);
+		//console.log(already_saved_genes);
 		var parsed_gene_IDS = gene_IDS.filter(function(value, index, arr){
 			 return !already_saved_genes.includes(value); //only returns elements not in already_saved_genes array
 	 });
-	 console.log("old array: "+gene_IDS.length+" new array: "+parsed_gene_IDS.length);
+	 //console.log("old array: "+gene_IDS.length+" new array: "+parsed_gene_IDS.length);
 	 gene_IDS=parsed_gene_IDS.slice(); //copies elements from one array to the other*/
 	 /////////////////////////////////
 
@@ -102,9 +102,9 @@ module.exports = {
 			let to_be_inserted = {}
 			to_be_inserted.name = name;
 			to_be_inserted.genes = gene_IDS;
-			console.log('Inserting ' + name);
+			//console.log('Inserting ' + name);
 			await conn.insert_species(to_be_inserted);
-			console.log('Inserted');
+			//console.log('Inserted');
 			resolve(to_be_inserted.name);
 
 		});

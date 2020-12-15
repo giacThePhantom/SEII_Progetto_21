@@ -39,7 +39,7 @@ async function loadQAndA(){//function used to retrieve from the server the entir
 		return await fetch("../api/v2/qanda")
 		.then((resp)=>resp.json())
 		.then(function(data){
-				console.log(data);
+				//console.log(data);
 				let faqcontainer=document.getElementById("faqcontainer");
 			data.forEach((item, i) => {
 			if (!item.answerText)

@@ -10,15 +10,15 @@ const options = {
 var tree_function = async function tree_req (geneid){
     options.path=options.path+geneid+'?content-type=application/json';
     const req = https.request(options, res => {
-        console.log("statusCode"+ res.statusCode);
-        console.log(res);
+        //console.log("statusCode"+ res.statusCode);
+        //console.log(res);
       
         body = [];
         res.on('data', (chunk) => {
           body.push(chunk);
           }).on('end', () => {
              body = Buffer.concat(body).toString();
-             console.log(body);
+             //console.log(body);
              return 'body';
       }) 
       

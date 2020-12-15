@@ -72,7 +72,7 @@ module.exports = {
 			let to_be_inserted = new models.trees_model(tree_info);
 			await to_be_inserted.save((err) => {log(err, 'Inserted correctly', 'Inserted tree info');});
 		}else {
-			console.log("tree already saved: "+tree_info.id);
+			//console.log("tree already saved: "+tree_info.id);
 		}
 		return to_be_saved;
 	},
@@ -132,7 +132,7 @@ module.exports = {
 				if(!gene_info){
 					res = {error : 'This gene will be uploaded shortly'};
 				}
-				console.log(gene_info);
+				//console.log(gene_info);
 				res = gene_info;
 			}
 		}

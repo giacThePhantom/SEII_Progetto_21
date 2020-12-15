@@ -1,6 +1,6 @@
 
 async function addUser(email,username,password){
-	console.log("aggiungo user");
+	//console.log("aggiungo user");
 	return await fetch('./api/v2/users',{
 		method:'post',
 		headers: {
@@ -10,7 +10,7 @@ async function addUser(email,username,password){
  })
  .then((resp) => resp.json())
  .then((res)=>{
-	 console.log(res);
+	 //console.log(res);
 	 let info=document.getElementById("info");
 	 if(res.error){
 		 info.style.color="red";

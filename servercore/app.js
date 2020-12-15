@@ -24,7 +24,7 @@ const connection = mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopol
 // starting the server
 var port = process.env.PORT || 3000;
 let server = app.listen(port, function(){
-  console.log('Gene server listening at http://localhost:' + port);
+  //console.log('Gene server listening at http://localhost:' + port);
 });
 
 
@@ -56,5 +56,5 @@ app.use('/api/v2/genetree', genetrees);
 
 module.exports = {app, server};
 
-console.log('Starting db init');
+//console.log('Starting db init');
 db_init.start();

@@ -62,7 +62,7 @@ module.exports = {
 	ensembl_get: async (content) => {
 		return await got(ENSEMBL_API + content.replace("\r","") + FORMAT_JSON).catch((err) => {
 			if(err.response.statusCode >= 400  ){
-				console.log('Could not find ' + ENSEMBL_API + content + FORMAT_JSON);
+				//console.log('Could not find ' + ENSEMBL_API + content + FORMAT_JSON);
 			}
 			else throw err;
 		});
@@ -104,7 +104,7 @@ module.exports = {
 	get_gene_info: (gene_information) => {
 		let temp_json = JSON.parse(gene_information);
 		let gene = {};
-		console.log("getting gene "+temp_json.id);
+		//console.log("getting gene "+temp_json.id);
 		gene.id = temp_json.id;
 		gene.species=temp_json.species,
 		gene.version = temp_json.version;
@@ -147,7 +147,7 @@ module.exports = {
 		try{
 			data.children = get_gene_tree_rec(response_json.tree.children);
 		}catch{
-			console.log(data.id+" depth greater than 50");
+			//console.log(data.id+" depth greater than 50");
 			data.id="_"+data.id;
 		}
 

@@ -17,7 +17,7 @@ function history_element_parse(element){
 }
 
 async function deleteUser(){
-	console.log(tokenInfo.self.substring(tokenInfo.self.lastIndexOf("/")+1));
+	//console.log(tokenInfo.self.substring(tokenInfo.self.lastIndexOf("/")+1));
 	await fetch('../api/v2/users',{
 		method:'delete',
 		headers: {
@@ -57,14 +57,14 @@ function parseHistory(history_array,table){
 }
 function getUserInfo(){
 	try{
-		console.log(tokenInfo.self+"?token="+tokenInfo.token);
+		//console.log(tokenInfo.self+"?token="+tokenInfo.token);
 	fetch(tokenInfo.self+"?token="+tokenInfo.token)
 	.then((resp)=>resp.json())
 	.then(function(data){
 		let username=document.getElementById("username_field");
 		let email=document.getElementById("email_field");
 		let search_history=document.getElementById("search_history");
-		console.log(data);
+		//console.log(data);
 		username.value=data.username;
 		email.value=data.email;
 		parseHistory(data.history,search_history)

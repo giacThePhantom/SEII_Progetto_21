@@ -32,16 +32,16 @@ module.exports = {
             let to_be_saved = !(await qanda_already_saved(models.qandas_model,qanda_info));
             if(to_be_saved){
                 let to_be_inserted = await new models.qandas_model(qanda_info);
-                await to_be_inserted.save((err) => {console.log(err,'inserted qanda info');});
+                await to_be_inserted.save();//(err) => {//console.log(err,'inserted qanda info');});
                 return to_be_inserted._id;
             }else{
                 return to_be_saved;
             }
         },
         delete_qanda:async(id) => {
-            console.log("DELETE request received for ID : ",id);
+            //console.log("DELETE request received for ID : ",id);
             let data = models.qandas_model.deleteOne({'_id':id});
-            //console.log(data, "\n\n");
+            ////console.log(data, "\n\n");
             return data;
         },
         get_qanda_by_id:async(id) => {

@@ -1,6 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const gene = urlParams.get('gene');
-console.log(gene);
+//console.log(gene);
 
 /**
  * Populates the ul element of html page with gene informations
@@ -18,12 +18,12 @@ function create_para(gene_info, temp, ul){
 }
 var title = document.getElementById("title");
 title.innerHTML=gene;
-console.log('Requiring gene info');
+//console.log('Requiring gene info');
 let list = document.createElement("UL");
 var gene_tree_id=null;
 let tokenInfo = JSON.parse(window.localStorage.getItem("tokenInfo"));
 fetch('./api/v2/gene/' + gene + '?format=condensed&token='+JSON.stringify(tokenInfo)).then( (ret) => {
-	console.log(ret);
+	//console.log(ret);
 	ret.json().then((gene_infos) => {
 		//Viewing gene informations
 
@@ -32,7 +32,7 @@ fetch('./api/v2/gene/' + gene + '?format=condensed&token='+JSON.stringify(tokenI
 
 			if(temp == 'gene_tree'){
                 gene_tree_id = gene_infos[temp];
-                console.log("sopra è un gene tree");
+                //console.log("sopra è un gene tree");
             }
             else if (temp == 'homologies'){
                 create_para("", temp+": ", list);
@@ -55,7 +55,7 @@ fetch('./api/v2/gene/' + gene + '?format=condensed&token='+JSON.stringify(tokenI
             }
 
 
-			console.log(temp);
+			//console.log(temp);
         }
 
         document.body.appendChild(list);
@@ -115,7 +115,7 @@ function return_tree(){
         slider= document.getElementById("treeRes");
 
         slider.addEventListener("mousedown", e => {
-            console.log("mousedown");
+            //console.log("mousedown");
           isDown = true;
           slider.classList.add("active");
           startX = e.pageX - slider.offsetLeft;
@@ -141,7 +141,7 @@ function return_tree(){
               const y = e.pageY - slider.offsetTop;
               const walkX = x - startX;
               const walkY = y - startY;
-                console.log(walkY,scrollTop-walkY,walkX,scrollLeft-walkX);
+                //console.log(walkY,scrollTop-walkY,walkX,scrollLeft-walkX);
               slider.scrollLeft = scrollLeft - walkX;
               slider.scrollTop = scrollTop - walkY;
             });
@@ -178,7 +178,7 @@ function return_sequence(){
 
 
     fetch('./api/v2/gene/sequence/' + gene).then( (ret) => {
-        console.log(ret);
+        //console.log(ret);
         ret.json().then((gene_sequence) => {
             seqSlide.innerHTML= gene_sequence["sequence"];
             });
@@ -291,8 +291,8 @@ function click(d) {
             text=this.getElementsByTagName("text")[0];
                       text.style.fontSize=50;
                       this.style.zIndex=10000000;
-                      console.log(d3.select(this));
-            console.log(this);
+                      //console.log(d3.select(this));
+            //console.log(this);
         })
               .on("mouseleave", function(){
                 text=this.getElementsByTagName("text")[0];
@@ -300,7 +300,7 @@ function click(d) {
                           this.style.zIndex=0;
 
                 // Get x & y co-ordinates
-                console.log(d3.mouse(this));
+                //console.log(d3.mouse(this));
             })
 
     nodeEnter.append("circle")
@@ -377,11 +377,11 @@ function click(d) {
 
   }
   function getTreeInfo(treeID) {
-      console.log("http://localhost:3000/api/v2/genetree/"+treeID);
+      //console.log("http://localhost:3000/api/v2/genetree/"+treeID);
       fetch("http://localhost:3000/api/v2/genetree/"+treeID)
           .then((resp)=>resp.json())
           .then(function(data){
-              console.log(data);
+              //console.log(data);
         visualizeTree(data)
           })
   }

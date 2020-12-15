@@ -1,12 +1,12 @@
 const urlParams = new URLSearchParams(window.location.search);
 const specie1 = urlParams.get('specie1');
 const specie2= urlParams.get('specie2');
-console.log(specie1);
-console.log(specie2);
+//console.log(specie1);
+//console.log(specie2);
 
 if (specie1==specie2){
     var badrequest = document.getElementById("namespecies");
-    console.log(badrequest);
+    //console.log(badrequest);
     badrequest.innerHTML="";
     //se le due specie sono uguali, finestra di alert e ritorno a pagina precendente
     alert("Scegli specie distinte!");
@@ -27,8 +27,8 @@ function req_list_genes(){
 	return fetch('./api/v2/genome/compara?species1='+specie1+"&species2="+specie2+"&token="+JSON.stringify(tokenInfo))
 	.then((risp) =>risp.json())
 	.then((data)=>{
-		console.log(data);
-		console.log(data.species1.genes.length/2);
+		//console.log(data);
+		//console.log(data.species1.genes.length/2);
 		all_list=data.species1.genes;
 		let ul_sp1=document.getElementById("species1_list_top");
 		let ul_sp2=document.getElementById("species2_list_top");
@@ -45,12 +45,12 @@ function filterArr(name_filter,start_filter,chr_filter){
 		name_filter="";
 	if(!chr_filter)
 		chr_filter="";
-	console.log(name_filter,start_filter,chr_filter);
-	console.log(all_list);
+	//console.log(name_filter,start_filter,chr_filter);
+	//console.log(all_list);
 	array_crom=all_list.filter((el)=>{
 		return el.id.startsWith(name_filter) && el.chromosome && el.chromosome.startsWith(chr_filter) && el.start>start_filter;
 	})
-	console.log(array_crom);
+	//console.log(array_crom);
 	f(200,100,Math.ceil(array_crom.length/2));
 }
 function filterRes() {

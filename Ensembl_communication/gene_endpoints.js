@@ -4,7 +4,7 @@ const conn = require('./db_conn.js');
 
 router.get('/api/v2/gene/:id', (req, res) => {
 	const filters = req.query;
-	console.log(filters);
+	//console.log(filters);
 	let id = req.params.id;
 	conn.get_gene_info(id, filters).then( (ret) =>{
 		if(ret.error){

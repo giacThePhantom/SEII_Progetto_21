@@ -10,7 +10,7 @@ router.get('',async (req, res) => {
 });
 router.get('/:id', async (req, res) => {
 	let tree = await db.get_treebyID(req.params.id);
-	console.log(tree.id);
+	//console.log(tree.id);
 	if(tree)
 		res.status(200).json(tree);
 	else{

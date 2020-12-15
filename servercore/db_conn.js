@@ -21,7 +21,7 @@ module.exports = {
 				if(!gene_info){
 					res = {error : 'This gene will be uploaded shortly'};
 				}
-				console.log(gene_info);
+				//console.log(gene_info);
 				
 			}
 		}
