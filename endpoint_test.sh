@@ -7,7 +7,7 @@ if [ "$1" = "local" ]; then
 	PREFIX="localhost:3000/api/v$2/"
 	echo "Testing in local $PREFIX"
 elif [ "$1" = "remote" ]; then
-	PREFIX="https://se-2-progetto-21.herokuapp.com/api/v$2/"
+	PREFIX="https://se-2-progetto-21-test.herokuapp.com/api/v$2/"
 	echo "Testing on remote $PREFIX"
 fi
 

@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const url = "https://se-2-progetto-21.herokuapp.com/api/v2/users"
+const url = "https://se-2-progetto-21-test.herokuapp.com/api/v2/users"
 
 
 describe('login.test', () => {

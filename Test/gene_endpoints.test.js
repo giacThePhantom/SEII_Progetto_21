@@ -1,6 +1,6 @@
 
 const fetch = require("node-fetch");
-const url = "https://se-2-progetto-21.herokuapp.com/api/v2/gene"
+const url = "https://se-2-progetto-21-test.herokuapp.com/api/v2/gene"
 
 
 describe('gene-api.test', () => {
