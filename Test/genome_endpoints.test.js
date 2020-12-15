@@ -13,8 +13,8 @@ describe('genome.test', () => {
 	});
 	
 	it("genome of mus_musculus", () => {
-		expect.assertions(1);
 		jest.setTimeout(1200000);
+		expect.assertions(1);
 		return fetch(url + 'mus_musculus').then( r => r.json()).then(data => {
 			expect(data.genes[0]).toStrictEqual({
 				id:"ENSMUSG00000118659",
@@ -43,10 +43,10 @@ describe('genome.test', () => {
 		return fetch(url + 'mus_musculus/0/1000').then( r => r.json()).then(data => {
 			expect(data).toStrictEqual({
 				name : 'mus_musculus',
-				start : 0,
-				end : 100,
+				start : "0",
+				end : "1000",
 				genes : []
-			);
+			});
 		});
 	});
 
@@ -81,8 +81,8 @@ describe('genome.test', () => {
 		return fetch(url + 'mus_musculus/9000000/0').then( r => r.json()).then(data => {
 			expect(data).toStrictEqual({
 				name:"mus_musculus",
-				start:9000000,
-				end:0,
+				start:"9000000",
+				end:"0",
 				genes:[]
 			});
 		});
@@ -91,11 +91,11 @@ describe('genome.test', () => {
 	it("genome of mus_musculus from -9000000 to 0", () => {
 		expect.assertions(1);
 
-		return fetch(url + 'mus_musculus').then( r => r.json()).then(data => {
+		return fetch(url + 'mus_musculus/-9000000/0').then( r => r.json()).then(data => {
 			expect(data).toStrictEqual({
 				name:"mus_musculus",
-				start:9000000,
-				end:0,
+				start:"-9000000",
+				end:"0",
 				genes:[]
 			});
 		});
@@ -103,11 +103,11 @@ describe('genome.test', () => {
 
 	it('genome compara nonexistingspecie1 with nonexistingspecies2', () => {
 		expect.assertions(1);
-		return fetc(url + 'compara?species1=nonexistingspecies1&species2=nonexistingspecies2').then(r => r.json()).then(data => {
+		return fetch(url + 'compara?species1=nonexistingspecies1&species2=nonexistingspecies2').then(r => r.json()).then(data => {
 			expect(data).toStrictEqual({
 				error:[
-					"Genome of species: nonexistingspecies2doesn't exists",
-					"Genome of species: nonexistingspecies1doesn't exists"
+					"Genome of species: nonexistingspecies2 doesn't exists",
+					"Genome of species: nonexistingspecies1 doesn't exists"
 				]
 			});
 		});
@@ -116,7 +116,7 @@ describe('genome.test', () => {
 	it('genome compara mus_musculus with rattus_norvegicus', () => {
 		expect.assertions(1);
 		jest.setTimeout(1200000);
-		return fetc(url + 'compara?species1=mus_musculus&species2=rattus_norvegicus').then(r => r.json()).then(data => {
+		return fetch(url + 'compara?species1=mus_musculus&species2=rattus_norvegicus').then(r => r.json()).then(data => {
 			expect(data.species1.genes[0]).toStrictEqual({
 				id:"ENSMUSG00000000103",
 				start:2106015,
@@ -130,41 +130,46 @@ describe('genome.test', () => {
 
 	it('genome compara mus_musculus with nonexistingspecies2', () => {
 		expect.assertions(1);
-		return fetc(url + 'compara?species1=mus_musculus&species2=nonexistingspecies2').then(r => r.json()).then(data => {
+		return fetch(url + 'compara?species1=mus_musculus&species2=nonexistingspecies2').then(r => r.json()).then(data => {
 			expect(data).toStrictEqual({
-				error:"Genome of species: nonexistingspecies2 exists"
+				error:"Genome of species: nonexistingspecies2 doesn't exists"
 			});
 		});
 	});
 
 	it('genome compara nonexistingspecies1 with mus_musculus', () => {
 		expect.assertions(1);
-		return fetc(url + 'compara?species1=nonexistingspecies1&species2=mus_musculus').then(r => r.json()).then(data => {
+		return fetch(url + 'compara?species1=nonexistingspecies1&species2=mus_musculus').then(r => r.json()).then(data => {
 			expect(data).toStrictEqual({
-				error:"Genome of species: nonexistingspecies1 exists"
+				error:"Genome of species: nonexistingspecies1 doesn't exists"
 			});
 		});
 	});
 
 	it('genome compara mus_musculus with rattus_norvegicus on chromosome B', () => {
 		expect.assertions(1);
-		return fetc(url + 'compara?species1=nonexistingspecies1&species2=mus_musculus&chr=B').then(r => r.json()).then(data => {
+		return fetch(url + 'compara?species1=mus_musculus&species2=rattus_norvegicus&chr=B').then(r => r.json()).then(data => {
 			expect(data).toStrictEqual({
-				error:"Genome of species: nonexistingspecies1 exists"
+				error:"Chromosome: B doesn't exists"
 			});
 		});
 	});
 
-	it('genome compara nonexistingspecies1 with mus_musculus', () => {
+	it('genome compara mus_musculus with rattus_norvegicus on chromosome 1', () => {
 		expect.assertions(1);
-		return fetc(url + 'compara?species1=nonexistingspecies1&species2=mus_musculus').then(r => r.json()).then(data => {
-			expect(data).toStrictEqual({
-				error:"Genome of species: nonexistingspecies1 exists"
+		return fetch(url + 'compara?species1=mus_musculus&species2=rattus_norvegicus&chr=1').then(r => r.json()).then(data => {
+			expect(data.species1.genes[0]).toStrictEqual({
+				id:"ENSMUSG00000025900",
+				start:3999557,
+				end:4409241,
+				chromosome:"1",
+				strand:-1,
+				homologies:{
+					target_id:"ENSRNOG00000008807",
+					target_species:"rattus_norvegicus"
+				}
 			});
 		});
 	});
-
-
-
 
 });

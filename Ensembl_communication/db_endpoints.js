@@ -220,10 +220,10 @@ module.exports = {
 		let genome2 = await models.species_model.findOne({'name' : species2}, {_id : false, __v : false});
 		let res = {};
 		if(!genome1){
-			res = {error : 'Genome of species: ' + species1 +  "doesn't exists"};
+			res = {error : 'Genome of species: ' + species1 +  " doesn't exists"};
 		}
 		if(!genome2){
-			let msg = 'Genome of species: ' + species2 + "doesn't exists";
+			let msg = 'Genome of species: ' + species2 + " doesn't exists";
 			if(res.error){
 				res.error = [msg, res.error];
 			}
@@ -258,10 +258,10 @@ module.exports = {
 		let genome2 = await models.species_model.findOne({'name' : species2}, {_id : false, __v : false});
 		let res = {};
 		if(!genome1){
-			res = {error : 'Genome of species: ' + species1 + "doesn't exists"};
+			res = {error : 'Genome of species: ' + species1 + " doesn't exists"};
 		}
 		if(!genome2){
-			let msg = 'Genome of species: ' + species2 + "doesn't exists";
+			let msg = 'Genome of species: ' + species2 + " doesn't exists";
 			if(res.error){
 				res.error = [msg, res.error];
 			}
@@ -297,6 +297,10 @@ module.exports = {
 				genome1.genes
 			);
 			res.species1.name = genome1.name;
+			if(!res.species1.genes.length){
+				res = {};
+				res.error = "Chromosome: " + chr + " doesn't exists";
+			}
 
 		//	res.species2 = await get_all_genes_aggregate({$unwind : {path: '$homologies'}}, {$match : {'homologies.target_species' : genome1.name, species : genome2.name, chromosome : chr}}, {$project : {_id : false, sequence : false, version : false, biotype : false, description : false, gene_tree : false, species : false, __v : false, 'homologies._id' : false}}, genome1.genes);
 			//res.species2.name = genome2.name;
