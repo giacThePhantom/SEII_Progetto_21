@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 const url = "https://se-2-progetto-21-test.herokuapp.com/api/v2/genome/"
 
 describe('genome.test', () => {
-	it("genome of existing species", () => {
+	it("genome of non existing species", () => {
 		expect.assertions(1);
 
 		return fetch(url + 'nonexistingspecies').then( r => r.json()).then(data => {
