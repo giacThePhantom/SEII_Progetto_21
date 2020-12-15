@@ -13,8 +13,8 @@ describe('genome.test', () => {
 	});
 	
 	it("genome of mus_musculus", () => {
-		expect.assertions(1);
 		jest.setTimeout(1200000);
+		expect.assertions(1);
 		return fetch(url + 'mus_musculus').then( r => r.json()).then(data => {
 			expect(data.genes[0]).toStrictEqual({
 				id:"ENSMUSG00000118659",
