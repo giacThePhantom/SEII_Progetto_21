@@ -32,6 +32,10 @@
     width: 60%;
     padding: 10px;
 }
+video{
+	max-width: 800px;
+	display: block;
+}
 </style>
   </head>
 
@@ -84,7 +88,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12 main">
-        
+
 
 
 <h1 id="genome">Genome</h1>
@@ -177,17 +181,18 @@
 
 <h2 id="gene-view">How to access gene informations</h2>
 <div class="center">
-<video  autoplay loop>
-	  <source src="movie.mp4" type="video/mp4">
-	    <source src="movie.ogg" type="video/ogg">
+<video  autoplay controls loop>
+	  <source src="media/video_genome.mp4" type="video/mp4">
+	    <sourcesrc="media/video_genome.ogg" type="video/ogg">
 	      Your browser does not support the video tag.
 </video>
 <p class="center">This is what you can do:</p>
 		<ul  class="center">
-			<li> one thing </li>
-			<li> one thing </li>
-			<li> one thing </li>
-			<li> one thing </li>
+			<li> Using the form on the top of the page you can filter the list of genese.</li>
+			<li> with the "name filter" you can specify a string to get only the genes with that prefix. </li>
+			<li> with the "start filter" you can analyze the genome starting from a point. </li>
+			<li> with the "chromosome filter" you can gather only info regarding genes in that chromosome (in the fist species). </li>
+			<li> once you find a gene you are interested to study you can click on the visual representation ( nearby square in the chromosome) to load an information page.  </li>
 		</ul>
 
 </div>
@@ -229,7 +234,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -240,14 +245,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
     <script>
         //document.getElementById('sidebar').getElementsByTagName('ul')[0].className += "nav nav-sidebar";
-        
+
         /* ajust the height when click the toc
            the code is from https://github.com/twbs/bootstrap/issues/1768
         */
         var shiftWindow = function() { scrollBy(0, -50) };
         window.addEventListener("hashchange", shiftWindow);
         function load() { if (window.location.hash) shiftWindow(); }
-        
+
         /*add Bootstrap styles to tables*/
         var tables = document.getElementsByTagName("table");
         for(var i = 0; i < tables.length; ++i){
