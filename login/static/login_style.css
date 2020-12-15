@@ -12,6 +12,10 @@ img{
 	width: 100%;
 	height: auto;
 }
+#maincontent h1{
+	font-size: 45px;
+	color: #1b5d8c;
+}
 #maincontent,td{
 	text-align: center;
 }

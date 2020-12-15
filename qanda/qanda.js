@@ -39,8 +39,13 @@ router.post('', async (req,res) => {
     //check that all the parameters are strings
     if(typeof(qanda.questionAuthor) == "string" && typeof(qanda.answerAuthor) == "string" && typeof(qanda.questionText) == "string" && typeof(qanda.answerText) == "string"){
         let qanda_id = await db.insert_qanda(qanda); //insert_qanda non ritorna id, giusto?
-        res.location('/api/v2/qanda/'+ qanda_id).status(201).send();
-        console.log('Inserted qanda with id',qanda_id, "\n");
+				if(qanda_id){
+					res.location('/api/v2/qanda/'+ qanda_id).status(201).json({id:qanda_id,message : 'Question added to FAQs'});
+        	console.log('Inserted qanda with id',qanda_id, "\n");
+				}
+				else{
+	        res.status(400).json({message : 'Faq already in the database'});
+				}
     }else{
         console.log('Parameter error, all parameters need to be string');
         res.status(400).json({message : 'All parameters need to be string'});
@@ -50,8 +55,8 @@ router.post('', async (req,res) => {
 
 //delete an existing qanda
 router.delete('', async(req,res) => {
-
-    let qanda_id = req.query.id;    //non prende l'id, { id : undefined };
+    console.log(req);
+    let qanda_id = req.body.id;    //non prende l'id, { id : undefined };
 
     console.log("qanda ID : ",qanda_id);
     let del = await db.delete_qanda(qanda_id);
@@ -59,11 +64,27 @@ router.delete('', async(req,res) => {
         if(del.n==1){
             res.status(201).send('Eliminato '+qanda_id+' '+JSON.stringify(del));
         }else{
-            res.status(201).send('Nessuna qanda corrispondente all\'ID passato');
+            res.status(204).send('Nessuna qanda corrispondente all\'ID passato');
         }
     }else{
         res.status(404).send('Errore durante l\'eliminazione');
     }
 });
+
+//req.id_domanda
+//req.answerAuthor
+//req.answerText
+router.post('/answer', async (req,res) => {
+    console.log("\n\nPOST request received\n");
+    let qanda = await db.update_qanda_id(req.body._id,req.body.answerText,req.body.answerAuthor); //insert_qanda non ritorna id, giusto?
+    if(qanda.nModified){
+      res.status(201).send();
+    }
+    else{
+        res.status(400).json({message : 'No question modified'});
+    }
+});
+
+
 
 module.exports = router;

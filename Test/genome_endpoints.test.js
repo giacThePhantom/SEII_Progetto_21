@@ -1,8 +1,8 @@
 const fetch = require("node-fetch");
-const url = "https://se-2-progetto-21.herokuapp.com/api/v2/genome/"
+const url = "https://se-2-progetto-21-test.herokuapp.com/api/v2/genome/"
 
 describe('genome.test', () => {
-	it("genome of existing species", () => {
+	it("genome of non existing species", () => {
 		expect.assertions(1);
 
 		return fetch(url + 'nonexistingspecies').then( r => r.json()).then(data => {
@@ -118,11 +118,11 @@ describe('genome.test', () => {
 		jest.setTimeout(1200000);
 		return fetch(url + 'compara?species1=mus_musculus&species2=rattus_norvegicus').then(r => r.json()).then(data => {
 			expect(data.species1.genes[0]).toStrictEqual({
-				id:"ENSMUSG00000000103",
-				start:2106015,
-				chromosome:"Y",
+				id:"ENSMUSG00000064354",
+				start:7013,
+				chromosome:"MT",
 				homologies:{
-					target_id:"ENSRNOG00000053042"
+					target_id:"ENSRNOG00000030371"
 				}
 			});
 		});

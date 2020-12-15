@@ -1,58 +1,58 @@
 const fetch = require("node-fetch");
-const url = "https://se-2-progetto-21.herokuapp.com/api/v2/qanda"
+const url = "https://se-2-progetto-21-test.herokuapp.com/api/v2/qanda"
 
 describe('qanda.test', () => {
-    it("get single qanda", async () => {
-        expect.assertions(1);
-        return await fetch(url+"/?id=5fd6487d76c3d02d137eaf2c")
-            .then(r => r.json())
-            .then( data => {
-                expect(data).toEqual(
-                    {
-                        "_id": "5fd6487d76c3d02d137eaf2c",
-                        "questionAuthor": "luca",
-                        "answerAuthor": "marco",
-                        "questionText": "ei",
-                        "answerText": "oi",
-                        "self": "api/v1/qanda/5fd6487d76c3d02d137eaf2c"
-                    }
-                )
-            })
-    });
 
-    it("get all qandas", async () =>{
-        expect.assertions(1);
-        let response = await fetch (url)
-            expect(response.status).toEqual(200);
-        return response;
-    });
+	var qanda_id;
+	it("post a qanda", () => {
+		expect.assertions(1);
+		return fetch(url + "/", {
+				method: 'POST',
+				body: JSON.stringify({
+					"questionAuthor": "questionAuthor111",
+					"answerAuthor": "answerAuthor111",
+					"questionText": "questionText111",
+					"answerText": "answerText111"
+				}),
+				headers: {
+					'content-type': 'application/json'
+				}
+			}).then(r => r.json())
+			.then(data => {
+				qanda_id = data.id;
+				expect(data).not.toBeNull();;
+			})
+	});
+	it("get single qanda", () => {
+		expect.assertions(1);
+		return fetch(url + "/?id=" + qanda_id)
+			.then(r => r.json())
+			.then(data => {
+				expect(data).toEqual({
+					"_id": qanda_id,
+					"questionAuthor": "questionAuthor111",
+					"answerAuthor": "answerAuthor111",
+					"questionText": "questionText111",
+					"answerText": "answerText111",
+					"self": "api/v2/qanda/" + qanda_id
+				})
+			})
+	});
 
-    it("post a qanda", async () =>{
-        expect.assertions(1);
-        var response = await fetch(url+"/",
-            {
-                method : 'POST',
-                body : JSON.stringify(
-                    {
-                        "questionAuthor" : "uno",
-                        "answerAuthor" : "due",
-                        "questionText" : "tre",
-                        "answerText" : "quattro"
-                    }),
-                headers :
-                    {
-                        'content-type' : 'application/json'
-                    }
-            }
-        )
-        var json = await response;
-        expect(json.status).toEqual(201);
-    });
-
-    it("delete a qanda", async () => {
-        expect.assertions(1);
-        let response = await fetch(url+"/?id=5fd64acd0a3a71319f752ae5")
-            expect(response.status).toEqual(200);
-        return response;
-    });
+	it("get all qandas", () => {
+		expect.assertions(1);
+		return fetch(url).then((res) => {
+			expect(res.status).toEqual(200)});
+	});
+	it("delete a qanda", () => {
+		expect.assertions(1);
+		return fetch(url,
+				{
+				 method: 'DELETE',
+				 body: JSON.stringify({id: qanda_id}),
+				 headers: {
+				 'Content-Type': 'application/json'
+			 }
+		 }).then((res)=>{	expect(res.status).toEqual(201)});
+	});
 });

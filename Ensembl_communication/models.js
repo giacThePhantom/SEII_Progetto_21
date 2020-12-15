@@ -68,7 +68,6 @@ const user= new Schema({
  * Schema of Q&A
  */
 const qanda= new Schema({
-	id: String,
 	questionAuthor: String,
 	answerAuthor: String,
 	questionText: String,

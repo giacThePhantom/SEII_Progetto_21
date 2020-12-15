@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const url = "https://se-2-progetto-21.herokuapp.com/api/v2/users"
+const url = "https://se-2-progetto-21-test.herokuapp.com/api/v2/users"
 
 
 describe('login.test', () => {
@@ -44,7 +44,7 @@ describe('login.test', () => {
 												})
 				});
 
-				it("create user with already registered email", async ()=>{
+				it("create user with already registered email", ()=>{
 
 					expect.assertions(1);
 					return fetch(url,
@@ -61,7 +61,7 @@ describe('login.test', () => {
 				});
 
 				let id;
-				it("create user with new email", async ()=>{
+				it("create user with new email", ()=>{
 
 						expect.assertions(1);
 					return fetch(url,
@@ -79,7 +79,7 @@ describe('login.test', () => {
 				});
 
 				let token;
-		it("authenticate user", async ()=>{
+		it("authenticate user",  ()=>{
 			expect.assertions(1);
 
 			return fetch(url+"/auth",
@@ -97,7 +97,7 @@ describe('login.test', () => {
 			 token=data.token;
 		});
 	});
-		it("delete user", async ()=>{
+		it("delete user",  ()=>{
 		expect.assertions(1);
 
 		return fetch(url,

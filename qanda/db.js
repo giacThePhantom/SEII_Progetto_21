@@ -4,7 +4,9 @@ const conn = require('../Ensembl_communication/db_conn.js'); //qui devo mettere 
 const models = require('../Ensembl_communication/models.js');
 const { qandas_model } = require("../Ensembl_communication/models.js");
 //const uri = 'mongodb://127.0.0.1:27017/genes';
-const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes';
+//const uri = 'mongodb+srv://geneup:geneuploader@cluster0.ro4mj.mongodb.net/genes';
+const uri = 'mongodb://geneup:progettogeneuploader@SG-genes-40495.servers.mongodirector.com:27017/genes';
+
 //return the entire collection of qanda
 let qandas = async () => {
     let qanda = await models.qandas_model.find({});
@@ -39,7 +41,7 @@ module.exports = {
         delete_qanda:async(id) => {
             console.log("DELETE request received for ID : ",id);
             let data = models.qandas_model.deleteOne({'_id':id});
-            console.log(data, "\n\n");
+            //console.log(data, "\n\n");
             return data;
         },
         get_qanda_by_id:async(id) => {
@@ -51,11 +53,26 @@ module.exports = {
                     answerAuthor: qanda.answerAuthor,
                     questionText: qanda.questionText,
                     answerText: qanda.answerText,
-                    self: "api/v1/qanda/"+qanda._id
+                    self: "api/v2/qanda/"+qanda._id
                 }
             }else{
                 var qanda_info = null;
             }
             return qanda_info;
+        },
+
+        update_qanda_id:async(_id,answerText,answerAuthor) => {
+          let qanda = await models.qandas_model.updateOne(
+           { _id: _id },
+           {
+             $set: {
+               answerAuthor: answerAuthor,
+               answerText: answerText
+             }
+           }
+        )
+        return qanda;
         }
+
+
 }
