@@ -6,7 +6,6 @@ describe('qanda.test', () => {
 	var qanda_id;
 	it("post a qanda", async () => {
 		expect.assertions(1);
-		jest.setTimeout(1200000);
 		return await fetch(url + "/", {
 				method: 'POST',
 				body: JSON.stringify({
