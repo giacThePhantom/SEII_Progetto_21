@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const url = "https://se-2-progetto-21.herokuapp.com/api/v2/qanda"
+const url = "https://se-2-progetto-21-test.herokuapp.com/api/v2/qanda"
 
 describe('qanda.test', () => {
 
@@ -9,17 +9,17 @@ describe('qanda.test', () => {
 		return fetch(url + "/", {
 				method: 'POST',
 				body: JSON.stringify({
-					"questionAuthor": "questionAuthor",
-					"answerAuthor": "answerAuthor",
-					"questionText": "questionText",
-					"answerText": "answerText"
+					"questionAuthor": "questionAuthor111",
+					"answerAuthor": "answerAuthor111",
+					"questionText": "questionText111",
+					"answerText": "answerText111"
 				}),
 				headers: {
 					'content-type': 'application/json'
 				}
 			}).then(r => r.json())
 			.then(data => {
-				qanda_id = data;
+				qanda_id = data.id;
 				expect(data).not.toBeNull();;
 			})
 	});
@@ -30,10 +30,10 @@ describe('qanda.test', () => {
 			.then(data => {
 				expect(data).toEqual({
 					"_id": qanda_id,
-					"questionAuthor": "questionAuthor",
-					"answerAuthor": "answerAuthor",
-					"questionText": "questionText",
-					"answerText": "answerText",
+					"questionAuthor": "questionAuthor111",
+					"answerAuthor": "answerAuthor111",
+					"questionText": "questionText111",
+					"answerText": "answerText111",
 					"self": "api/v2/qanda/" + qanda_id
 				})
 			})
