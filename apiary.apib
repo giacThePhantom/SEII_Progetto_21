@@ -113,22 +113,68 @@ paths :
                 properties :   
                   message :
                     type : string
-    
-      responses:
-        '200':
-          description: Successfully posted a species
 
-        '400':
-          description: Invalid request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:   
-                  message:
-                    type: string                
-   
-      
+  /species/{id}/{gene} :
+    get :
+      description : Returns a gene for the species identified by its ID
+      parameters :
+        - name : id
+          in : query
+          description : Specify the ID of the species to return
+          schema :
+            type : integer
+        - name : gene
+          in : query
+          description : Specify the ID the gene to return
+          schema :
+            type : integer
+      responses :
+        '200' :
+          description : succesfully returned a gene object
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  genes :
+                    type : array
+                    items : 
+                      type : object
+                      properties :
+                        id :
+                          type : string
+                        biotype :
+                          type : string
+                        chromosome :
+                          type : integer
+                        strand :
+                          type : integer
+                        sequence :
+                          type : string
+                        description: 
+                          type : string
+                        start :
+                          type : integer
+                        end :
+                          type : integer
+                        version :
+                          type : string
+                        homologies :
+                          type : array
+                          items :
+                            type : string
+                        gene_tree_id : 
+                          type : string
+        '400' :
+          description : Invalid request
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :   
+                  message :
+                    type : string
+
   /genes :
     get :
       description : Returns the list of all genes
@@ -179,50 +225,7 @@ paths :
                 properties :   
                   message :
                     type : string
-    post:
-      description: Lets a user upload a gene
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type : object
-              properties :
-                biotype :
-                  type : string
-                chromosome :
-                  type : integer
-                strand :
-                  type : integer
-                sequence :
-                  type : string
-                description: 
-                  type : string
-                start :
-                  type : integer
-                end :
-                  type : integer
-                version :
-                  type : string
-                homologies :
-                  type : array
-                  items :
-                    type : string
-                gene_tree_id : 
-                  type : string
-      responses:
-        '200':
-          description: Successfully posted a gene
-
-        '400':
-          description: Invalid request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:   
-                  message:
-                    type: string                  
+    
   /genes/{id} :
     get :
       description : Returns one genes identified by its ID
@@ -278,6 +281,8 @@ paths :
                 properties :   
                   message :
                     type : string
+                    
+                    
                     
   /users :
     get :
@@ -525,3 +530,30 @@ paths :
             description: id not found
           '404':
             description: Unauthorized
+  /qanda/answer :
+    post:
+      description: Lets a modder post a new answer to a question
+      requestBody:
+        required: true
+        content:
+          - name : answerText
+            in : body
+            description : The answer of the question
+            schema :
+            type : string
+          - name : answerAuthor
+            in : body
+            description : The author of the answer
+            schema :
+            type : string
+          - name : answerText
+            in : body
+            description : The answer of the question
+            schema :
+            type : string
+      responses:
+        '200':
+          description: ''
+
+        '400':
+          description: no question modified
