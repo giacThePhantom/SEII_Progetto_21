@@ -74,12 +74,41 @@ Progetto del corso di ingegneria del software II del gruppo #21. Unitn 2020/2021
 
 ## Sprint #2 Backlog
 
-| | Sprint Backlog (Sprint Planning) |  |  |  |  | Sprint |  |  |  |  |
-|-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| Sprint #2 | ... | ... | ... | ... | ... |  |  |  |  |  |
-| | Name | User story | | Volunteer | Estimate | Day1 | Day2 | Day3 | Day4 | Day5 |
-| | | | | | | | | | | |
-| | | | | | | | | | | |
-| | Total | | | | | | | | | |
-=======
->>>>>>> menu
+| | Sprint Backlog (Sprint Planning) |  |  |  |  | Sprint 2|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  
+|-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| Name| User story| Task| Volunteer| Estimate| Day1| Day2| Day3| Day4| Day5| Day6| Day7| Day8| Day9| Day10| Day11| Day12| Day13| Day14| Day15| Day16| Day17| Day18| Day19| Day20| 
+| Aggiornamento Geni| Io come utente posso entrare nel sito e visualizzare informazioni aggiornate.| Deploy| Ettore| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 2| 1| 0| 0|
+| Risposta qanda| Io come moderatore posso rispondere alle FAQ del sito per chiarire dubbi di utenti.| Definizione api| Ettore| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 0|
+| | | Deploy| Ettore| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 0|
+| Sign up| Io come utente posso entrare nel sito e visualizzare informazioni affidabili| Inserimento info e visualizzazione alberi| Nicola| 7| 7| 7| 7| 7| 7| 7| 7| 6| 6| 3| 3| 1| 2| 0| 0| 1| 0| 0| 0| 0|
+| Comparazione specie| Io come utente posso comparare due interi genomi per determinare quando e come due specie si sono differenziate. Con UI intuitiva| Definizione Endpoint| Giacomo| 3| 3| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 1| 0| 0| 0| 0| 0| 0| 0| 0|
+| | | Implementazione metodo restful genomi| Giacomo| 6| 6| 6| 6| 6| 6| 6| 6| 6| 6| 6| 6| 5| 5| 5| 5| 3| 3| 1| 1| 0|
+| | | Deploy metodi| Giacomo| 2| 2| 2| 2| 2| 2| 2| 2| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 0|
+| | | Testing species endpoints| Ettore| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 0| 0|
+| | | Testing genes endopoints| Elisa| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 0| 0|
+| | | Frontend home page| Elisa| 5| 5| 5| 5| 5| 5| 5| 5| 5| 4| 3| 3| 2| 2| 2| 1| 1| 1| 1| 0|| 
+| | | Testing genome endpoints| Giacomo| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 0|
+| | | Frontend comparazione genomi| Nicola| 6| 6| 6| 6| 6| 6| 6| 6| 6| 6| 6| 6| 5| 5| 5| 3| 4| 1| 0| 0| 0|
+| About| Io come utente posso ricevere informazioni riguardo quello che la web application mi permette di fare e le informazioni che contiene.| Raccolta informazioni| Giacomo| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 0| 0| 0|
+| | | Creazione pagina| Giacomo| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 1| 0| 0|
+| | | Scrittura di how to use| Elisa| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 0|
+| | | Template per how to use| Giacomo| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 0| 0|
+| | | Video - tutorial per how to use| Elisa| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 0|
+| Caricamento geni utente| Io come utente iscritto posso caricare informazioni geniche di mio interesse, per avere sempre sotto mano i dati con cui lavoro più spesso.| Definizione Api| Ettore| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 0| 0|
+| | | Deploy| Ettore| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3|
+| Login utente| Io come utente posso registrarmi nel sito per avere un'esperienza personalizzata.| Progettazione pagina di registrazione| Nicola| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 2| 1| 0| 0|
+| | | Testing| Nicola| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 4| 3| 2| 2| 0|
+| | | modifica e integrazione API| Nicola| 5| 5| 5| 5| 4| 4| 3| 1| 1| 0| 0| 1| 0| 0| 0| 0| 0| 0| 0| 0| 0|
+| Cronologia| Io come utente loggato posso vedere la storia delle mie ricerche.| realizzazione backend | Nicola| 3| 3| 3| 3| 3| 3| 3| 2| 2| 2| 1| 2| 0| 0| 0| 0| 0| 0| 0| 0| 0|
+| | | integrazione frontend| Nicola| 2| 2| 2| 2| 2| 2| 2| 2| 2| 1| 1| 1| 1| 0| 0| 0| 0| 0| 0| 0| 0|
+| | | Modifica API| Nicola| 5| 5| 5| 5| 5| 5| 4| 3| 1| 1| 0| 0| 0| 0| 0| 0| 0| 0| 1| 0| 0|
+| Q&A| Io come utente posso chiedere informazioni ai moderatori, per avere un confronto con persone competenti.| progettazione e realizzazione frontend| Nicola| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 2| 3| 0| 0|
+| | | implementazione backend per le FAQ, HTTP GET, POST, DELETE| Filippo| 13| 13| 13| 13| 13| 11| 12| 10| 10| 8| 8| 6| 6| 6| 5| 5| 4| 4| 3| 0| 0|
+| | | Test del backend FAQ| Filippo| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 3| 0| 0|
+| | | Documentazione openAPI3 delle API che gestiscono le FAQ| FIlippo| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 2| 0| 0|
+| Accedere a singolo gene| Io come utente posso accedere alle informazioni su un determinato gene di mio interesse. Per approfondire la sua funzione.| Test get single gene with empty input| Filippo| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 1| 0| 0| 0| 0| 0| 0| 0| 0| 0|
+| | | Ottenere gene trees| Elisa| 3| 3| 3| 3| 2| 2| 1| 1| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0|
+| | | Test get gene sequence with correct parameters| Filippo| 1| 1| 1| 1| 1| 1| 1| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0|
+| | | Frontend visualizzazione gene| Elisa| 5| 5| 5| 5| 5| 5| 5| 5| 5| 5| 5| 5| 5| 5| 4| 4| 3| 3| 3| 0| 0|
+| Total| | | | 111| 67| 67| 67| 65| 63| 61| 54| 51| 47| 45| 45| 41| 40| 38| 38| 36| 33| 29| 8| 3|
+| ideal| | | | 111| 105,45| 99,9| 94,35| 88,8| 83,25| 77,7| 72,15| 66,6| 61,05| 55,5| 49,95| 44,4| 38,85| 33,3| 27,75| 22,2| 16,65| 11,1| 5,55| 0| 
