@@ -24,7 +24,7 @@ module.export = {
         for(gene of spicie.genes){
           let gene_ens_version = await get_ensembl_gene_version(gene);
           let gene_db=await get_gene_db(gene);
-          if( gene_db.id===undefined ){
+          if( gene_db.id === undefined ){
             let filtered_gene = await filtre_ensembl_gene(gene);
             console.log(filtered_gene);
           }
@@ -107,7 +107,7 @@ async function get_ensembl_gene_info(gene){
 async function filtre_ensembl_gene(gene){
   let gene_ens_info = await get_ensembl_gene_info(gene);
   let filtered_gene = new models.genes_model;
-  filtered_gene.id           = gene_ens_info.id;
+  filtered_gene.id.type      = gene_ens_info.id;
   filtered_gene.version      = gene_ens_info.version;
   filtered_gene.start        = gene_ens_info.start;
   filtered_gene.end          = gene_ens_info.end;
