@@ -8,18 +8,18 @@ describe('login.test', () => {
 			return fetch(url)
 					.then(r => r.json())
 					.then( data => {
-						expect({email:data[0]["email"],id:data[0]["id"]}).toEqual( {email:"nicola.marchioro@studenti.unitn.it",id:"0"})
+						expect({email:data[0]["email"],id:data[0]["id"]}).toEqual( {email:"nicola.marchioro@studenti.unitn.it",id:"1"})
 					} )
 		});
 		it("get user by id and correct token",()=>{
 			expect.assertions(1);
 
-			return fetch(url+'/0?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pY29sYS5tYXJjaGlvcm9Ac3R1ZGVudGkudW5pdG4uaXQiLCJpZCI6IjAiLCJpYXQiOjE2MDc5ODI0MjgsImV4cCI6MjAwMDc5ODYwMjh9.qzfaT6LGH0ZVbFtMzEvIkXXvSHuSD8cVlTm6S89BTGM')
+			return fetch(url+'/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pY29sYS5tYXJjaGlvcm9Ac3R1ZGVudGkudW5pdG4uaXQiLCJpZCI6IjAiLCJpYXQiOjE2MDc5ODI0MjgsImV4cCI6MjAwMDc5ODYwMjh9.qzfaT6LGH0ZVbFtMzEvIkXXvSHuSD8cVlTm6S89BTGM')
 					.then(r => r.json())
 					.then( data => {
 							expect(data).toEqual({email: "nicola.marchioro@studenti.unitn.it",
-								username:"NicolaMarchioro1",
-								self: "/api/v2/users/0",
+								username:"NicolaMarchioro",
+								self: "/api/v2/users/1",
 								admin:false,
 							history:[]})
 					} )

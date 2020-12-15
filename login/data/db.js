@@ -28,7 +28,7 @@ module.exports = {
     users:users,
 		insert_user:async(user_info)=>{
 			//user_info.id=await models.users_model.find({}).countDocuments();
-			user_info.id=await models.users_model.count({});
+			user_info.id=await models.users_model.count({})+1;
 			user_info.admin=false;
 			console.log(user_info);
 			let to_be_saved = !(await user_already_saved(models.users_model, user_info));
