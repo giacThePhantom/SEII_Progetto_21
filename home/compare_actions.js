@@ -11,7 +11,7 @@ if (specie1==specie2){
     //se le due specie sono uguali, finestra di alert e ritorno a pagina precendente
     alert("Scegli specie distinte!");
     if (alert)
-        window.history.back();
+        window.location="/home.html";
 }
 
 else{

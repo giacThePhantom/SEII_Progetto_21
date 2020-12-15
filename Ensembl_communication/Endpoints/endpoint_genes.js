@@ -20,6 +20,9 @@ router.get('/sequence/:id', (req, res) => {
 router.get('/:id', (req, res) => {
 	const filters = req.query;
 	let id = req.params.id;
+	if(req.query.token){
+		conn.insert_search(JSON.parse(req.query.token),"/gene_view.html?gene="+req.params.id);
+	}
 	conn.get_gene_info(id, filters).then( (ret) =>{
 		if(ret.error){
 			res.status(404).json(ret);

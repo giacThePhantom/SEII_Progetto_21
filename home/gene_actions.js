@@ -21,7 +21,8 @@ title.innerHTML=gene;
 console.log('Requiring gene info');
 let list = document.createElement("UL");
 var gene_tree_id=null;
-fetch('./api/v2/gene/' + gene + '?format=condensed').then( (ret) => {
+let tokenInfo = JSON.parse(window.localStorage.getItem("tokenInfo"));
+fetch('./api/v2/gene/' + gene + '?format=condensed&token='+JSON.stringify(tokenInfo)).then( (ret) => {
 	console.log(ret);
 	ret.json().then((gene_infos) => {
 		//Viewing gene informations
@@ -80,6 +81,7 @@ function return_noTreeAlert(){
 }
 
 function return_tree(){
+	if (!document.getElementById("treeRes")){
     //expand the entire tree
    var btn_expand = document.createElement("BUTTON");
     btn_expand.innerHTML="Expand tree";
@@ -163,6 +165,7 @@ function return_tree(){
         };
 
         visualizeTree(gene_tree_id);
+			}
 }
 
 
@@ -183,7 +186,7 @@ function return_sequence(){
 
     list.appendChild(seqSlide);
    }
-    
+
 }
 
 // Toggle children on click.

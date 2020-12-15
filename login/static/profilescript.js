@@ -6,10 +6,12 @@ function history_element_parse(element){
 		ret="Gene ID: " + element.replace("/api/v2/gene/","");
 	}else if (element.startsWith("/api/v2/species/")) {
 		ret= "Species: " + element.replace("/api/v2/species/","");
-	}else if (element.startsWith("/compara?")) {
+	}else if (element.startsWith("/comparison.html?")) {
 			ret= "Compara: " + element.replace("/comparison.html?","").replace("specie1=","").replace("&specie2="," e ");
+	}else if (element.startsWith("/gene_view.html?")) {
+			ret= "Dati gene: " + element.replace("/gene_view.html?","").replace("gene=","");
 	}else {
-		ret=element;
+	ret=element;
 	}
 	return ret;
 }
