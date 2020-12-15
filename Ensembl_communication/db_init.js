@@ -1,7 +1,7 @@
 const read = require('./read_data.js');
 const write = require('./write_data.js');
 const conn = require('./db_conn.js');
-
+const update = require('./update_data.js');
 
 async function albero_prova(){
 	let testtree = await write.tree_prova('ENSG00000157764');
@@ -43,5 +43,9 @@ module.exports = {
 		await build_species_data();
 		console.log('Written all species data');
 		build_gene_data();
+		while (true) {
+			conn.update.update_all_genes();
+		}
 	}
+
 }
