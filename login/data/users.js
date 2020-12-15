@@ -32,7 +32,7 @@ router.post('', (req, res) => {
     }
 
     let userId = db.insert_user(user);
-    res.location("/api/v1/users/" + userId).status(201).send();
+    res.location("/api/v2/users/" + userId).status(201).send();
 });
 
 router.delete('', async(req, res) => {

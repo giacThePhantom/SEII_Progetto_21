@@ -50,7 +50,7 @@ module.exports = {
 				username:user.username,
 				email:user.email,
 				admin: user.admin,
-				self: "/api/v1/users/"+user.id,
+				self: "/api/v2/users/"+user.id,
 				token:token
 			}
 			console.log(userinfo);
@@ -63,7 +63,7 @@ module.exports = {
 					username:user.username,
 					email:user.email,
 					admin: user.admin,
-					self: "/api/v1/users/"+user.id
+					self: "/api/v2/users/"+user.id
 				}
 
 		}

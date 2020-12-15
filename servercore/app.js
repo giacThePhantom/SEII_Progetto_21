@@ -35,7 +35,7 @@ const users = require('../login/data/users.js');
 
 
 
-app.use('/api/v1/users', users);
+app.use('/api/v2/users', users);
 
 const species = require('../Ensembl_communication/Endpoints/endpoint_species.js');
 

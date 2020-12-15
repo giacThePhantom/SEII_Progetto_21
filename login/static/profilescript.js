@@ -32,7 +32,7 @@ function updateData(){
 }
 
 function update(email,username,password){
-	fetch('../api/v1/users/updateInfo',{
+	fetch('../api/v2/users/updateInfo',{
 		method:'post',
 		headers: {
 		 'Content-Type': 'application/json'

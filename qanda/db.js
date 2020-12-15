@@ -53,7 +53,7 @@ module.exports = {
                     answerAuthor: qanda.answerAuthor,
                     questionText: qanda.questionText,
                     answerText: qanda.answerText,
-                    self: "api/v1/qanda/"+qanda._id
+                    self: "api/v2/qanda/"+qanda._id
                 }
             }else{
                 var qanda_info = null;
