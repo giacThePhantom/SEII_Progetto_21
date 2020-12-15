@@ -525,3 +525,30 @@ paths :
             description: id not found
           '404':
             description: Unauthorized
+  /qanda/answer :
+    post:
+      description: Lets a modder post a new answer to a question
+      requestBody:
+        required: true
+        content:
+          - name : answerText
+            in : body
+            description : The answer of the question
+            schema :
+            type : string
+          - name : answerAuthor
+            in : body
+            description : The author of the answer
+            schema :
+            type : string
+          - name : answerText
+            in : body
+            description : The answer of the question
+            schema :
+            type : string
+      responses:
+        '200':
+          description: ''
+
+        '400':
+          description: no question modified
