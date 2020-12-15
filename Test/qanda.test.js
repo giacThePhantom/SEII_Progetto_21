@@ -4,10 +4,9 @@ const url = "https://se-2-progetto-21.herokuapp.com/api/v2/qanda"
 describe('qanda.test', () => {
 
 	var qanda_id;
-	it("post a qanda", async () => {
+	it("post a qanda", () => {
 		expect.assertions(1);
-		jest.setTimeout(1200000);
-		return await fetch(url + "/", {
+		return fetch(url + "/", {
 				method: 'POST',
 				body: JSON.stringify({
 					"questionAuthor": "questionAuthor",
@@ -24,9 +23,9 @@ describe('qanda.test', () => {
 				expect(data).not.toBeNull();;
 			})
 	});
-	it("get single qanda", async () => {
+	it("get single qanda", () => {
 		expect.assertions(1);
-		return await fetch(url + "/?id=" + qanda_id)
+		return fetch(url + "/?id=" + qanda_id)
 			.then(r => r.json())
 			.then(data => {
 				expect(data).toEqual({
@@ -40,13 +39,12 @@ describe('qanda.test', () => {
 			})
 	});
 
-	it("get all qandas", async () => {
+	it("get all qandas", () => {
 		expect.assertions(1);
-		let response = await fetch(url)
-		expect(response.status).toEqual(200);
-		return response;
+		return fetch(url).then((res) => {
+			expect(res.status).toEqual(200)});
 	});
-	it("delete a qanda", async () => {
+	it("delete a qanda", () => {
 		expect.assertions(1);
 		return fetch(url,
 				{
